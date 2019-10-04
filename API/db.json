@@ -1,0 +1,116 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "user": "Rico.Schultz69",
+      "pass": "7pNXEqF_JD8HgM_"
+    },
+    {
+      "id": 2,
+      "user": "Syble_Kunde",
+      "pass": "Dyu5TMGVFlKr7_u"
+    },
+    {
+      "id": 3,
+      "user": "Ashtyn.Von",
+      "pass": "tULpW73YFGfl2yn"
+    },
+    {
+      "id": 4,
+      "user": "Rusty_OKeefe",
+      "pass": "UFRWML5mVlDttiR"
+    },
+    {
+      "id": 5,
+      "user": "Genoveva.Mills6",
+      "pass": "85DjjAqRNXMUbL6"
+    },
+    {
+      "id": 6,
+      "user": "Pansy.Kub",
+      "pass": "uDh9m6JS2GtxDun"
+    },
+    {
+      "id": 7,
+      "user": "Rosina.Harvey65",
+      "pass": "R02jf6DSZqUkAbB"
+    },
+    {
+      "id": 8,
+      "user": "Sebastian_Friesen93",
+      "pass": "5UHLBCVhsRKzMsA"
+    },
+    {
+      "id": 9,
+      "user": "Emil26",
+      "pass": "rAb3k4FKf9kAfKi"
+    }
+  ],
+  "boards": [
+    {
+      "id": 1,
+      "name": "dolores"
+    },
+    {
+      "id": 2,
+      "name": "enim"
+    },
+    {
+      "id": 3,
+      "name": "voluptas"
+    },
+    {
+      "id": 4,
+      "name": "ipsa"
+    },
+    {
+      "id": 5
+    }
+  ],
+  "rooms": [
+    {
+      "id": 1,
+      "name": "fugit",
+      "owner": "Jasper_Homenick",
+      "players": [
+        "Jasper_Homenick",
+        "Sven25",
+        "Ethel.Dibbert95"
+      ],
+      "max_players": 4
+    },
+    {
+      "id": 2,
+      "name": "sapiente",
+      "owner": "Cruz.Medhurst91",
+      "players": [
+        "Cruz.Medhurst91",
+        "Linwood53",
+        "Sonny.Hessel"
+      ],
+      "max_players": 4
+    },
+    {
+      "id": 3,
+      "name": "ipsum",
+      "owner": "Einar55",
+      "players": [
+        "Einar55",
+        "Marcelina_Crooks",
+        "Lamar_Ernser"
+      ],
+      "max_players": 4
+    },
+    {
+      "id": 4,
+      "name": "laborum",
+      "owner": "Afton_Schmeler",
+      "players": [
+        "Afton_Schmeler",
+        "Aisha_DuBuque15",
+        "Catalina_Wehner45"
+      ],
+      "max_players": 4
+    }
+  ]
+}
