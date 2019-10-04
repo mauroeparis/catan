@@ -10,9 +10,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "test": "mocha"
+    "test": "mocha",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +29,7 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
     "mocha": "^6.2.1"
   }
 }
