@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import V from "./Vector";
 import CatanTypes from "../CatanTypes";
-
-const pAdd = (a, b) => [a[0] + b[0], a[1] + b[1]];
 
 function Hexagon({ position, resource, token }) {
   // Point positioning
@@ -13,16 +12,16 @@ function Hexagon({ position, resource, token }) {
   const wunit = width / 2;
   const hunit = height / 4;
 
-  const center = position.level === 0 ? [0, 0] : [wunit, 3 * hunit]; // XXX: Will be removed afterwards
+  const P = (x, y) => new V(x, y); // shorthand without new
+  const center = position.level === 0 ? V.zero : P(wunit, 3 * hunit); // XXX: Will be removed afterwards
   const ps = [
-    pAdd(center, [0, -unit]), // n
-    pAdd(center, [wunit, -hunit]), // ne
-    pAdd(center, [wunit, hunit]), // se
-    pAdd(center, [0, unit]), // s
-    pAdd(center, [-wunit, hunit]), // sw
-    pAdd(center, [-wunit, -hunit]) // nw
+    V.add(center, P(0, -unit)), // n
+    V.add(center, P(wunit, -hunit)), // ne
+    V.add(center, P(wunit, hunit)), // se
+    V.add(center, P(0, unit)), // s
+    V.add(center, P(-wunit, hunit)), // sw
+    V.add(center, P(-wunit, -hunit)) // nw
   ];
-
   const points = ps.join(" ");
 
   // Style
@@ -33,10 +32,10 @@ function Hexagon({ position, resource, token }) {
     grain: "#FBC02D",
     ore: "#263238"
   }[resource];
-  const resourceTextPos = { x: center[0], y: center[1] };
+  const resourceTextPos = center;
   const resourceTextStyle = { font: "bold 5rem sans-serif", fill: "white" };
+  const tokenPos = V.add(center, P(0, 128));
   const tokenTextStyle = { font: "bold 5rem sans-serif", fill: resourceColor };
-  const tokenPos = { x: center[0] + 0, y: center[1] + 128 };
 
   return (
     <>
