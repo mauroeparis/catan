@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import CatanTypes from "../CatanTypes";
 
-function Hexagon({ resource, token }) {
+function Hexagon({ position, resource, token }) {
   // Point positioning
   const scale = 256;
   const width = Math.sqrt(3) * scale;
@@ -65,7 +66,8 @@ function Hexagon({ resource, token }) {
 }
 
 Hexagon.propTypes = {
-  resource: PropTypes.string.isRequired,
+  position: CatanTypes.HexPosition.isRequired,
+  resource: CatanTypes.Resource.isRequired,
   token: PropTypes.number.isRequired
 };
 
