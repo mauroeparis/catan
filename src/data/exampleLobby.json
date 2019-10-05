@@ -1,0 +1,9 @@
+[
+  {
+    "id" : 123,
+    "name": "Catan",
+    "owner" : "Pedro",
+    "players" : ["Pedro", "Juan", "Mario"],
+    "max_players" : 4
+  }
+]
