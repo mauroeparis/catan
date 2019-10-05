@@ -1,9 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react";
+import Board from "./board/Board";
+import logo from "./logo.svg";
 
 function App() {
   return (
-    <div class="text-center">
+    <div className="text-center">
+      <Board />
       <div
         className="
           flex
@@ -13,7 +15,7 @@ function App() {
           rounded
           bg-purple-800
           shadow-lg"
-        >
+      >
         <h1 className="text-white text-3xl">Welcome to React</h1>
         <div className="w-1/2 self-center">
           <img src={logo} className="App-logo" alt="logo" />
