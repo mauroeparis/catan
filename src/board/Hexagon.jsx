@@ -12,8 +12,21 @@ function Hexagon({ position, resource, token }) {
   const wunit = width / 2;
   const hunit = height / 4;
 
+  // TODO: Make this work for arbitrarily big boards not just up to level 2
   const P = (x, y) => new V(x, y); // shorthand without new
-  const center = position.level === 0 ? V.zero : P(wunit, 3 * hunit); // XXX: Will be removed afterwards
+  let center;
+  if (position.level === 0) {
+    center = V.zero;
+  } else if (position.level === 1) {
+    const levelFirstHexagon = V.rot(P(2 * wunit, 0), -60, true);
+    center = V.rot(levelFirstHexagon, 60 * position.index, true);
+  } else if (position.level === 2) {
+    const axis =
+      position.index % 2 ? V.rot(P(4 * wunit, 0), -60, true) : P(0, 3 * -unit);
+    center = V.rot(axis, 60 * Math.floor(position.index / 2), true);
+  } else {
+    throw new Error("Invalid hexagon position.level");
+  }
   const ps = [
     V.add(center, P(0, -unit)), // n
     V.add(center, P(wunit, -hunit)), // ne
@@ -42,7 +55,7 @@ function Hexagon({ position, resource, token }) {
       <polygon
         points={points}
         fill={resourceColor}
-        stroke="black"
+        stroke="white"
         strokeWidth="1rem"
       />
       <text

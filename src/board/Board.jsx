@@ -1,11 +1,12 @@
 import React from "react";
+import _ from "lodash";
 import Hexagon from "./Hexagon";
 
 function Board() {
   const style = {
-    width: "256px",
+    width: "1024px",
     margin: "4rem auto",
-    backgroundColor: "#404040"
+    backgroundColor: "#202020"
   };
 
   const hexagons = [
@@ -13,16 +14,28 @@ function Board() {
       position: { level: 0, index: 0 },
       resource: "brick",
       token: 3
-    },
-    {
-      position: { level: 1, index: 0 },
-      resource: "ore",
-      token: 6
     }
   ];
 
-  const width = 2048;
-  const height = 2048;
+  // Add Level 1
+  for (let i = 0; i < 6; i += 1) {
+    hexagons[1 + i] = {
+      position: { level: 1, index: i },
+      resource: _.sample(["brick", "lumber", "wool", "grain", "ore"]),
+      token: i
+    };
+  }
+  // Add Level 2
+  for (let i = 0; i < 12; i += 1) {
+    hexagons[1 + 6 + i] = {
+      position: { level: 2, index: i },
+      resource: _.sample(["brick", "lumber", "wool", "grain", "ore"]),
+      token: i
+    };
+  }
+
+  const width = 2560;
+  const height = 2560;
   const viewBox = `${-width / 2} ${-height / 2} ${width} ${height}`;
 
   return (
