@@ -13,19 +13,34 @@ function Board() {
       position: { level: 0, index: 0 },
       resource: "brick",
       token: 3
+    },
+    {
+      position: { level: 1, index: 0 },
+      resource: "ore",
+      token: 6
     }
   ];
 
+  const width = 2048;
+  const height = 2048;
+  const viewBox = `${-width / 2} ${-height / 2} ${width} ${height}`;
+
   return (
     <div style={style}>
-      {hexagons.map(hex => (
-        <Hexagon
-          key={hex.position}
-          position={hex.position}
-          resource={hex.resource}
-          token={hex.token}
-        />
-      ))}
+      <svg
+        viewBox={viewBox}
+        overflow="visible"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {hexagons.map(hex => (
+          <Hexagon
+            key={Object.values(hex.position)}
+            position={hex.position}
+            resource={hex.resource}
+            token={hex.token}
+          />
+        ))}
+      </svg>
     </div>
   );
 }

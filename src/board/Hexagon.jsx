@@ -2,21 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 import CatanTypes from "../CatanTypes";
 
+const pAdd = (a, b) => [a[0] + b[0], a[1] + b[1]];
+
 function Hexagon({ position, resource, token }) {
   // Point positioning
-  const scale = 256;
-  const width = Math.sqrt(3) * scale;
-  const radius = scale;
+  const unit = 256;
+  const width = Math.sqrt(3) * unit;
+  const radius = unit;
   const height = 2 * radius;
-  // (√3/2, 0), (√3, 1/2), (√3, 3/2), (√3/2, 2), (0, 3/2), (0, 1/2)
-  const n = [width / 2, 0];
-  const ne = [width, (1 / 4) * height];
-  const se = [width, (3 / 4) * height];
-  const s = [width / 2, height];
-  const sw = [0.0, (3 / 4) * height];
-  const nw = [0.0, (1 / 4) * height];
-  const points = `${n} ${ne} ${se} ${s} ${sw} ${nw}`;
-  const viewBox = `0 0 ${width} ${height}`;
+  const wunit = width / 2;
+  const hunit = height / 4;
+
+  const center = position.level === 0 ? [0, 0] : [wunit, 3 * hunit]; // XXX: Will be removed afterwards
+  const ps = [
+    pAdd(center, [0, -unit]), // n
+    pAdd(center, [wunit, -hunit]), // ne
+    pAdd(center, [wunit, hunit]), // se
+    pAdd(center, [0, unit]), // s
+    pAdd(center, [-wunit, hunit]), // sw
+    pAdd(center, [-wunit, -hunit]) // nw
+  ];
+
+  const points = ps.join(" ");
 
   // Style
   const resourceColor = {
@@ -26,16 +33,13 @@ function Hexagon({ position, resource, token }) {
     grain: "#FBC02D",
     ore: "#263238"
   }[resource];
+  const resourceTextPos = { x: center[0], y: center[1] };
   const resourceTextStyle = { font: "bold 5rem sans-serif", fill: "white" };
   const tokenTextStyle = { font: "bold 5rem sans-serif", fill: resourceColor };
-  const tokenPos = { x: 50, y: 65 };
+  const tokenPos = { x: center[0] + 0, y: center[1] + 128 };
 
   return (
-    <svg
-      viewBox={viewBox}
-      overflow="visible"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <>
       <polygon
         points={points}
         fill={resourceColor}
@@ -43,25 +47,25 @@ function Hexagon({ position, resource, token }) {
         strokeWidth="1rem"
       />
       <text
-        x="50%"
-        y="45%"
         dominantBaseline="middle"
         textAnchor="middle"
+        x={resourceTextPos.x}
+        y={resourceTextPos.y}
         style={resourceTextStyle}
       >
         {resource}
       </text>
-      <circle cx={`${tokenPos.x}%`} cy={`${tokenPos.y}%`} r="50" fill="white" />
+      <circle cx={tokenPos.x} cy={tokenPos.y} r="50" fill="white" />
       <text
-        x={`${tokenPos.x}%`}
-        y={`${tokenPos.y + 1}%`}
+        x={tokenPos.x}
+        y={tokenPos.y + 6} // HACK: +6 seems to center the sans-serif font
         dominantBaseline="middle"
         textAnchor="middle"
         style={tokenTextStyle}
       >
         {token}
       </text>
-    </svg>
+    </>
   );
 }
 
