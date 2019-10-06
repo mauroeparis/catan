@@ -5,6 +5,7 @@
   "dependencies": {
     "faker": "^4.1.0",
     "json-server": "^0.15.1",
+    "jsonwebtoken": "8.5.1",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-scripts": "3.2.0"
@@ -13,7 +14,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mockapi": "node API/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
