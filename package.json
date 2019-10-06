@@ -8,9 +8,10 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "mocha",
+    "tailwind:css":"tailwind build src/css/tailwind.src.css -c tailwind.js -o src/css/tailwind.css",
+    "start": "npm run tailwind:css && react-scripts start",
+    "build": "npm run tailwind:css && react-scripts build",
+    "test": "react-scripts test && mocha",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -31,6 +32,7 @@
   "devDependencies": {
     "chai-enzyme": "^1.0.0-beta.1",
     "enzyme": "^3.10.0",
-    "mocha": "^6.2.1"
+    "mocha": "^6.2.1",
+    "tailwindcss": "^1.1.2"
   }
 }
