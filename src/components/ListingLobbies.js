@@ -32,8 +32,10 @@ function App() {
   <div class="w-1/6 bg-yellow-300 h-12 text-center">
     {room.owner}
   </div>
-  <div class="w-1/6 bg-yellow-300 h-12 text-center">
-    {room.players}
+  <div class="w-1/6 bg-yellow-300 w-auto text-center">
+    {room.players.map((player, index) => {
+      return <div> {player} </div>
+    })}
   </div>
   <div class="w-1/6 bg-yellow-300 h-12 text-center">
     {room.max_players}
