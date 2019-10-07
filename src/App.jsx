@@ -1,7 +1,9 @@
 import React from "react";
-import logo from "./logo.svg";
-import Board from "./board/Board";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
+import Game from "./components/Game";
+import Board from "./board/Board";
 
 function App() {
   const rooms = [
@@ -18,32 +20,54 @@ function App() {
       owner: "Fabricio",
       players: ["Jose", "Pepe", "Fabricio", "Esteban"],
       max_players: 4
+    },
+    {
+      id: 123,
+      name: "Catan",
+      owner: "Pedro",
+      players: ["Pedro", "Juan", "Mario"],
+      max_players: 4
     }
   ];
+  const room = rooms[2];
 
   return (
-    <div className="text-center">
-      <Board />
-      <div
-        className="
-          flex
-          flex-col
-          m-6
-          p-6
-          rounded
-          bg-purple-800
-          shadow-lg"
-      >
-        <h1 className="text-white text-3xl">Welcome to React</h1>
-        <div className="w-1/2 self-center">
-          <img src={logo} className="App-logo" alt="logo" />
-        </div>
+    <Router>
+      <ul>
+        <li>
+          <a href="/lobby">Lobby</a>
+        </li>
+        <li>
+          <a href="/lobbyList">Lobby List</a>
+        </li>
+        <li>
+          <a href="/board">Board</a>
+        </li>
+      </ul>
+      <div className="App">
+        <Switch>
+          <Route
+            path="/lobby"
+            exact
+            render={() => (
+              <Lobby
+                name={room.name}
+                owner={room.owner}
+                max_players={room.max_players}
+                players={room.players}
+              />
+            )}
+          />
+          <Route path="/game" component={Game} />
+          <Route
+            path="/lobbyList"
+            exact
+            render={() => <LobbyList rooms={rooms} />}
+          />
+          <Route path="/board" component={Board} />
+        </Switch>
       </div>
-      <p className="text-base">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-      <LobbyList rooms={rooms} />
-    </div>
+    </Router>
   );
 }
 

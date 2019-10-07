@@ -1,27 +1,39 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import CatanTypes from "../CatanTypes";
 
-
-function LobbyList({rooms}) {
-  function sayAlert() {
-    alert("hola");
-  }
+function LobbyList({ rooms }) {
   return (
-    <li>
-      {rooms.map((room, index) => (
-        <li>
-          <ul>id: {room.id}</ul>
-          <ul>name: {room.name}</ul>
-          <ul>owner: {room.owner}</ul>
-          <ul>
-            <li>
-            {room.players.map((player, index) => <ul>{player}</ul>)}
-            </li>
-          </ul>
-          <ul>max_players: {room.max_players}</ul>
-          <ul><button onClick={sayAlert}>Join Game</button></ul>
-        </li>
+    <ul>
+      {rooms.map(room => (
+        <ul>
+          <li>id: {room.id}</li>
+          <li>name: {room.name}</li>
+          <li>owner: {room.owner}</li>
+          <li>
+            <ul>
+              {room.players.map(player => (
+                <li>{player}</li>
+              ))}
+            </ul>
+          </li>
+          <li>max_players: {room.max_players}</li>
+          <li>
+            <Link to="/lobby">
+              <button type="button" onClick={() => alert("Will join you!")}>
+                JoinGame
+              </button>
+            </Link>
+          </li>
+        </ul>
       ))}
-    </li>
+    </ul>
   );
 }
+
+LobbyList.propTypes = {
+  rooms: PropTypes.arrayOf(CatanTypes.Room).isRequired
+};
+
 export default LobbyList;
