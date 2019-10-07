@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "faker": "^4.1.0",
+    "faker": "4.1.0",
     "json-server": "^0.15.1",
     "jsonwebtoken": "8.5.1",
     "react": "^16.10.1",
