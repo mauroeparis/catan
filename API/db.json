@@ -112,5 +112,178 @@
       ],
       "max_players": 4
     }
-  ]
+  ],
+  "resources": {
+    "resources": [
+      "brick",
+      "lumber",
+      "wool",
+      "grain",
+      "ore"
+    ],
+    "cards": [
+      "road_building",
+      "year_of_plenty",
+      "monopoly",
+      "victory_point",
+      "knight",
+      "knight"
+    ]
+  },
+  "hexes": {
+    "hexes": [
+      {
+        "position": {
+          "level": 0,
+          "index": 0
+        },
+        "resource": "desert",
+        "token": 7
+      },
+      {
+        "position": {
+          "level": 1,
+          "index": 0
+        },
+        "resource": "brick",
+        "token": 2
+      },
+      {
+        "position": {
+          "level": 1,
+          "index": 1
+        },
+        "resource": "lumber",
+        "token": 3
+      },
+      {
+        "position": {
+          "level": 1,
+          "index": 2
+        },
+        "resource": "brick",
+        "token": 4
+      },
+      {
+        "position": {
+          "level": 1,
+          "index": 3
+        },
+        "resource": "grain",
+        "token": 5
+      },
+      {
+        "position": {
+          "level": 1,
+          "index": 4
+        },
+        "resource": "grain",
+        "token": 6
+      },
+      {
+        "position": {
+          "level": 1,
+          "index": 5
+        },
+        "resource": "ore",
+        "token": 7
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 0
+        },
+        "resource": "wool",
+        "token": 3
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 1
+        },
+        "resource": "lumber",
+        "token": 4
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 2
+        },
+        "resource": "lumber",
+        "token": 5
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 3
+        },
+        "resource": "lumber",
+        "token": 6
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 4
+        },
+        "resource": "lumber",
+        "token": 7
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 5
+        },
+        "resource": "wool",
+        "token": 8
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 6
+        },
+        "resource": "grain",
+        "token": 9
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 7
+        },
+        "resource": "ore",
+        "token": 10
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 8
+        },
+        "resource": "brick",
+        "token": 11
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 9
+        },
+        "resource": "lumber",
+        "token": 12
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 10
+        },
+        "resource": "lumber",
+        "token": 1
+      },
+      {
+        "position": {
+          "level": 2,
+          "index": 11
+        },
+        "resource": "grain",
+        "token": 2
+      }
+    ]
+  }
 }

@@ -46,6 +46,11 @@ server.post('/users/login', (req, res) => {
   res.status(200).json({token})
 })
 
+server.use(jsonServer.rewriter({
+  '/games/:id/player': '/resources',
+  '/games/:id/board': '/hexes'
+}))
+
 server.use(router)
 
 server.listen(PORT, () => {
