@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 import V from "./Vector";
 import CatanTypes from "../CatanTypes";
 
-function Hexagon({ position, resource, token }) {
+function Hexagon({ position, resource, token, unit = 256 }) {
   // Point positioning
-  const unit = 256;
   const width = Math.sqrt(3) * unit;
   const radius = unit;
   const height = 2 * radius;
@@ -84,7 +83,12 @@ function Hexagon({ position, resource, token }) {
 Hexagon.propTypes = {
   position: CatanTypes.HexPosition.isRequired,
   resource: CatanTypes.Resource.isRequired,
-  token: PropTypes.number.isRequired
+  token: PropTypes.number.isRequired,
+  unit: PropTypes.number
+};
+
+Hexagon.defaultProps = {
+  unit: 256
 };
 
 export default Hexagon;
