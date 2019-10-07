@@ -25,6 +25,10 @@
         "prettier"
     ],
     "rules": {
-      "prettier/prettier": ["error"]
+      "prettier/prettier": ["error"],
+      "camelcase": ["error", {
+        // Allow api properties that have underscores in their names
+        "allow": ["development_cards", "resources_cards", "max_players"]
+      }]
     }
 }

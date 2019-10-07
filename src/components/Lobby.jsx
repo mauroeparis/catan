@@ -1,27 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CatanTypes from "../CatanTypes";
 
-function Lobby({ lobbyInfo }) {
-  function enableToStart() {
-    if (lobbyInfo.max_players === 3) {
-      return false;
-    }
-    return true;
-  }
-
+function Lobby({ name, owner, max_players, players }) {
   return (
     <div>
-      <h1>Name:{lobbyInfo.name}</h1>
-      <h1>Owner:{lobbyInfo.owner}</h1>
+      <h1>Name:{name}</h1>
+      <h1>Owner:{owner}</h1>
       <h1>
         Players:
-        {lobbyInfo.players.map((player, index) =>
-        <li>{player}</li>
-        )}</h1>
-      <h1>Max Players:{lobbyInfo.max_players}</h1>
+        {players.map(player => (
+          <li>{player}</li>
+        ))}
+      </h1>
+      <h1>Max Players:{max_players}</h1>
       <div>
         <Link to="/game">
-          <button type="button" disabled={enableToStart()}>Start Game</button>
+          <button
+            type="button"
+            disabled={players.length >= 3 && players.length <= max_players}
+          >
+            Start Game
+          </button>
         </Link>
       </div>
       <div>
@@ -32,5 +32,7 @@ function Lobby({ lobbyInfo }) {
     </div>
   );
 }
+
+Lobby.propTypes = CatanTypes.Room;
 
 export default Lobby;
