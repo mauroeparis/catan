@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "./logo.svg";
+import Board from "./board/Board";
 import LobbyList from "./components/LobbyList";
 
 function App() {
@@ -22,15 +23,16 @@ function App() {
 
   return (
     <div className="text-center">
+      <Board />
       <div
         className="
-        flex
-        flex-col
-        m-6
-        p-6
-        rounded
-        bg-purple-800
-        shadow-lg"
+          flex
+          flex-col
+          m-6
+          p-6
+          rounded
+          bg-purple-800
+          shadow-lg"
       >
         <h1 className="text-white text-3xl">Welcome to React</h1>
         <div className="w-1/2 self-center">
