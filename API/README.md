@@ -8,4 +8,4 @@ In the project directory, you can run:
 
 ##### `npm run mockapi`
 
-and the API will run over http://localhost:3000 (you can change the port in server.js)
+and the API will run over http://localhost:8000 (you can change the port in server.js)
