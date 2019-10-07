@@ -1,10 +1,9 @@
 import React from "react";
-import exampleLobby from "./data/exampleLobby.json";
 import {Link} from "react-router-dom";
 
-function Lobby() {
+function Lobby({lobby_info}) {
   function enableToStart() {
-    if (exampleLobby.max_players === 3) {
+    if (lobby_info.max_players === 3) {
       return false;
     }
     return true;
@@ -12,15 +11,10 @@ function Lobby() {
 
   return (
     <div>
-      <h1>Lobby</h1>
-      {exampleLobby.map(lobby => {
-        return <div>
-          <h1 key={exampleLobby.id}>Name:{exampleLobby.name}</h1>
-          <h1 key={exampleLobby.id}>Owner:{exampleLobby.owner}</h1>
-          <h1 key={exampleLobby.id}>Players:{exampleLobby.players}</h1>
-          <h1 key={exampleLobby.id}>Max Players:{exampleLobby.max_players}</h1>
-        </div>
-      })}
+      <h1>Name:{lobby_info.name}</h1>
+      <h1>Owner:{lobby_info.owner}</h1>
+      <h1>Players:{lobby_info.players.map((player, index) => <li>{player}</li>)}</h1>
+      <h1>Max Players:{lobby_info.max_players}</h1>
       <div>
         <Link to="/game">
           <button disabled={enableToStart()}>
