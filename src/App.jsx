@@ -1,7 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
+import LobbyList from './components/LobbyList'
 
 function App() {
+
+  const rooms = [
+    {
+      "id" : 1,
+      "name": "superMegaHyperMegaRed",
+      "owner" : "Julian",
+      "players" : ["Hoyito", "Mayco", "Julian"],
+      "max_players" : 3
+    },
+    {
+      "id" : 2,
+      "name": "Omega",
+      "owner" : "Fabricio",
+      "players" : ["Jose", "Pepe", "Fabricio", "Esteban"],
+      "max_players" : 4
+    }
+  ];
+
   return (
     <div class="text-center">
       <div
@@ -22,6 +41,7 @@ function App() {
       <p className="text-base">
         To get started, edit <code>src/App.js</code> and save to reload.
       </p>
+      <LobbyList rooms={rooms}/>
     </div>
   );
 }
