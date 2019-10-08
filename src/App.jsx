@@ -37,7 +37,7 @@ function App() {
     <Router>
       <div className="h-screen">
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <LoginPage />
           </Route>
           <Route
