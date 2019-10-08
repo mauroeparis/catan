@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import LoginPage from "./components/Login";
 import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
@@ -33,19 +35,11 @@ function App() {
 
   return (
     <Router>
-      <ul>
-        <li>
-          <a href="/lobby">Lobby</a>
-        </li>
-        <li>
-          <a href="/lobbyList">Lobby List</a>
-        </li>
-        <li>
-          <a href="/board">Board</a>
-        </li>
-      </ul>
-      <div className="App">
+      <div className="h-screen">
         <Switch>
+          <Route path="/">
+            <LoginPage />
+          </Route>
           <Route
             path="/lobby"
             exact
