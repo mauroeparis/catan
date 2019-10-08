@@ -1,19 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import LoginPage from './components/Login'
+import logo from './logo.svg';
 
 function App() {
   return (
-    <Router>
-      <div className="h-screen">
-        <Switch>
-          <Route path="/">
-            <LoginPage />
-          </Route>
-        </Switch>
+    <div class="text-center">
+      <div
+        className="
+          flex
+          flex-col
+          m-6
+          p-6
+          rounded
+          bg-purple-800
+          shadow-lg"
+        >
+        <h1 className="text-white text-3xl">Welcome to React</h1>
+        <div className="w-1/2 self-center">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
       </div>
-    </Router>
+      <p className="text-base">
+        To get started, edit <code>src/App.js</code> and save to reload.
+      </p>
+    </div>
   );
 }
 
