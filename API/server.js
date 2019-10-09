@@ -11,6 +11,7 @@ const userdb = JSON.parse(fs.readFileSync("./API/db.json", "UTF-8")).users;
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+server.use(jsonServer.defaults());
 
 const PORT = 8000;
 
@@ -21,6 +22,13 @@ const expiresIn = "1h";
 // Create a token from a payload
 function createToken(payload) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
+}
+
+// Verify the token
+function verifyToken(token) {
+  return jwt.verify(token, SECRET_KEY, (err, decode) =>
+    decode !== undefined ? decode : err
+  );
 }
 
 // Check if the user exists in database
@@ -42,6 +50,27 @@ server.post("/users/login", (req, res) => {
   const token = createToken({ user, pass });
   console.log(`token:${token}`);
   res.status(200).json({ token });
+});
+
+// Check token for other actions diff from login and register
+server.use(/^(?!\/(login|register)).*$/, (req, res, next) => {
+  if (
+    req.headers.authorization === undefined ||
+    req.headers.authorization.split(" ")[0] !== "Bearer"
+  ) {
+    const status = 401;
+    const message = "Bad authorization header";
+    res.status(status).json({ status, message });
+    return;
+  }
+  try {
+    verifyToken(req.headers.authorization.split(" ")[1]);
+    next();
+  } catch (err) {
+    const status = 401;
+    const message = "Error: access_token is not valid";
+    res.status(status).json({ status, message });
+  }
 });
 
 server.use(
