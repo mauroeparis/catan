@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
+import axios from "axios";
 import Hexagon from "./Hexagon";
 import Settlemet from "./Settlement";
 
-function makeHexagons() {
+const api = axios.create({
+  // TODO: This should be accessible from anywhere
+  baseURL: "http://localhost:8000/",
+  timeout: 10000
+});
+
+function makehexagons() {
   const hexagons = [
     {
       position: { level: 0, index: 0 },
@@ -44,6 +51,17 @@ function makeSettlements() {
 }
 
 function Board() {
+  const settlements = makeSettlements();
+  const [hexagons, setHexagons] = useState(makehexagons());
+  useEffect(() => {
+    const fetchBoard = async () => {
+      const gameId = 2; // TODO: This should come from an upper state
+      const response = await api.get(`games/${gameId}/board`);
+      setHexagons(response.data.hexes);
+    };
+    fetchBoard();
+  }, []);
+
   const unit = 256; // Radius of one hexagon in pixels
 
   const style = {
@@ -51,9 +69,6 @@ function Board() {
     margin: "4rem auto",
     backgroundColor: "#202020"
   };
-
-  const hexagons = makeHexagons();
-  const settlements = makeSettlements();
 
   const width = 2560;
   const height = 2560;
