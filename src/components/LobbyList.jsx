@@ -3,27 +3,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import CatanTypes from "../CatanTypes";
 
-// <ul>
-//   <li>id: {room.id}</li>
-//   <li>name: {room.name}</li>
-//   <li>owner: {room.owner}</li>
-//   <li>
-//     <ul>
-//       {room.players.map(player => (
-//         <li>{player}</li>
-//       ))}
-//     </ul>
-//   </li>
-//   <li>max_players: {room.max_players}</li>
-//   <li>
-//     <Link to="/lobby">
-//       <button type="button" onClick={() => alert("Will join you!")}>
-//         JoinGame
-//       </button>
-//     </Link>
-//   </li>
-// </ul>
-
 function LobbyList({ rooms }) {
   return (
     <div className="h-full bg-orange-300">
@@ -44,7 +23,8 @@ function LobbyList({ rooms }) {
             </div>
           </div>
           {rooms.map((room, index) => (
-            <div
+            <Link
+              to="/lobby"
               key={room.id}
               className={`
                 table-row
@@ -52,30 +32,24 @@ function LobbyList({ rooms }) {
               `}
             >
               <div className="table-cell py-4 px-6 text-gray-900 truncate">
-                <Link to="/lobby">
-                  <span>{room.name}</span>
-                </Link>
+                <span>{room.name}</span>
               </div>
               <div className="table-cell hidden md:block lg:block xl:block py-4 px-6 text-gray-900 truncate">
-                <Link to="/lobby">
-                  <span>
-                    {room.players.map((player, pIndex) => (
-                      <span>
-                        {player}
-                        {`${pIndex !== room.players.length - 1 ? ", " : ""}`}
-                      </span>
-                    ))}
-                  </span>
-                </Link>
+                <span>
+                  {room.players.map((player, pIndex) => (
+                    <span>
+                      {player}
+                      {`${pIndex !== room.players.length - 1 ? ", " : ""}`}
+                    </span>
+                  ))}
+                </span>
               </div>
               <div className="table-cell py-4 px-6 text-right text-gray-900">
-                <Link to="Lobby">
-                  <span>
-                    {room.players.length}/{room.max_players}
-                  </span>
-                </Link>
+                <span>
+                  {room.players.length}/{room.max_players}
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
