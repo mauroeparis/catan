@@ -7,8 +7,7 @@ import Background from "../public/img/catan-bg.jpg";
 const TextClasses = "text-center text-sm self-center tracking-wider text-bold";
 const CommonClasses = "w-5/6 shadow-md rounded h-12";
 
-function CustomInput(props) {
-  const { type, placeholder } = props;
+function CustomInput({ type, placeholder }) {
   return (
     <input
       type={type}
@@ -46,7 +45,7 @@ function LoginPage() {
 
 function LoginForm() {
   return (
-    <div className="h-ful md:h-fit w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
+    <div className="h-ful md:table lg:table xl:table w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
       <h1 className="font-cinzel text-center pt-24 leading-tight text-gray-900">
         <span className="text-xl">The Settlers of</span>
         <br />

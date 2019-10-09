@@ -8,9 +8,11 @@ const jwt = require("jsonwebtoken");
 const server = jsonServer.create();
 const router = jsonServer.router("./API/db.json");
 const userdb = JSON.parse(fs.readFileSync("./API/db.json", "UTF-8")).users;
+const middlewares = jsonServer.defaults();
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+server.use(middlewares);
 
 const PORT = 8000;
 
