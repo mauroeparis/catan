@@ -4,7 +4,7 @@ import api from "../Api";
 import Hexagon from "./Hexagon";
 import Settlemet from "./Settlement";
 
-function makehexagons() {
+function makeHexagons() {
   const hexagons = [
     {
       position: { level: 0, index: 0 },
@@ -46,7 +46,7 @@ function makeSettlements() {
 
 function Board() {
   const settlements = makeSettlements();
-  const [hexagons, setHexagons] = useState(makehexagons());
+  const [hexagons, setHexagons] = useState(makeHexagons());
   useEffect(() => {
     const fetchBoard = async () => {
       const gameId = 2; // TODO: This should come from an upper state
