@@ -1,40 +1,24 @@
 import React from "react";
+import _ from "lodash";
 import PropTypes from "prop-types";
 import CatanTypes from "../CatanTypes";
 
 function CardList({ cards }) {
-  let roadBuilding = 0;
-  let yearOfPlenty = 0;
-  let monopoly = 0;
-  let victoryPoint = 0;
-  let knight = 0;
-
-  for (let i = 0; i < cards.length; i += 1)
-    if (cards[i] === "road_building") {
-      roadBuilding += 1;
-    } else if (cards[i] === "year_of_plenty") {
-      yearOfPlenty += 1;
-    } else if (cards[i] === "monopoly") {
-      monopoly += 1;
-    } else if (cards[i] === "victory_point") {
-      victoryPoint += 1;
-    } else {
-      knight += 1;
-    }
+  const amounts = _.countBy(cards);
 
   return (
     <div>
-      <h1>Road building: {roadBuilding}</h1>
-      <h1>Year of plenty: {yearOfPlenty}</h1>
-      <h1>Monopoly: {monopoly}</h1>
-      <h1>Victory point: {victoryPoint}</h1>
-      <h1>Knight: {knight}</h1>
+      <h1>Road building: {amounts.road_building}</h1>
+      <h1>Year of plenty: {amounts.year_of_plenty}</h1>
+      <h1>Monopoly: {amounts.monopoly}</h1>
+      <h1>Victory point: {amounts.victory_point}</h1>
+      <h1>Knight: {amounts.knight}</h1>
     </div>
   );
 }
 
 CardList.propTypes = {
-  cards: PropTypes.arrayOf(CatanTypes.Cards).isRequired
+  cards: PropTypes.arrayOf(CatanTypes.Card).isRequired
 };
 
 export default CardList;

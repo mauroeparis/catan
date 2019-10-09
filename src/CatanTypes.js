@@ -6,7 +6,7 @@ const CatanTypes = {
     index: PropTypes.number.isRequired
   }),
   Resource: PropTypes.oneOf(["brick", "lumber", "wool", "grain", "ore"]),
-  Cards: PropTypes.oneOf([
+  Card: PropTypes.oneOf([
     "road_building",
     "year_of_plenty",
     "monopoly",
