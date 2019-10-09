@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import axios from "axios";
+import api from "../Api";
 import Hexagon from "./Hexagon";
 import Settlemet from "./Settlement";
-
-const api = axios.create({
-  // TODO: This should be accessible from anywhere
-  baseURL: "http://localhost:8000/",
-  timeout: 10000
-});
 
 function makehexagons() {
   const hexagons = [
