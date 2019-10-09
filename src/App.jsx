@@ -4,6 +4,7 @@ import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
 import ResourcesList from "./components/ResourcesList";
+import CardList from "./components/CardList";
 import Board from "./board/Board";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
   ];
   const room = rooms[2];
   const resources = ["brick", "lumber", "wool", "grain", "ore", "ore", "brick"];
+  const cards = ["road_building", "knight", "monopoly", "knight"];
 
   return (
     <Router>
@@ -47,6 +49,9 @@ function App() {
         </li>
         <li>
           <Link to="/resourcesList">Resources List</Link>
+        </li>
+        <li>
+          <Link to="/cardList">Card List</Link>
         </li>
       </ul>
       <div className="App">
@@ -74,6 +79,11 @@ function App() {
             path="/resourcesList"
             exact
             render={() => <ResourcesList resources={resources} />}
+          />
+          <Route
+            path="/cardList"
+            exact
+            render={() => <CardList cards={cards} />}
           />
         </Switch>
       </div>
