@@ -17,7 +17,7 @@ const CatanTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     owner: PropTypes.string.isRequired,
-    players: PropTypes.arrayOf(PropTypes.string),
+    players: PropTypes.arrayOf(PropTypes.string).isRequired,
     max_players: PropTypes.number.isRequired
   })
 };

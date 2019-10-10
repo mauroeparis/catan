@@ -17,12 +17,12 @@ function Hexagon({ position, resource, token, unit = 256 }) {
   if (position.level === 0) {
     center = V.zero;
   } else if (position.level === 1) {
-    const levelFirstHexagon = V.rot(P(2 * wunit, 0), -60, true);
-    center = V.rot(levelFirstHexagon, 60 * position.index, true);
+    const levelFirstHexagon = V.rot(P(2 * wunit, 0), -60);
+    center = V.rot(levelFirstHexagon, 60 * position.index);
   } else if (position.level === 2) {
     const axis =
-      position.index % 2 ? V.rot(P(4 * wunit, 0), -60, true) : P(0, 3 * -unit);
-    center = V.rot(axis, 60 * Math.floor(position.index / 2), true);
+      position.index % 2 ? V.rot(P(4 * wunit, 0), -60) : P(0, 3 * -unit);
+    center = V.rot(axis, 60 * Math.floor(position.index / 2));
   } else {
     throw new Error("Invalid hexagon position.level");
   }
