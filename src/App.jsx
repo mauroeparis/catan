@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 import LoginPage from "./components/Login";
 import Lobby from "./components/Lobby";
@@ -40,10 +45,9 @@ function App() {
   return (
     <Router>
       <div className="h-screen">
+        {!localStorage.token && <Redirect to="/login" />}
         <Switch>
-          <Route exact path="/">
-            <LoginPage />
-          </Route>
+          <Route path="/login" component={LoginPage} />
           <Route
             path="/lobby"
             exact
@@ -57,7 +61,6 @@ function App() {
               />
             )}
           />
-          <Route path="/game" component={Game} />
           <Route
             path="/lobbyList"
             exact
@@ -74,6 +77,8 @@ function App() {
             exact
             render={() => <CardList cards={cards} />}
           />
+
+          <Route path="/" component={Game} />
         </Switch>
       </div>
     </Router>
