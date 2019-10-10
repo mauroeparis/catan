@@ -8,6 +8,7 @@ function ResourcesList({ resources }) {
 
   return (
     <div>
+      <h1 class="text-3xl">Resource List</h1>
       <h1>Brick: {amounts.brick}</h1>
       <h1>Lumber: {amounts.lumber}</h1>
       <h1>Wool: {amounts.wool}</h1>

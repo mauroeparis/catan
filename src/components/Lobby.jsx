@@ -30,7 +30,7 @@ function Lobby({ name, owner, max_players, players }) {
         <Link to="/game">
           <button
             type="button"
-            disabled={players.length >= 3 && players.length <= max_players}
+            disabled={!(players.length >= 3 && players.length <= max_players)}
           >
             Start Game
           </button>
