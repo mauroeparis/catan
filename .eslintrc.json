@@ -13,7 +13,7 @@
     "globals": {
         "Atomics": "readonly",
         "SharedArrayBuffer": "readonly",
-        "shallow" : true
+        "shallow" : "readonly"
     },
     "parserOptions": {
         "ecmaFeatures": {
@@ -31,7 +31,6 @@
       "camelcase": ["error", {
         // Allow api properties that have underscores in their names
         "allow": ["development_cards", "resources_cards", "max_players"]
-      }],
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      }]
     }
 }

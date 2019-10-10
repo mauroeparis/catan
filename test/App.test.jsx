@@ -4,6 +4,7 @@ import App from "../src/App";
 describe("<Add /> rendering", () => {
   it("should render one <ul>", () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.children("ul")).toHaveLength(1);
+    // Expects the app to have exactly one div children
+    expect(wrapper.children("div")).toHaveLength(1);
   });
 });
