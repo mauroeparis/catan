@@ -75,10 +75,11 @@ function Lobby({ id, name, owner, max_players, players }) {
             <div className="m-4" />
           )}
 
-          <Link to="/" className="w-full text-center">
+          <Link to="/game" className="w-full text-center">
             <input
               type="button"
               value="START GAME"
+              disabled={!(players.length >= 3 && players.length <= max_players)}
               className={`
                 h-12
                 bg-blue-800

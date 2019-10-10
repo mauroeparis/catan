@@ -15,7 +15,7 @@ function LobbyList({ rooms }) {
             <div className="table-cell py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
               Name
             </div>
-            <div className="table-cell hidden md:block lg:block xl:block py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
+            <div className="table-cell hidden md:table-cell lg:table-cell xl:table-cell py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
               Players
             </div>
             <div className="table-cell py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
