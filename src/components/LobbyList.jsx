@@ -28,6 +28,8 @@ function LobbyList({ rooms }) {
               key={room.id}
               className={`
                 table-row
+                cursor-pointer
+                hover:bg-gray-400
                 ${index % 2 ? "bg-gray-200" : "bg-gray-300"}
               `}
             >
