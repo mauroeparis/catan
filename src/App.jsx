@@ -54,6 +54,13 @@ function App() {
           <Link to="/cardList">Card List</Link>
         </li>
       </ul>
+      <Lobby
+        id={room.id}
+        name={room.name}
+        owner={room.owner}
+        max_players={room.max_players}
+        players={room.players}
+      />
       <div className="App">
         <Switch>
           <Route
@@ -61,6 +68,7 @@ function App() {
             exact
             render={() => (
               <Lobby
+                id={room.id}
                 name={room.name}
                 owner={room.owner}
                 max_players={room.max_players}

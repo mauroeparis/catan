@@ -7,14 +7,14 @@ function LobbyList({ rooms }) {
   return (
     <ul>
       {rooms.map(room => (
-        <ul>
+        <ul key={room.id}>
           <li>id: {room.id}</li>
           <li>name: {room.name}</li>
           <li>owner: {room.owner}</li>
           <li>
             <ul>
               {room.players.map(player => (
-                <li>{player}</li>
+                <li key={player}>{player}</li>
               ))}
             </ul>
           </li>
