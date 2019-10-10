@@ -62,8 +62,7 @@ function LoginForm() {
       localStorage.setItem("token", token);
       history.push("/lobbyList");
     } catch (err) {
-      console.log("Error:");
-      console.log(err);
+      console.log(`Error: ${err}`);
       alert("Invalid login of password");
     }
   };
