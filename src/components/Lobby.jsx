@@ -5,6 +5,7 @@ import CatanTypes from "../CatanTypes";
 import { ReactComponent as Crown } from "../public/icons/crown-solid.svg";
 import { ReactComponent as Dot } from "../public/icons/circle-solid.svg";
 import { ReactComponent as AlertIcon } from "../public/icons/exclamation-triangle-solid.svg";
+import { ReactComponent as NormalUser } from "../public/icons/user-shield-solid.svg";
 
 const TextClasses = "text-center text-sm tracking-wider text-bold";
 const CommonClasses = "w-full shadow-md rounded h-12";
@@ -32,8 +33,8 @@ function Lobby({ name, owner, max_players, players }) {
               >
                 <div className="flex flex-row justify-between items-center">
                   <div className="flex flex-row">
-                    <div className="w-6 h-6 mr-5 text-blue-900">
-                      {player === owner ? <Crown /> : ""}
+                    <div className={`w-6 h-6 mr-5 ${player === owner ? "text-blue-900" : "text-gray-600"}`}>
+                      {player === owner ? <Crown /> : <NormalUser />}
                     </div>
                     <span>{player}</span>
                   </div>
@@ -50,7 +51,7 @@ function Lobby({ name, owner, max_players, players }) {
               <div className="w-6 h-6 mr-4">
                 <AlertIcon />
               </div>
-              ¡Faltan jugadores!
+              ¡Necesitas {max_players - players.length} más en la partida!
             </span>
           ) : (
             ""
