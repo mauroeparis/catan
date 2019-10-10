@@ -44,6 +44,11 @@
       "id": 9,
       "user": "Emil26",
       "pass": "rAb3k4FKf9kAfKi"
+    },
+    {
+      "id": 10,
+      "user": "test",
+      "pass": "test"
     }
   ],
   "boards": [

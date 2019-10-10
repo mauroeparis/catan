@@ -52,7 +52,7 @@ function LoginPage() {
 function LoginForm() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-  const { history } = useHistory();
+  const history = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();

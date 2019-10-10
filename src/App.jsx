@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
-import api from "./Api";
+
 import LoginPage from "./components/Login";
 import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
