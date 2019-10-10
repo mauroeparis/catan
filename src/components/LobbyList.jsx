@@ -39,7 +39,7 @@ function LobbyList({ rooms }) {
               <div className="table-cell hidden md:block lg:block xl:block py-4 px-6 text-gray-900 truncate">
                 <span>
                   {room.players.map((player, pIndex) => (
-                    <span>
+                    <span key={player}>
                       {player}
                       {`${pIndex !== room.players.length - 1 ? ", " : ""}`}
                     </span>

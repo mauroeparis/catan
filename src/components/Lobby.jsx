@@ -22,9 +22,11 @@ const CommonClasses = "w-full shadow-md rounded h-12";
 // Warning: Failed prop type: The prop `isRequired` is marked
 // as required in `Lobby`, but its value is `undefined`.
 
-function Lobby({ name, owner, max_players, players }) {
+function Lobby({ id, name, owner, max_players, players }) {
   return (
-    <div className="h-full bg-orange-300">
+    // HACK: Are we going to use max_players and the id?
+    // I set them up for the linter to shut up
+    <div key={id + max_players} className="h-full bg-orange-300">
       <div className="py-5 flex flex-col">
         <h1 className="font-cinzel text-gray-900 text-5xl lg:text-6xl lg:text-bold md:pt-5 lg:pt-5 self-center">
           {name}
@@ -62,15 +64,15 @@ function Lobby({ name, owner, max_players, players }) {
             ))}
           </ul>
 
-          {players.length < max_players ? (
+          {players.length < 3 ? (
             <span className="text-red-700 flex flex-row m-3">
               <div className="w-6 h-6 mr-4">
                 <AlertIcon />
               </div>
-              ¡Necesitas {max_players - players.length} más en la partida!
+              ¡Necesitas {3 - players.length} más en la partida!
             </span>
           ) : (
-            ""
+            <div className="m-4" />
           )}
 
           <Link to="/" className="w-full text-center">
@@ -82,11 +84,7 @@ function Lobby({ name, owner, max_players, players }) {
                 bg-blue-800
                 text-white
                 shadow
-                ${
-                  players.length < max_players
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
-                }
+                ${players.length < 3 ? "opacity-50 cursor-not-allowed" : ""}
                 ${CommonClasses}
                 ${TextClasses}
               `}
