@@ -1,7 +1,8 @@
 {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": [
         "airbnb",
@@ -11,7 +12,8 @@
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "shallow" : true
     },
     "parserOptions": {
         "ecmaFeatures": {
@@ -29,6 +31,7 @@
       "camelcase": ["error", {
         // Allow api properties that have underscores in their names
         "allow": ["development_cards", "resources_cards", "max_players"]
-      }]
+      }],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     }
 }
