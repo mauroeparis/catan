@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
@@ -52,18 +52,23 @@ function LoginPage() {
 function LoginForm() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-  const history = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const res = await api.login(user, pass);
-    const { token } = res.data;
-    localStorage.setItem("token", token);
-    history.push("/lobbyList");
+    try {
+      const res = await api.login(user, pass);
+      const { token } = res.data;
+      localStorage.setItem("token", token);
+    } catch (err) {
+      console.log("Error:");
+      console.log(err);
+      alert("Invalid login of password");
+    }
   };
 
   return (
     <div className="h-ful md:h-fit w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
+      {localStorage.token && <Redirect to="/lobbyList" />}
       <h1 className="font-cinzel text-center pt-24 leading-tight text-gray-900">
         <span className="text-xl">The Settlers of</span>
         <br />
