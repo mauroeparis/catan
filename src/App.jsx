@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import LoginPage from "./components/Login";
 import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
@@ -37,25 +39,11 @@ function App() {
 
   return (
     <Router>
-      <ul>
-        <li>
-          <Link to="/lobby">Lobby</Link>
-        </li>
-        <li>
-          <Link to="/lobbyList">Lobby List</Link>
-        </li>
-        <li>
-          <Link to="/board">Board</Link>
-        </li>
-        <li>
-          <Link to="/resourcesList">Resources List</Link>
-        </li>
-        <li>
-          <Link to="/cardList">Card List</Link>
-        </li>
-      </ul>
-      <div className="App">
+      <div className="h-screen">
         <Switch>
+          <Route exact path="/">
+            <LoginPage />
+          </Route>
           <Route
             path="/lobby"
             exact
