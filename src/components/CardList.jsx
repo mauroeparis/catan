@@ -8,7 +8,7 @@ function CardList({ cards }) {
 
   return (
     <div>
-      <h1 class="text-3xl">Card List</h1>
+      <h1 className="text-3xl">Card List</h1>
       <h1>Road building: {amounts.road_building}</h1>
       <h1>Year of plenty: {amounts.year_of_plenty}</h1>
       <h1>Monopoly: {amounts.monopoly}</h1>

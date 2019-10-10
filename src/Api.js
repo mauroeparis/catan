@@ -20,7 +20,7 @@ const lobby = {
 };
 
 const games = {
-  board: id => API.get(`/games/${id}`),
+  board: id => API.get(`/games/${id}/board`),
   cards: id => API.get(`/games/${id}/player`)
 };
 
