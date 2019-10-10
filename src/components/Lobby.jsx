@@ -10,6 +10,18 @@ import { ReactComponent as NormalUser } from "../public/icons/user-shield-solid.
 const TextClasses = "text-center text-sm tracking-wider text-bold";
 const CommonClasses = "w-full shadow-md rounded h-12";
 
+// TODO: For some reason I'm not being able to use this component,
+// <Lobby
+//   id={room.id}
+//   name={room.name}
+//   owner={room.owner}
+//   max_players={room.max_players}
+//   players={room.players}
+// />
+// It keeps saying in the browser console:
+// Warning: Failed prop type: The prop `isRequired` is marked
+// as required in `Lobby`, but its value is `undefined`.
+
 function Lobby({ name, owner, max_players, players }) {
   return (
     <div className="h-full bg-orange-300">
@@ -33,7 +45,11 @@ function Lobby({ name, owner, max_players, players }) {
               >
                 <div className="flex flex-row justify-between items-center">
                   <div className="flex flex-row">
-                    <div className={`w-6 h-6 mr-5 ${player === owner ? "text-blue-900" : "text-gray-600"}`}>
+                    <div
+                      className={`w-6 h-6 mr-5 ${
+                        player === owner ? "text-blue-900" : "text-gray-600"
+                      }`}
+                    >
                       {player === owner ? <Crown /> : <NormalUser />}
                     </div>
                     <span>{player}</span>

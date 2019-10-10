@@ -49,6 +49,7 @@ function App() {
             exact
             render={() => (
               <Lobby
+                id={room.id}
                 name={room.name}
                 owner={room.owner}
                 max_players={room.max_players}
