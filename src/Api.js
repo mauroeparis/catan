@@ -1,8 +1,25 @@
 import axios from "axios";
 
-const api = axios.create({
-  baseURL: "http://localhost:8000/",
-  timeout: 10000
+const URL = "http://localhost:8000/";
+
+const API = axios.create({
+  baseURL: URL,
+  timeout: 10000,
+  headers: {
+    Authorization: `Bearer ${localStorage.token}`
+  }
 });
 
-export default api;
+function login(user, pass) {
+  const header = { "Content-Type": "application/json" };
+  return API.post("/users/login", { user, pass }, header);
+}
+
+const lobby = {
+  list: API.get("/rooms")
+};
+
+export default {
+  login,
+  lobby
+};
