@@ -10,6 +10,8 @@ import LoginPage from "./components/Login";
 import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
+import ResourcesList from "./components/ResourcesList";
+import CardList from "./components/CardList";
 import Board from "./board/Board";
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
     }
   ];
   const room = rooms[2];
+  const resources = ["brick", "lumber", "wool", "grain", "ore", "ore", "brick"];
+  const cards = ["road_building", "knight", "monopoly", "knight"];
 
   return (
     <Router>
@@ -49,6 +53,7 @@ function App() {
             exact
             render={() => (
               <Lobby
+                id={room.id}
                 name={room.name}
                 owner={room.owner}
                 max_players={room.max_players}
@@ -62,6 +67,17 @@ function App() {
             render={() => <LobbyList rooms={rooms} />}
           />
           <Route path="/board" component={Board} />
+          <Route
+            path="/resourcesList"
+            exact
+            render={() => <ResourcesList resources={resources} />}
+          />
+          <Route
+            path="/cardList"
+            exact
+            render={() => <CardList cards={cards} />}
+          />
+
           <Route path="/" component={Game} />
         </Switch>
       </div>

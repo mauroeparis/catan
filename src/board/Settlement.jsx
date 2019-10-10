@@ -17,23 +17,19 @@ function Settlement({ position, unit = 256 }) {
     if (level === 0) {
       axis = P(0, -unit);
     } else if (level === 1) {
-      axis =
-        index % 3 ? V.rot(P(wunit, 2.5 * -unit), -20, true) : P(0, 2 * -unit);
+      axis = index % 3 ? V.rot(P(wunit, 2.5 * -unit), -20) : P(0, 2 * -unit);
     } else if (level === 2) {
       const imod5 = index % 5;
       if (imod5 === 0) axis = P(0, 4 * -unit);
-      else if (imod5 === 1) axis = V.rot(P(wunit, 3.5 * -unit), -12, true);
-      else if (imod5 === 2)
-        axis = V.rot(P(2 * wunit, 4 * -unit), -2 * 12, true);
-      else if (imod5 === 3)
-        axis = V.rot(P(3 * wunit, 3.5 * -unit), -3 * 12, true);
-      else if (imod5 === 4)
-        axis = V.rot(P(3 * wunit, 2.5 * -unit), -4 * 12, true);
+      else if (imod5 === 1) axis = V.rot(P(wunit, 3.5 * -unit), -12);
+      else if (imod5 === 2) axis = V.rot(P(2 * wunit, 4 * -unit), -2 * 12);
+      else if (imod5 === 3) axis = V.rot(P(3 * wunit, 3.5 * -unit), -3 * 12);
+      else if (imod5 === 4) axis = V.rot(P(3 * wunit, 2.5 * -unit), -4 * 12);
     } else {
       throw new Error("Invalid vertex level");
     }
 
-    const vertex = V.rot(axis, (360 / hexCount) * index, true);
+    const vertex = V.rot(axis, (360 / hexCount) * index);
     return vertex;
   };
 
@@ -46,7 +42,7 @@ function Settlement({ position, unit = 256 }) {
         y={center.y + 3} // HACK: +3 seems to center the sans-serif font
         dominantBaseline="middle"
         textAnchor="middle"
-        style={{ font: "bold 2rem sans-serif", fill: "#ffffff" }}
+        style={{ font: "bold 2rem Cinzel", fill: "#ffffff" }}
       >
         {position.index}
       </text>
