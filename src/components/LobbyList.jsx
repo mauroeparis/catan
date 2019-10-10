@@ -7,7 +7,7 @@ function LobbyList({ rooms }) {
   return (
     <div className="h-full bg-orange-300">
       <div className="py-5 flex flex-col">
-        <h1 className="font-cinzel text-4xl lg:text-6xl lg:text-bold lg:pt-5 self-center">
+        <h1 className="font-cinzel text-gray-900 text-4xl lg:text-6xl lg:text-bold lg:pt-5 self-center">
           Lobby List
         </h1>
         <div className="table rounded mt-6 lg:mt-12 self-center w-11/12 lg:w-8/12">
@@ -15,7 +15,7 @@ function LobbyList({ rooms }) {
             <div className="table-cell py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
               Name
             </div>
-            <div className="table-cell hidden md:block lg:block xl:block py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
+            <div className="table-cell hidden md:table-cell lg:table-cell xl:table-cell py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
               Players
             </div>
             <div className="table-cell py-4 px-6 font-bold uppercase text-center text-sm text-gray-700">
@@ -28,6 +28,8 @@ function LobbyList({ rooms }) {
               key={room.id}
               className={`
                 table-row
+                cursor-pointer
+                hover:bg-gray-400
                 ${index % 2 ? "bg-gray-200" : "bg-gray-300"}
               `}
             >
@@ -37,7 +39,7 @@ function LobbyList({ rooms }) {
               <div className="table-cell hidden md:block lg:block xl:block py-4 px-6 text-gray-900 truncate">
                 <span>
                   {room.players.map((player, pIndex) => (
-                    <span>
+                    <span key={player}>
                       {player}
                       {`${pIndex !== room.players.length - 1 ? ", " : ""}`}
                     </span>
