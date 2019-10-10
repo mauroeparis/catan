@@ -42,7 +42,7 @@ function Settlement({ position, unit = 256 }) {
         y={center.y + 3} // HACK: +3 seems to center the sans-serif font
         dominantBaseline="middle"
         textAnchor="middle"
-        style={{ font: "bold 2rem sans-serif", fill: "#ffffff" }}
+        style={{ font: "bold 2rem Cinzel", fill: "#ffffff" }}
       >
         {position.index}
       </text>

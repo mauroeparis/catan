@@ -45,9 +45,9 @@ function Hexagon({ position, resource, token, unit = 256 }) {
     ore: "#263238"
   }[resource];
   const resourceTextPos = center;
-  const resourceTextStyle = { font: "bold 5rem sans-serif", fill: "white" };
+  const resourceTextStyle = { font: "bold 5rem Cinzel", fill: "white" };
   const tokenPos = V.add(center, P(0, 128));
-  const tokenTextStyle = { font: "bold 5rem sans-serif", fill: resourceColor };
+  const tokenTextStyle = { font: "bold 5rem Cinzel", fill: resourceColor };
 
   return (
     <>

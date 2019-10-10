@@ -1,7 +1,11 @@
 module.exports = {
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        cinzel: ["Cinzel"]
+      }
+    }
   },
   variants: {},
   plugins: []
-}
+};
