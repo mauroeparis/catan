@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
+import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
 
 const TextClasses = "text-center text-sm self-center tracking-wider text-bold";
@@ -52,9 +53,12 @@ function LoginForm() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    alert(`${user} ${pass}`)
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const res = await api.login(user, pass);
+    const { token } = res.data;
+    localStorage.setItem("token", token);
+    this.props.history.push(`/dashboard`);
   };
 
   return (
