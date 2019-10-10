@@ -19,7 +19,13 @@ const lobby = {
   list: API.get("/rooms")
 };
 
+const games = {
+  board: id => API.get(`/games/${id}`),
+  cards: id => API.get(`/games/${id}/player`)
+};
+
 export default {
   login,
-  lobby
+  lobby,
+  games
 };

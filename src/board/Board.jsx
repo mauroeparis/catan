@@ -50,7 +50,7 @@ function Board() {
   useEffect(() => {
     const fetchBoard = async () => {
       const gameId = 2; // TODO: This should come from an upper state
-      const response = await api.get(`games/${gameId}/board`);
+      const response = await api.games.board(gameId);
       setHexagons(response.data.hexes);
     };
     fetchBoard();
