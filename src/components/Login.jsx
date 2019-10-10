@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
@@ -52,6 +52,7 @@ function LoginPage() {
 function LoginForm() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const { history } = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -59,6 +60,7 @@ function LoginForm() {
       const res = await api.login(user, pass);
       const { token } = res.data;
       localStorage.setItem("token", token);
+      history.push("/lobbyList");
     } catch (err) {
       console.log("Error:");
       console.log(err);
