@@ -58,7 +58,6 @@ function LoginForm() {
     const res = await api.login(user, pass);
     const { token } = res.data;
     localStorage.setItem("token", token);
-    this.props.history.push(`/dashboard`);
   };
 
   return (
