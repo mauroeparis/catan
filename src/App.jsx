@@ -61,11 +61,7 @@ function App() {
               />
             )}
           />
-          <Route
-            path="/lobbyList"
-            exact
-            render={() => <LobbyList rooms={rooms} />}
-          />
+          <Route path="/lobbyList" exact component={LobbyList} />
           <Route path="/board" component={Board} />
           <Route
             path="/resourcesList"

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import CatanTypes from "../CatanTypes";
+import api from "../Api";
 
-function LobbyList({ rooms }) {
+function LobbyList() {
+  const [rooms, setRooms] = useState([]);
+  useEffect(() => {
+    const fetchRooms = async () => {
+      const res = await api.lobby.list;
+      setRooms(res.data);
+    };
+    fetchRooms();
+  }, []);
+
   return (
     <div className="h-full bg-orange-300">
       <div className="py-5 flex flex-col">
@@ -58,9 +66,5 @@ function LobbyList({ rooms }) {
     </div>
   );
 }
-
-LobbyList.propTypes = {
-  rooms: PropTypes.arrayOf(CatanTypes.Room).isRequired
-};
 
 export default LobbyList;
