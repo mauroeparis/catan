@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import CatanTypes from "../CatanTypes";
 import { ReactComponent as Crown } from "../public/icons/crown-solid.svg";
@@ -22,7 +22,12 @@ const CommonClasses = "w-full shadow-md rounded h-12";
 // Warning: Failed prop type: The prop `isRequired` is marked
 // as required in `Lobby`, but its value is `undefined`.
 
-function Lobby({ id, name, owner, max_players, players }) {
+function Lobby(prop) {
+  if (!prop.location.roomProp) return <Redirect to="/lobbyList" />;
+  // TODO: there must be a better way to do this.
+  // Hack to redirect when not coming from Lobbylist
+
+  const { id, name, owner, max_players, players } = prop.location.roomProp.room;
   return (
     // HACK: Are we going to use max_players and the id?
     // I set them up for the linter to shut up
