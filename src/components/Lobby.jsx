@@ -93,6 +93,8 @@ function Lobby(prop) {
                 ${players.length < 3 ? "opacity-50 cursor-not-allowed" : ""}
                 ${CommonClasses}
                 ${TextClasses}
+                disabled:cursor-not-allowed
+                disabled:opacity-50
               `}
             />
           </Link>
