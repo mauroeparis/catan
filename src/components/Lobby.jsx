@@ -1,7 +1,9 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 
+import PropTypes from "prop-types";
 import CatanTypes from "../CatanTypes";
+
 import { ReactComponent as Crown } from "../public/icons/crown-solid.svg";
 import { ReactComponent as Dot } from "../public/icons/circle-solid.svg";
 import { ReactComponent as AlertIcon } from "../public/icons/exclamation-triangle-solid.svg";
@@ -104,6 +106,12 @@ function Lobby(prop) {
   );
 }
 
-Lobby.propTypes = CatanTypes.Room;
+Lobby.propTypes = {
+  location: PropTypes.shape({
+    roomProp: PropTypes.shape({
+      room: CatanTypes.Room
+    })
+  }).isRequired
+};
 
 export default Lobby;
