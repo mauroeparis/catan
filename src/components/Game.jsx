@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import api from "../Api";
 import Board from "../board/Board";
@@ -30,5 +31,13 @@ function Game(props) {
     </>
   );
 }
+
+Game.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string
+    })
+  }).isRequired
+};
 
 export default Game;
