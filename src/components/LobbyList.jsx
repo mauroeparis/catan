@@ -33,7 +33,7 @@ function LobbyList() {
           {rooms.map((room, index) => (
             <Link
               to={{
-                pathname: "/lobby",
+                pathname: `/lobby/${room.id}`,
                 roomProp: { room }
               }}
               key={room.id}
