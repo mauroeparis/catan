@@ -75,7 +75,7 @@ function Lobby({ id, name, owner, max_players, players }) {
             <div className="m-4" />
           )}
 
-          <Link to="/game" className="w-full text-center">
+          <Link to={`/games/${id}`} className="w-full text-center">
             <input
               type="button"
               value="START GAME"
