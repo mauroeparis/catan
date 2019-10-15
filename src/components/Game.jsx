@@ -6,8 +6,7 @@ import Board from "../board/Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourcesList";
 
-function Game(props) {
-  const { match } = props;
+function Game({ match }) {
   const gameId = match.params.id;
 
   const [resCards, setResCards] = useState([]);
