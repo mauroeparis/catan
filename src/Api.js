@@ -16,7 +16,9 @@ function login(user, pass) {
 }
 
 const lobby = {
-  list: API.get("/rooms")
+  list: API.get("/rooms"),
+  join: id => API.put(`/rooms/${id}`),
+  get: id => API.get(`/rooms/${id}`)
 };
 
 const games = {
