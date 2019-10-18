@@ -1,46 +1,49 @@
-import React from "react";
-import { Link, Redirect } from "react-router-dom";
-
-import PropTypes from "prop-types";
-import CatanTypes from "../CatanTypes";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 
 import { ReactComponent as Crown } from "../public/icons/crown-solid.svg";
 import { ReactComponent as Dot } from "../public/icons/circle-solid.svg";
 import { ReactComponent as AlertIcon } from "../public/icons/exclamation-triangle-solid.svg";
 import { ReactComponent as NormalUser } from "../public/icons/user-shield-solid.svg";
 
+import api from "../Api";
+
 const TextClasses = "text-center text-sm tracking-wider text-bold";
 const CommonClasses = "w-full shadow-md rounded h-12";
 
-// TODO: For some reason I'm not being able to use this component,
-// <Lobby
-//   id={room.id}
-//   name={room.name}
-//   owner={room.owner}
-//   max_players={room.max_players}
-//   players={room.players}
-// />
-// It keeps saying in the browser console:
-// Warning: Failed prop type: The prop `isRequired` is marked
-// as required in `Lobby`, but its value is `undefined`.
+function Lobby() {
+  const { id } = useParams();
 
-function Lobby(prop) {
-  if (!prop.location.roomProp) return <Redirect to="/lobbyList" />;
-  // TODO: there must be a better way to do this.
-  // Hack to redirect when not coming from Lobbylist
+  const [room, setRoom] = useState();
 
-  const { id, name, owner, max_players, players } = prop.location.roomProp.room;
+  useEffect(() => {
+    const fetchRoom = async () => {
+      const res = await api.lobby.get(id);
+      setRoom(res.data);
+    };
+    fetchRoom();
+  }, [id]);
+
+  const handleJoin = async event => {
+    event.preventDefault();
+    try {
+      const res = await api.lobby.join(id);
+      console.log(res); // TODO: Handle join response
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
+  };
+
+  if (!room) return <div> Loading! </div>;
   return (
-    // HACK: Are we going to use max_players and the id?
-    // I set them up for the linter to shut up
-    <div key={id + max_players} className="h-full bg-orange-300">
+    <div className="h-full bg-orange-300">
       <div className="py-5 flex flex-col">
         <h1 className="font-cinzel text-gray-900 text-5xl lg:text-6xl lg:text-bold md:pt-5 lg:pt-5 self-center">
-          {name}
+          {room.name}
         </h1>
         <div className="w-11/12 md:w-8/12 self-center">
           <ul className="w-full rounded-lg mt-4 shadow-md">
-            {players.map((player, index) => (
+            {room.players.map((player, index) => (
               <li
                 key={player}
                 className={`
@@ -49,17 +52,19 @@ function Lobby(prop) {
                   text-gray-900 truncate
                   ${index === 0 ? "rounded-t-lg" : ""}
                   ${index % 2 ? "bg-gray-200" : "bg-gray-300"}
-                  ${index === players.length - 1 ? "rounded-b-lg" : ""}
+                  ${index === room.players.length - 1 ? "rounded-b-lg" : ""}
                 `}
               >
                 <div className="flex flex-row justify-between items-center">
                   <div className="flex flex-row">
                     <div
                       className={`w-6 h-6 mr-5 ${
-                        player === owner ? "text-blue-900" : "text-gray-600"
+                        player === room.owner
+                          ? "text-blue-900"
+                          : "text-gray-600"
                       }`}
                     >
-                      {player === owner ? <Crown /> : <NormalUser />}
+                      {player === room.owner ? <Crown /> : <NormalUser />}
                     </div>
                     <span>{player}</span>
                   </div>
@@ -71,28 +76,48 @@ function Lobby(prop) {
             ))}
           </ul>
 
-          {players.length < 3 ? (
+          {room.players.length < 3 ? (
             <span className="text-red-700 flex flex-row m-3">
               <div className="w-6 h-6 mr-4">
                 <AlertIcon />
               </div>
-              ¡Necesitas {3 - players.length} más en la partida!
+              ¡Necesitas {3 - room.players.length} más en la partida!
             </span>
           ) : (
             <div className="m-4" />
           )}
-
+          <input
+            type="button"
+            value="JOIN GAME"
+            disabled={!(room.players.length < room.max_players)}
+            onClick={handleJoin}
+            className={`
+              h-12
+              bg-orange-600
+              text-white
+              shadow
+              ${CommonClasses}
+              ${TextClasses}
+              disabled:cursor-not-allowed
+              disabled:opacity-50
+            `}
+          />
+          <div className="m-4" />
           <Link to="/game" className="w-full text-center">
             <input
               type="button"
               value="START GAME"
-              disabled={!(players.length >= 3 && players.length <= max_players)}
+              disabled={
+                !(
+                  room.players.length >= 3 &&
+                  room.players.length <= room.max_players
+                )
+              }
               className={`
                 h-12
                 bg-blue-800
                 text-white
                 shadow
-                ${players.length < 3 ? "opacity-50 cursor-not-allowed" : ""}
                 ${CommonClasses}
                 ${TextClasses}
                 disabled:cursor-not-allowed
@@ -105,13 +130,5 @@ function Lobby(prop) {
     </div>
   );
 }
-
-Lobby.propTypes = {
-  location: PropTypes.shape({
-    roomProp: PropTypes.shape({
-      room: CatanTypes.Room
-    })
-  }).isRequired
-};
 
 export default Lobby;

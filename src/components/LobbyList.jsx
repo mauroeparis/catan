@@ -32,10 +32,7 @@ function LobbyList() {
           </div>
           {rooms.map((room, index) => (
             <Link
-              to={{
-                pathname: `/lobby/${room.id}`,
-                roomProp: { room }
-              }}
+              to={`/lobby/${room.id}`}
               key={room.id}
               className={`
                 table-row
