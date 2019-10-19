@@ -10,10 +10,9 @@ const API = axios.create({
   }
 });
 
-function login(user, pass) {
-  const header = { "Content-Type": "application/json" };
-  return API.post("/users/login", { user, pass }, header);
-}
+const auth = {
+  login: (user, pass) => API.post("/users/login", { user, pass })
+};
 
 const lobby = {
   list: API.get("/rooms")
@@ -25,11 +24,9 @@ const games = {
   board: id => API.get(`/games/${id}/board`),
   player: id => API.get(`/games/${id}/player`),
   actions: id => API.get(`/games/${id}/player/actions`),
+  makeAction: (id, action, payload) =>
+    API.post(`/games/${id}/player/actions`, { action, payload }),
   transactions: id => API.get(`/games/${id}/player/transactions`)
 };
 
-export default {
-  login,
-  lobby,
-  games
-};
+export default { auth, lobby, games };
