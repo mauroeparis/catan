@@ -32,7 +32,14 @@ const getVertex = (level, index, unit) => {
 };
 
 // TODO: Unit param should probably come from an upper global config state
-function Settlement({ position, unit = 256, isCity, colour, username }) {
+export default function Settlement({
+  position,
+  unit = 256,
+  isCity,
+  colour,
+  username,
+  canUpgrade
+}) {
   const center = getVertex(position.level, position.index, unit);
   return (
     <>
@@ -41,7 +48,7 @@ function Settlement({ position, unit = 256, isCity, colour, username }) {
         cy={center.y}
         r={isCity ? "48px" : "32px"}
         fill={colour}
-        stroke="white"
+        stroke={canUpgrade ? "#E91E63" : "white"}
         strokeWidth="10"
       />
       <text
@@ -62,11 +69,33 @@ Settlement.propTypes = {
   unit: PropTypes.number,
   isCity: PropTypes.bool.isRequired,
   colour: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired
+  username: PropTypes.string.isRequired,
+  canUpgrade: PropTypes.bool.isRequired
 };
 
 Settlement.defaultProps = {
   unit: 256
 };
 
-export default Settlement;
+export function BuildIndicator({ position, unit = 256 }) {
+  const center = getVertex(position.level, position.index, unit);
+  return (
+    <circle
+      cx={center.x}
+      cy={center.y}
+      r="48px"
+      fill="transparent"
+      stroke="#E91E63"
+      strokeWidth="10"
+    />
+  );
+}
+
+BuildIndicator.propTypes = {
+  position: CatanTypes.VertexPosition.isRequired,
+  unit: PropTypes.number
+};
+
+BuildIndicator.defaultProps = {
+  unit: 256
+};
