@@ -14,7 +14,7 @@ function Game({ match }) {
 
   useEffect(() => {
     const fetchRooms = async () => {
-      const res = await api.games.cards(gameId);
+      const res = await api.games.player(gameId);
       const { resources, cards } = res.data;
       setResCards(resources);
       setDevCards(cards);

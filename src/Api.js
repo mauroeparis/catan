@@ -20,8 +20,12 @@ const lobby = {
 };
 
 const games = {
+  all: () => API.get("/games/"),
+  get: id => API.get(`/games/${id}`),
   board: id => API.get(`/games/${id}/board`),
-  cards: id => API.get(`/games/${id}/player`)
+  player: id => API.get(`/games/${id}/player`),
+  actions: id => API.get(`/games/${id}/player/actions`),
+  transactions: id => API.get(`/games/${id}/player/transactions`)
 };
 
 export default {

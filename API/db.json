@@ -49,6 +49,16 @@
       "id": 10,
       "user": "test",
       "pass": "test"
+    },
+    {
+      "id": 11,
+      "user": "mateo",
+      "pass": "mateo"
+    },
+    {
+      "id": 12,
+      "user": "julian",
+      "pass": "julian"
     }
   ],
   "boards": [
@@ -290,5 +300,49 @@
         "token": 2
       }
     ]
-  }
+  },
+  "games": [
+    {
+      "id": 1,
+      "players": [
+        {
+          "username": "mateo",
+          "colour": "#00ffff",
+          "settlements": [
+            { "level": 2, "index": 24 },
+            { "level": 0, "index": 0 },
+            { "level": 2, "index": 6 }
+          ],
+          "cities": [
+            { "level": 1, "index": 15 },
+            { "level": 1, "index": 3 }
+          ],
+          "roads": [],
+          "development_cards": 3,
+          "resources_cards": 6,
+          "last_gained": ["brick", "grain"]
+        },
+        {
+          "username": "julian",
+          "colour": "#00ff00",
+          "settlements": [
+            { "level": 1, "index": 12 },
+            { "level": 1, "index": 6 }
+          ],
+          "cities": [
+            { "level": 2, "index": 21 },
+            { "level": 2, "index": 9 },
+            { "level": 0, "index": 3 }
+          ],
+          "roads": [],
+          "development_cards": 2,
+          "resources_cards": 8,
+          "last_gained": ["ore", "ore"]
+        }
+      ],
+      "robber": { "level": 0, "index": 0 },
+      "current_turn": { "user": "mateo", "dice": [3, 6]},
+      "winner": null
+    }
+  ]
 }
