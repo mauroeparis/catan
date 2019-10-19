@@ -20,7 +20,7 @@ function Game({ match }) {
       setDevCards(cards);
     };
     fetchRooms();
-  }, []);
+  }, [gameId]);
 
   return (
     <>
