@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import api from "../Api";
 import Hexagon from "./Hexagon";
-import Settlemet from "./Settlement";
+import Settlement from "./Settlement";
 
 function makeHexagons() {
   const hexagons = [
@@ -45,13 +45,49 @@ function makeSettlements() {
 }
 
 function Board() {
-  const settlements = makeSettlements();
-  const [hexagons, setHexagons] = useState(makeHexagons());
+  const [{ hexagons, settlements }, setState] = useState({
+    hexagons: makeHexagons(),
+    settlements: makeSettlements()
+  });
   useEffect(() => {
     const fetchBoard = async () => {
-      const gameId = 2; // TODO: This should come from an upper state
-      const response = await api.games.board(gameId);
-      setHexagons(response.data.hexes);
+      const gameId = 1; // TODO: This should come from an upper state
+
+      // Parallel fetching
+      const [
+        { data: board },
+        {
+          data: { players }
+        }
+      ] = await Promise.all([api.games.board(gameId), api.games.get(gameId)]);
+
+      // Update board internal state
+      setState({
+        hexagons: board.hexes,
+        // combine all vertices from all players in the same array
+        settlements: _.flatten(
+          // get built vertices from players
+          players.map(p =>
+            // concat those vertices
+            _.concat(
+              // settlements to usable vertex
+              p.settlements.map(s => ({
+                position: s,
+                username: p.username,
+                isCity: false,
+                colour: p.colour
+              })),
+              // cities to usable vertex
+              p.cities.map(c => ({
+                position: c,
+                username: p.username,
+                isCity: true,
+                colour: p.colour
+              }))
+            )
+          )
+        )
+      });
     };
     fetchBoard();
   }, []);
@@ -84,7 +120,7 @@ function Board() {
           />
         ))}
         {settlements.map(sett => (
-          <Settlemet // TODO: This is just showing
+          <Settlement // TODO: This is just showing
             key={Object.values(sett.position)}
             position={sett.position}
           />
