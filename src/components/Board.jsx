@@ -29,18 +29,15 @@ function makeHexagons() {
 
 function makeSettlements() {
   const settlements = [];
-  for (let i = 0; i < 6; i += 1)
-    settlements[i] = {
-      position: { level: 0, index: i }
-    };
-  for (let i = 0; i < 18; i += 1)
-    settlements[6 + i] = {
-      position: { level: 1, index: i }
-    };
-  for (let i = 0; i < 30; i += 1)
-    settlements[6 + 18 + i] = {
-      position: { level: 2, index: i }
-    };
+  const makeSett = (l, i) => ({
+    position: { level: l, index: i },
+    isCity: _.sample([true, false]),
+    colour: "#404040",
+    username: "loading"
+  });
+  for (let i = 0; i < 6; i += 1) settlements[i] = makeSett(0, i);
+  for (let i = 0; i < 18; i += 1) settlements[6 + i] = makeSett(1, i);
+  for (let i = 0; i < 30; i += 1) settlements[6 + 18 + i] = makeSett(2, i);
   return settlements;
 }
 
@@ -61,33 +58,33 @@ function Board() {
         }
       ] = await Promise.all([api.games.board(gameId), api.games.get(gameId)]);
 
-      // Update board internal state
-      setState({
-        hexagons: board.hexes,
-        // combine all vertices from all players in the same array
-        settlements: _.flatten(
-          // get built vertices from players
-          players.map(p =>
-            // concat those vertices
-            _.concat(
-              // settlements to usable vertex
-              p.settlements.map(s => ({
-                position: s,
-                username: p.username,
-                isCity: false,
-                colour: p.colour
-              })),
-              // cities to usable vertex
-              p.cities.map(c => ({
-                position: c,
-                username: p.username,
-                isCity: true,
-                colour: p.colour
-              }))
-            )
+      // Prepare fetched settlements for re-rendering by
+      // combining all vertices from all players in the same array
+      const combinedSettlements = _.flatten(
+        // Get built vertices from players
+        players.map(p =>
+          // Concat those vertices
+          _.concat(
+            // Settlements to usable vertex
+            p.settlements.map(s => ({
+              position: s,
+              isCity: false,
+              colour: p.colour,
+              username: p.username
+            })),
+            // Cities to usable vertex
+            p.cities.map(c => ({
+              position: c,
+              isCity: true,
+              colour: p.colour,
+              username: p.username
+            }))
           )
         )
-      });
+      );
+
+      // Update board internal state
+      setState({ hexagons: board.hexes, settlements: combinedSettlements });
     };
     fetchBoard();
   }, []);
@@ -123,6 +120,9 @@ function Board() {
           <Settlement // TODO: This is just showing
             key={Object.values(sett.position)}
             position={sett.position}
+            isCity={sett.isCity}
+            colour={sett.colour}
+            username={sett.username}
           />
         ))}
       </svg>
