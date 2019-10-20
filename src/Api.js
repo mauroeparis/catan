@@ -10,6 +10,8 @@ const API = axios.create({
   }
 });
 
+const POLL_EVERY = 2000;
+
 function login(user, pass) {
   const header = { "Content-Type": "application/json" };
   return API.post("/users/login", { user, pass }, header);
@@ -21,10 +23,11 @@ const lobby = {
 
 const games = {
   board: id => API.get(`/games/${id}/board`),
-  cards: id => API.get(`/games/${id}/player`)
+  player: id => API.get(`/games/${id}/player`)
 };
 
 export default {
+  POLL_EVERY,
   login,
   lobby,
   games

@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import CatanTypes from "../CatanTypes";
+import api from "../Api";
 
-function ResourcesList({ resources }) {
+function ResourceList({ gameId }) {
+  const [{ resources }, setState] = useState({ resources: null });
   const amounts = _.countBy(resources);
 
+  useEffect(() => {
+    const fetchResources = async () => {
+      const player = await api.games.player(gameId);
+      setState({ resources: player.data.resources });
+    };
+    fetchResources();
+    const interval = setInterval(() => fetchResources(), api.POLL_EVERY);
+    return () => clearInterval(interval);
+  }, [gameId]);
+
+  if (!resources) return <i>Loading Resource List...</i>;
   return (
     <div>
       <h1 className="text-3xl">Resource List</h1>
@@ -18,8 +30,6 @@ function ResourcesList({ resources }) {
   );
 }
 
-ResourcesList.propTypes = {
-  resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired
-};
+ResourceList.propTypes = { gameId: PropTypes.string.isRequired };
 
-export default ResourcesList;
+export default ResourceList;
