@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import api from "../Api";
 import Board from "./Board";
 import CardList from "./CardList";
-import ResourceList from "./ResourcesList";
+import ResourceList from "./ResourceList";
 
 function Game({ match }) {
   const gameId = match.params.id;
