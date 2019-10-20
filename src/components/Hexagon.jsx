@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import V from "./Vector";
+import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 
 function Hexagon({ position, resource, token, unit = 256 }) {
