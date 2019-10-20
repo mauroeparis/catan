@@ -39,7 +39,7 @@ function App() {
   ];
   const room = rooms[2];
 
-  const testresources = ["wool","wool", "wool", "wool", "lumber"];
+  const testresources = ["wool", "wool", "wool", "wool", "lumber"];
   return (
     <Router>
       <div className="h-screen">
@@ -66,12 +66,13 @@ function App() {
           />
 
           <Route path="/board" component={Board} />
-          <Route path="/games/:gameId" component={Game} />
           <Route
-            path="/julian"
-            exact
-            render={() => <BankTradeComp resources={testresources} />}
+            path="/games/:gameId/bankTrade"
+            render={() => (
+              <BankTradeComp resources={testresources} gameId={room.id} />
+            )}
           />
+          <Route path="/games/:gameId" component={Game} />
           <Route path="/" render={() => <Redirect to="/lobbyList" />} />
         </Switch>
       </div>

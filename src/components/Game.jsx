@@ -7,7 +7,7 @@ import CardList from "./CardList";
 import ResourceList from "./ResourcesList";
 
 function Game({ match }) {
-  const gameId = match.params.id;
+  const { gameId } = match.params;
 
   const [resCards, setResCards] = useState([]);
   const [devCards, setDevCards] = useState([]);
@@ -25,7 +25,7 @@ function Game({ match }) {
   return (
     <>
       <CardList cards={devCards} />
-      <ResourceList resources={resCards} />
+      <ResourceList resources={resCards} gameId={gameId}/>
       <Board />
     </>
   );
@@ -34,7 +34,7 @@ function Game({ match }) {
 Game.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string
+      gameId: PropTypes.string
     })
   }).isRequired
 };

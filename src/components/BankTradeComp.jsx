@@ -6,7 +6,7 @@ import CatanTypes from "../CatanTypes";
 
 import API from "../Api";
 
-function BankTradeComp({ resources }) {
+function BankTradeComp({ resources, gameId }) {
   const amounts = _.countBy(resources);
   const availableButtons = _.pickBy(amounts, x => x >= 4);
   const refreshButtons = _.keys(availableButtons);
@@ -17,7 +17,6 @@ function BankTradeComp({ resources }) {
   });
 
   function tradeResources() {
-    const gameId = 1; // TODO: Should come from an upper state
     const t =
       "You are going to exchange 4 of your resource for 1 selected from the bank.";
     if (window.confirm(t)) {
@@ -100,7 +99,7 @@ function BankTradeComp({ resources }) {
         >
           Accept
         </button>
-        <Link to={`/games/${1}`}>
+        <Link to={`/games/${gameId}`}>
           <button
             type="button"
             onClick={() =>
@@ -116,7 +115,8 @@ function BankTradeComp({ resources }) {
 }
 
 BankTradeComp.propTypes = {
-  resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired
+  resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired,
+  gameId: PropTypes.number.isRequired
 };
 
 export default BankTradeComp;
