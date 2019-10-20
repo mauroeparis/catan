@@ -24,8 +24,9 @@ function BankTradeComp({ resources }) {
   }
 
   function disableButtons(manyResources, table) {
-    manyResources.forEach(res => (table[res] = false));
-    return table;
+    const newTable = table;
+    manyResources.forEach(res => (newTable[res] = false));
+    return newTable;
   }
 
   const newButtonTable = disableButtons(refreshButtons, buttonTable);
