@@ -11,6 +11,7 @@ import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
 import Board from "./board/Board";
+import BankTradeComp from "./components/BankTradeComp";
 
 function App() {
   const rooms = [
@@ -38,6 +39,7 @@ function App() {
   ];
   const room = rooms[2];
 
+  const testresources = ["wool","wool", "wool", "wool", "lumber"];
   return (
     <Router>
       <div className="h-screen">
@@ -65,6 +67,11 @@ function App() {
 
           <Route path="/board" component={Board} />
           <Route path="/games/:gameId" component={Game} />
+          <Route
+            path="/julian"
+            exact
+            render={() => <BankTradeComp resources={testresources} />}
+          />
           <Route path="/" render={() => <Redirect to="/lobbyList" />} />
         </Switch>
       </div>
