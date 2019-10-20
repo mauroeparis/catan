@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import api from "../Api";
-import Board from "../board/Board";
+import Board from "./Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourcesList";
 
@@ -20,7 +20,7 @@ function Game({ match }) {
       setDevCards(cards);
     };
     fetchRooms();
-  }, []);
+  }, [gameId]);
 
   return (
     <>

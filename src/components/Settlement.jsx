@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import V from "./Vector";
+import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 
 // TODO: Unit param should probably come from an upper global config state

@@ -10,7 +10,7 @@ import LoginPage from "./components/Login";
 import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
-import Board from "./board/Board";
+import Board from "./components/Board";
 
 function App() {
   const rooms = [
