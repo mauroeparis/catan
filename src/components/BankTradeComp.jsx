@@ -1,119 +1,78 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import CatanTypes from "../CatanTypes";
 
 import API from "../Api";
-
-// TODO
-// agregar arrays al estado
-// agregar estado a todo
-// ver como modificar los recursos, que llamadas hay que hacer
 
 function BankTradeComp({ resources }) {
   const amounts = _.countBy(resources);
   const availableButtons = _.pickBy(amounts, x => x >= 4);
   const refreshButtons = _.keys(availableButtons);
 
-  // TODO : Should use state to re-render enabled buttons
-  const [state, setState] = useState();
+  const [{ giveResource, receiveResource }, setState] = useState({
+    giveResource: null,
+    receiveResource: null
+  });
 
-// This is part of Api.js
-  const games = {
-    all: () => API.get("/games/"),
-    get: id => API.get(`/games/${id}`),
-    board: id => API.get(`/games/${id}/board`),
-    player: id => API.get(`/games/${id}/player`),
-    actions: id => API.get(`/games/${id}/player/actions`),
-    makeAction: (id, action, payload) =>
-      API.post(`/games/${id}/player/actions`, { action, payload }),
-    transactions: id => API.get(`/games/${id}/player/transactions`)
-  };
-
-  let giveResource;
-  let receiveResource;
-
-  let buttonTable = {
-    brick: true,
-    lumber: true,
-    wool: true,
-    grain: true,
-    ore: true
-  };
-
-  function setGiveResource(res) {
-    giveResource = res;
-  }
-
-  function setReceiveResource(res) {
-    receiveResource = res;
-  }
-
-  function EnableClickableButtons(manyResources, table) {
-    const newTable = table;
-    manyResources.forEach(res => (newTable[res] = false));
-    return newTable;
-  }
-
-  const newButtonTable = EnableClickableButtons(refreshButtons, buttonTable);
-
-  function TradeResources(give, receive) {
+  function tradeResources() {
     const gameId = 1; // TODO: Should come from an upper state
-    const t = "You are going to exchange 4 of your resource for 1 selected from the bank.";
+    const t =
+      "You are going to exchange 4 of your resource for 1 selected from the bank.";
     if (window.confirm(t)) {
-      games.makeAction(gameId, "trade_bank", { give, receive });
-      console.log(give);
-      console.log(receive);
+      API.games.makeAction(gameId, "trade_bank", {
+        give: giveResource,
+        receive: receiveResource
+      });
     }
   }
 
-  function FlushSelectedResources() {
-    giveResource = undefined;
-    receiveResource = undefined;
-    buttonTable = {
-      brick: true,
-      lumber: true,
-      wool: true,
-      grain: true,
-      ore: true
-    };
+  function setGiveResource(res) {
+    const newState = { giveResource: res, receiveResource };
+    setState(newState);
   }
 
+  function setReceiveResource(res) {
+    const newState = { giveResource, receiveResource: res };
+    setState(newState);
+  }
   return (
     <div>
       <div>
         <button
           type="button"
           onClick={() => setGiveResource("brick")}
-          disabled={newButtonTable.brick}
+          disabled={!refreshButtons.includes("brick")}
         >
           Give Brick
         </button>
         <button
           type="button"
           onClick={() => setGiveResource("lumber")}
-          disabled={newButtonTable.lumber}
+          disabled={!refreshButtons.includes("lumber")}
         >
           Give Lumber
         </button>
         <button
           type="button"
           onClick={() => setGiveResource("wool")}
-          disabled={newButtonTable.wool}
+          disabled={!refreshButtons.includes("wool")}
         >
           Give Wool
         </button>
         <button
           type="button"
-          onClick={() => setGiveResource("Grain")}
-          disabled={newButtonTable.grain}>
+          onClick={() => setGiveResource("grain")}
+          disabled={!refreshButtons.includes("grain")}
+        >
           Give Grain
         </button>
         <button
           type="button"
-          onClick={() => setGiveResource("Ore")}
-          disabled={newButtonTable.ore}>
+          onClick={() => setGiveResource("ore")}
+          disabled={!refreshButtons.includes("ore")}
+        >
           Give Ore
         </button>
       </div>
@@ -127,23 +86,30 @@ function BankTradeComp({ resources }) {
         <button type="button" onClick={() => setReceiveResource("wool")}>
           Receive Wool
         </button>
-        <button type="button" onClick={() => setReceiveResource("Grain")}>
+        <button type="button" onClick={() => setReceiveResource("grain")}>
           Receive Grain
         </button>
-        <button type="button" onClick={() => setReceiveResource("Ore")}>
+        <button type="button" onClick={() => setReceiveResource("ore")}>
           Receive Ore
         </button>
       </div>
       <div>
         <button
           type="button"
-          onClick={() => TradeResources(giveResource, receiveResource)}
+          onClick={() => tradeResources(giveResource, receiveResource)}
         >
           Accept
         </button>
-        <button type="button" onClick={FlushSelectedResources}>
-          Cancel
-        </button>
+        <Link to={`/games/${1}`}>
+          <button
+            type="button"
+            onClick={() =>
+              setState({ giveResource: null, receiveResource: null })
+            }
+          >
+            Cancel
+          </button>
+        </Link>
       </div>
     </div>
   );
