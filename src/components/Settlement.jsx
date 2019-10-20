@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
+import api from "../Api";
 
 const getVertex = (level, index, unit) => {
   const hexCount = 6 + level * 12;
@@ -40,9 +41,15 @@ export default function Settlement({
   username,
   canUpgrade
 }) {
+  const tryUpgrade = () => {
+    const gameId = 1; // TODO: Should come from an upper state
+    const t = "Upgrade City\nIt will cost 3 ore and 2 grain.";
+    if (canUpgrade && window.confirm(t))
+      api.games.makeAction(gameId, "upgrade_city", position);
+  };
   const center = getVertex(position.level, position.index, unit);
   return (
-    <>
+    <g onClick={tryUpgrade}>
       <circle
         cx={center.x}
         cy={center.y}
@@ -60,7 +67,7 @@ export default function Settlement({
       >
         {position.index}
       </text>
-    </>
+    </g>
   );
 }
 
@@ -78,9 +85,16 @@ Settlement.defaultProps = {
 };
 
 export function BuildIndicator({ position, unit = 256 }) {
+  const doBuild = () => {
+    const gameId = 1; // TODO: Should come from an upper state
+    const t = "Build Settlement\nIt costs 1 of brick, lumber, wool and grain.";
+    if (window.confirm(t))
+      api.games.makeAction(gameId, "build_settlement", position);
+  };
   const center = getVertex(position.level, position.index, unit);
   return (
     <circle
+      onClick={doBuild}
       cx={center.x}
       cy={center.y}
       r="48px"
