@@ -76,7 +76,8 @@ server.use(/^(?!\/(login|register)).*$/, (req, res, next) => {
 server.use(
   jsonServer.rewriter({
     "/games/:id/player": "/resources",
-    "/games/:id/board": "/hexes"
+    "/games/:id/board": "/hexes",
+    "/games/:id/player/actions": "/player_actions"
   })
 );
 
