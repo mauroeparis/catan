@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import api from "../Api";
@@ -6,16 +6,22 @@ import CatanTypes from "../CatanTypes";
 
 function ResourcesList({ resources, gameId }) {
   const amounts = _.countBy(resources);
-  function handleActions() {
-    const actions = (async () => {
-      await api.games.actions(gameId);
-    })();
-    const buyCard = actions.some(a => a.type === "buy_card");
-    return buyCard;
-  }
+  const [canBuy, setCanBuy] = useState(true);
+
+  useEffect(() => {
+    const fetchActions = async () => {
+      const res = await api.games.actions(gameId);
+      const actions = res.data;
+      const hasBuyCard =
+        actions.findIndex(act => act.type === "buy_card") === -1;
+      setCanBuy(hasBuyCard);
+    };
+    fetchActions();
+  }, [gameId, setCanBuy]);
+
   function tryBuy() {
     const t = "Buy Card\nIt will cost 1 ore, 1 wool and 1 grain.";
-    if (window.confirm(t)) api.games.makeAction(gameId, "buy_card");
+    if (window.confirm(t)) api.games.makeAction(gameId, "buy_card", null);
   }
 
   return (
@@ -29,7 +35,7 @@ function ResourcesList({ resources, gameId }) {
       <input
         type="button"
         value="Buy Card"
-        disabled={!handleActions}
+        disabled={canBuy}
         onClick={tryBuy}
       />
     </div>

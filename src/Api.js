@@ -23,8 +23,8 @@ const games = {
   board: id => API.get(`/games/${id}/board`),
   cards: id => API.get(`/games/${id}/player`),
   actions: id => API.get(`/games/${id}/player/actions`),
-  makeAction: (id, action, payload) =>
-    API.post(`/games/${id}/player/actions`, { action, payload })
+  makeAction: (id, type, payload) =>
+    API.post(`/games/${id}/player/actions`, { type, payload })
 };
 
 export default {
