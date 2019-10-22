@@ -21,8 +21,8 @@ function App() {
           <Route path="/login" exact component={LoginPage} />
           <Route path="/lobby" exact component={LobbyList} />
           <Route path="/lobby/:id" exact component={Lobby} />
+          <Route path="/game/:id" exact component={Game} />
           <Route path="/board" exact component={Board} />
-          <Route path="/game" exact component={Game} />
           <Route path="/" render={() => <Redirect to="/lobby" />} />
         </Switch>
       </div>

@@ -103,7 +103,7 @@ function Lobby() {
             `}
           />
           <div className="m-4" />
-          <Link to="/game" className="w-full text-center">
+          <Link to={`/game/${id}`} className="w-full text-center">
             <input
               type="button"
               value="START GAME"
