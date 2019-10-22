@@ -7,14 +7,12 @@ function BuyCard({ gameId }) {
 
   useEffect(() => {
     const fetchActions = async () => {
-      const res = await api.games.actions(gameId);
-      const actions = res.data;
-      const hasBuyCard =
-        actions.findIndex(act => act.type === "buy_card") === -1;
+      const { data: actions } = await api.games.actions(gameId);
+      const hasBuyCard = actions.includes("buy_card");
       setCanBuy(hasBuyCard);
     };
     fetchActions();
-  }, [gameId, setCanBuy]);
+  }, [gameId]);
 
   function tryBuy() {
     const t = "Buy Card\nIt will cost 1 ore, 1 wool and 1 grain.";

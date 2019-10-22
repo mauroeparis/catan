@@ -26,8 +26,8 @@ function Game({ match }) {
   return (
     <>
       <CardList cards={devCards} />
-      <ResourceList resources={resCards} gameId={gameId} />
       <BuyCard gameId={gameId} />
+      <ResourceList resources={resCards} gameId={gameId} />
       <Board />
     </>
   );
