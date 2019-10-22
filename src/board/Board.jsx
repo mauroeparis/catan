@@ -95,7 +95,7 @@ function Board({ gameId }) {
 }
 
 Board.propTypes = {
-  id: PropTypes.string.isRequired
+  gameId: PropTypes.string.isRequired
   // TODO: This should be a number, but react-router treats match
   //       as strings. We could use regex /game/:id(//d+) as a safe mechanism
 };
