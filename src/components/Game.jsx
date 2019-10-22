@@ -26,9 +26,9 @@ function Game() {
   return (
     <>
       <CardList cards={devCards} />
-      <ResourceList gameId={id} />
       <BuyCard gameId={id} />
-      <Board />
+      <ResourceList gameId={id} />
+      <Board gameId={id} />
     </>
   );
 }
