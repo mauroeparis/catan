@@ -1,5 +1,10 @@
 /*  ---- MOCK API SERVER ---- */
 
+const DELAY = 200; // In miliseconds, how much to wait before giving response
+const PORT = 8000;
+const SECRET_KEY = "123456789";
+const expiresIn = "1h";
+
 const fs = require("fs");
 const bodyParser = require("body-parser");
 const jsonServer = require("json-server");
@@ -9,15 +14,10 @@ const server = jsonServer.create();
 const router = jsonServer.router("./API/db.json");
 const userdb = JSON.parse(fs.readFileSync("./API/db.json", "UTF-8")).users;
 
+server.use((req, res, next) => setTimeout(next, DELAY));
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
 server.use(jsonServer.defaults());
-
-const PORT = 8000;
-
-const SECRET_KEY = "123456789";
-
-const expiresIn = "1h";
 
 // Create a token from a payload
 function createToken(payload) {
@@ -73,10 +73,17 @@ server.use(/^(?!\/(login|register)).*$/, (req, res, next) => {
   }
 });
 
+server.put("/rooms/:id", (req, res) => {
+  const status = 200;
+  const message = "Lobby joined!";
+  res.status(status).json({ status, message });
+});
+
 server.use(
   jsonServer.rewriter({
     "/games/:id/player": "/resources",
-    "/games/:id/board": "/hexes"
+    "/games/:id/board": "/hexes",
+    "/games/:id/player/actions": "/player_actions"
   })
 );
 

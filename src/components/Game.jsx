@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 
 import api from "../Api";
 import Board from "./Board";
 import CardList from "./CardList";
-import ResourceList from "./ResourcesList";
+import ResourceList from "./ResourceList";
+import BuyCard from "./BuyCard";
 
-function Game({ match }) {
-  const gameId = match.params.id;
-
-  const [resCards, setResCards] = useState([]);
+function Game() {
+  const { id } = useParams();
   const [devCards, setDevCards] = useState([]);
 
   useEffect(() => {
     const fetchRooms = async () => {
-      const res = await api.games.player(gameId);
-      const { resources, cards } = res.data;
-      setResCards(resources);
+      // TODO: Remove cards polling from here, it should be inside CardList
+      // like it is made in ResourceList
+      const res = await api.games.player(id);
+      const { cards } = res.data;
       setDevCards(cards);
     };
     fetchRooms();
-  }, [gameId]);
+  }, [id]);
 
   return (
     <>
       <CardList cards={devCards} />
-      <ResourceList resources={resCards} />
-      <Board />
+      <BuyCard gameId={id} />
+      <ResourceList gameId={id} />
+      <Board gameId={id} />
     </>
   );
 }
@@ -34,7 +36,7 @@ function Game({ match }) {
 Game.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string
+      gameId: PropTypes.string
     })
   }).isRequired
 };

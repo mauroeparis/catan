@@ -11,61 +11,26 @@ import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
 import Board from "./components/Board";
+import BankTrade from "./components/BankTrade";
 
 function App() {
-  const rooms = [
-    {
-      id: 1,
-      name: "superMegaHyperMegaRed",
-      owner: "Julian",
-      players: ["Hoyito", "Mayco", "Julian"],
-      max_players: 3
-    },
-    {
-      id: 2,
-      name: "Omega",
-      owner: "Fabricio",
-      players: ["Jose", "Pepe", "Fabricio", "Esteban"],
-      max_players: 4
-    },
-    {
-      id: 123,
-      name: "Catan",
-      owner: "Pedro",
-      players: ["Pedro", "Juan", "Mario"],
-      max_players: 4
-    }
-  ];
-  const room = rooms[2];
-
+  // TODO: add API call here
+  const testresources = ["wool", "wool", "wool", "wool", "lumber"];
   return (
     <Router>
       <div className="h-screen">
         {!localStorage.token && <Redirect to="/login" />}
         <Switch>
-          <Route path="/login" component={LoginPage} />
+          <Route path="/login" exact component={LoginPage} />
+          <Route path="/lobby" exact component={LobbyList} />
+          <Route path="/lobby/:id" exact component={Lobby} />
+          <Route path="/game/:id" exact component={Game} />
           <Route
-            path="/lobby"
-            exact
-            render={() => (
-              <Lobby
-                id={room.id}
-                name={room.name}
-                owner={room.owner}
-                max_players={room.max_players}
-                players={room.players}
-              />
-            )}
+            path="/game/:gameId/bankTrade"
+            render={() => <BankTrade resources={testresources} />}
           />
-          <Route
-            path="/lobbyList"
-            exact
-            render={() => <LobbyList rooms={rooms} />}
-          />
-
-          <Route path="/board" component={Board} />
-          <Route path="/games/:gameId" component={Game} />
-          <Route path="/" render={() => <Redirect to="/lobbyList" />} />
+          <Route path="/board" exact component={Board} />
+          <Route path="/" render={() => <Redirect to="/lobby" />} />
         </Switch>
       </div>
     </Router>
