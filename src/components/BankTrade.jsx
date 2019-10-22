@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
-import CatanTypes from "../CatanTypes";
 
+import CatanTypes from "../CatanTypes";
 import API from "../Api";
 
 function BankTrade({ resources }) {

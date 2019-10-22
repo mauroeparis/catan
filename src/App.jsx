@@ -39,6 +39,7 @@ function App() {
   ];
   const room = rooms[2];
 
+  // TODO: add API call here
   const testresources = ["wool", "wool", "wool", "wool", "lumber"];
   return (
     <Router>
