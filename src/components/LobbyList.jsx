@@ -6,7 +6,7 @@ function LobbyList() {
   const [rooms, setRooms] = useState([]);
   useEffect(() => {
     const fetchRooms = async () => {
-      const res = await api.lobby.list();
+      const res = await api.lobbies.all();
       setRooms(res.data);
     };
     fetchRooms();

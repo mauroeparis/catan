@@ -74,7 +74,7 @@ server.use(/^(?!\/(login|register)).*$/, (req, res, next) => {
 });
 
 server.put("/rooms/:id", (req, res) => {
-  const status = 400;
+  const status = 200;
   const message = "Lobby joined!";
   res.status(status).json({ status, message });
 });

@@ -15,8 +15,8 @@ function login(user, pass) {
   return API.post("/users/login", { user, pass }, header);
 }
 
-const lobby = {
-  list: () => API.get("/rooms"),
+const lobbies = {
+  all: () => API.get("/rooms"),
   join: id => API.put(`/rooms/${id}`),
   get: id => API.get(`/rooms/${id}`)
 };
@@ -28,6 +28,6 @@ const games = {
 
 export default {
   login,
-  lobby,
+  lobbies,
   games
 };

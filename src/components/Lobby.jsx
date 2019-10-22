@@ -18,7 +18,7 @@ function Lobby() {
 
   useEffect(() => {
     const fetchRoom = async () => {
-      const res = await api.lobby.get(id);
+      const res = await api.lobbies.get(id);
       setRoom(res.data);
     };
     fetchRoom();
@@ -27,7 +27,7 @@ function Lobby() {
   const handleJoin = async event => {
     event.preventDefault();
     try {
-      const res = await api.lobby.join(id);
+      const res = await api.lobbies.join(id);
       console.log(res); // TODO: Handle join response
     } catch (err) {
       console.log(`Error: ${err}`);
