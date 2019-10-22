@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import CatanTypes from "../CatanTypes";
 
 import API from "../Api";
 
 function BankTrade({ resources }) {
   const { gameId } = useParams();
+  const history = useHistory();
 
   const amounts = _.countBy(resources);
   const availableButtons = _.pickBy(amounts, x => x >= 4);
@@ -25,6 +26,7 @@ function BankTrade({ resources }) {
         give: giveResource,
         receive: receiveResource
       });
+      history.push(`/games/${gameId}`);
     }
   }
 
@@ -91,15 +93,13 @@ function BankTrade({ resources }) {
         </button>
       </div>
       <div>
-        <Link to={`/games/${gameId}`}>
-          <button
-            type="button"
-            onClick={() => tradeResources(giveResource, receiveResource)}
-            disabled={giveResource === null || receiveResource === null}
-          >
-            Trade
-          </button>
-        </Link>
+        <button
+          type="button"
+          onClick={() => tradeResources(giveResource, receiveResource)}
+          disabled={giveResource === null || receiveResource === null}
+        >
+          Trade
+        </button>
         <Link to={`/games/${gameId}`}>
           <button
             type="button"
