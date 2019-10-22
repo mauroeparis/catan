@@ -43,9 +43,9 @@ export default function Settlement({
 }) {
   const tryUpgrade = () => {
     const gameId = 1; // TODO: Should come from an upper state
-    const t = "Upgrade City\nIt will cost 3 ore and 2 grain.";
+    const t = "Upgrade City\nIt costs 3 ore and 2 grain.";
     if (canUpgrade && window.confirm(t))
-      api.games.makeAction(gameId, "upgrade_city", position);
+      api.games.playAction(gameId, "upgrade_city", position);
   };
   const center = getVertex(position.level, position.index, unit);
   return (
@@ -89,7 +89,7 @@ export function BuildIndicator({ position, unit = 256 }) {
     const gameId = 1; // TODO: Should come from an upper state
     const t = "Build Settlement\nIt costs 1 of brick, lumber, wool and grain.";
     if (window.confirm(t))
-      api.games.makeAction(gameId, "build_settlement", position);
+      api.games.playAction(gameId, "build_settlement", position);
   };
   const center = getVertex(position.level, position.index, unit);
   return (

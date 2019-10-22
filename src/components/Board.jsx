@@ -93,11 +93,9 @@ function Board() {
         )
       );
 
-      // Combine available vertices
+      // Update board internal state
       const aBuilds = actions.find(a => a.type === "build_settlement").payload;
       const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
-
-      // Update board internal state
       setState({
         hexagons: board.hexes,
         settlements: combinedSettlements,

@@ -24,7 +24,7 @@ const games = {
   board: id => API.get(`/games/${id}/board`),
   player: id => API.get(`/games/${id}/player`),
   actions: id => API.get(`/games/${id}/player/actions`),
-  makeAction: (id, action, payload) =>
+  playAction: (id, action, payload) =>
     API.post(`/games/${id}/player/actions`, { action, payload }),
   transactions: id => API.get(`/games/${id}/player/transactions`)
 };
