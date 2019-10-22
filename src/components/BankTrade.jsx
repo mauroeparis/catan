@@ -21,7 +21,7 @@ function BankTrade({ resources }) {
   function tradeResources() {
     const t = `Trading 4 ${giveResource} for 1 ${receiveResource}, are you sure?`;
     if (window.confirm(t)) {
-      API.games.makeAction(gameId, "trade_bank", {
+      API.games.makeAction(gameId, "bank_trade", {
         give: giveResource,
         receive: receiveResource
       });
@@ -95,8 +95,9 @@ function BankTrade({ resources }) {
           <button
             type="button"
             onClick={() => tradeResources(giveResource, receiveResource)}
+            disabled={giveResource === null || receiveResource === null}
           >
-            Accept
+            Trade
           </button>
         </Link>
         <Link to={`/games/${gameId}`}>
