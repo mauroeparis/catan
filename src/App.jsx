@@ -68,9 +68,7 @@ function App() {
           <Route path="/board" component={Board} />
           <Route
             path="/games/:gameId/bankTrade"
-            render={() => (
-              <BankTradeComp resources={testresources} gameId={room.id} />
-            )}
+            render={() => <BankTradeComp resources={testresources} />}
           />
           <Route path="/games/:gameId" component={Game} />
           <Route path="/" render={() => <Redirect to="/lobbyList" />} />

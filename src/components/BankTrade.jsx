@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CatanTypes from "../CatanTypes";
 
 import API from "../Api";
 
-function BankTradeComp({ resources, gameId }) {
+function BankTradeComp({ resources }) {
+  const { gameId } = useParams();
+
   const amounts = _.countBy(resources);
   const availableButtons = _.pickBy(amounts, x => x >= 4);
   const refreshButtons = _.keys(availableButtons);
@@ -17,8 +19,7 @@ function BankTradeComp({ resources, gameId }) {
   });
 
   function tradeResources() {
-    const t =
-      "You are going to exchange 4 of your resource for 1 selected from the bank.";
+    const t = `Trading 4 ${giveResource} for 1 ${receiveResource}, are you sure?`;
     if (window.confirm(t)) {
       API.games.makeAction(gameId, "trade_bank", {
         give: giveResource,
@@ -27,15 +28,12 @@ function BankTradeComp({ resources, gameId }) {
     }
   }
 
-  function setGiveResource(res) {
-    const newState = { giveResource: res, receiveResource };
-    setState(newState);
-  }
+  const setGiveResource = res =>
+    setState({ giveResource: res, receiveResource });
 
-  function setReceiveResource(res) {
-    const newState = { giveResource, receiveResource: res };
-    setState(newState);
-  }
+  const setReceiveResource = res =>
+    setState({ giveResource, receiveResource: res });
+
   return (
     <div>
       <div>
@@ -93,12 +91,14 @@ function BankTradeComp({ resources, gameId }) {
         </button>
       </div>
       <div>
-        <button
-          type="button"
-          onClick={() => tradeResources(giveResource, receiveResource)}
-        >
-          Accept
-        </button>
+        <Link to={`/games/${gameId}`}>
+          <button
+            type="button"
+            onClick={() => tradeResources(giveResource, receiveResource)}
+          >
+            Accept
+          </button>
+        </Link>
         <Link to={`/games/${gameId}`}>
           <button
             type="button"
