@@ -15,19 +15,22 @@ function login(user, pass) {
   return API.post("/users/login", { user, pass }, header);
 }
 
-const lobby = {
-  list: API.get("/rooms")
+const lobbies = {
+  all: () => API.get("/rooms"),
+  join: id => API.put(`/rooms/${id}`),
+  get: id => API.get(`/rooms/${id}`)
 };
 
 const games = {
   board: id => API.get(`/games/${id}/board`),
   cards: id => API.get(`/games/${id}/player`),
-  makeAction: (id, action, payload) =>
-    API.post(`/games/${id}/player/actions`, { action, payload })
+  actions: id => API.get(`/games/${id}/player/actions`),
+  makeAction: (id, type, payload) =>
+    API.post(`/games/${id}/player/actions`, { type, payload })
 };
 
 export default {
   login,
-  lobby,
+  lobbies,
   games
 };
