@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
+import PropTypes from "prop-types";
 import api from "../Api";
 import Hexagon from "./Hexagon";
 import Settlemet from "./Settlement";
@@ -44,17 +45,16 @@ function makeSettlements() {
   return settlements;
 }
 
-function Board() {
+function Board({ gameId }) {
   const settlements = makeSettlements();
   const [hexagons, setHexagons] = useState(makeHexagons());
   useEffect(() => {
     const fetchBoard = async () => {
-      const gameId = 2; // TODO: This should come from an upper state
       const response = await api.games.board(gameId);
       setHexagons(response.data.hexes);
     };
     fetchBoard();
-  }, []);
+  }, [gameId]);
 
   const unit = 256; // Radius of one hexagon in pixels
 
@@ -93,5 +93,11 @@ function Board() {
     </div>
   );
 }
+
+Board.propTypes = {
+  gameId: PropTypes.string.isRequired
+  // TODO: This should be a number, but react-router treats match
+  //       as strings. We could use regex /game/:id(//d+) as a safe mechanism
+};
 
 export default Board;

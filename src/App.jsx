@@ -13,59 +13,17 @@ import Game from "./components/Game";
 import Board from "./components/Board";
 
 function App() {
-  const rooms = [
-    {
-      id: 1,
-      name: "superMegaHyperMegaRed",
-      owner: "Julian",
-      players: ["Hoyito", "Mayco", "Julian"],
-      max_players: 3
-    },
-    {
-      id: 2,
-      name: "Omega",
-      owner: "Fabricio",
-      players: ["Jose", "Pepe", "Fabricio", "Esteban"],
-      max_players: 4
-    },
-    {
-      id: 123,
-      name: "Catan",
-      owner: "Pedro",
-      players: ["Pedro", "Juan", "Mario"],
-      max_players: 4
-    }
-  ];
-  const room = rooms[2];
-
   return (
     <Router>
       <div className="h-screen">
         {!localStorage.token && <Redirect to="/login" />}
         <Switch>
-          <Route path="/login" component={LoginPage} />
-          <Route
-            path="/lobby"
-            exact
-            render={() => (
-              <Lobby
-                id={room.id}
-                name={room.name}
-                owner={room.owner}
-                max_players={room.max_players}
-                players={room.players}
-              />
-            )}
-          />
-          <Route
-            path="/lobbyList"
-            exact
-            render={() => <LobbyList rooms={rooms} />}
-          />
-
-          <Route path="/board" component={Board} />
-          <Route path="/games/:gameId" component={Game} />
-          <Route path="/" render={() => <Redirect to="/lobbyList" />} />
+          <Route path="/login" exact component={LoginPage} />
+          <Route path="/lobby" exact component={LobbyList} />
+          <Route path="/lobby/:id" exact component={Lobby} />
+          <Route path="/game/:id" exact component={Game} />
+          <Route path="/board" exact component={Board} />
+          <Route path="/" render={() => <Redirect to="/lobby" />} />
         </Switch>
       </div>
     </Router>
