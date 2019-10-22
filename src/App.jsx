@@ -26,7 +26,7 @@ function App() {
           <Route path="/lobby/:id" exact component={Lobby} />
           <Route path="/game/:id" exact component={Game} />
           <Route
-            path="/games/:gameId/bankTrade"
+            path="/game/:gameId/bankTrade"
             render={() => <BankTrade resources={testresources} />}
           />
           <Route path="/board" exact component={Board} />

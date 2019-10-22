@@ -15,7 +15,7 @@ function ResourcesList({ resources, gameId }) {
       <h1>Wool: {amounts.wool}</h1>
       <h1>Grain: {amounts.grain}</h1>
       <h1>Ore: {amounts.ore}</h1>
-      <Link to={`/games/${gameId}/bankTrade`} className="w-full text-center">
+      <Link to={`/game/${gameId}/bankTrade`} className="w-full text-center">
         <input type="button" value="Trade with bank" />
       </Link>
     </div>

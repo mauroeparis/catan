@@ -26,7 +26,7 @@ function BankTrade({ resources }) {
         give: giveResource,
         receive: receiveResource
       });
-      history.push(`/games/${gameId}`);
+      history.push(`/game/${gameId}`);
     }
   }
 
@@ -100,7 +100,7 @@ function BankTrade({ resources }) {
         >
           Trade
         </button>
-        <Link to={`/games/${gameId}`}>
+        <Link to={`/game/${gameId}`}>
           <button
             type="button"
             onClick={() =>
