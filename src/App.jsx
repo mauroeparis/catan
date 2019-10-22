@@ -11,7 +11,7 @@ import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
 import Board from "./components/Board";
-import BankTradeComp from "./components/BankTradeComp";
+import BankTrade from "./components/BankTrade";
 
 function App() {
   const rooms = [
@@ -68,7 +68,7 @@ function App() {
           <Route path="/board" component={Board} />
           <Route
             path="/games/:gameId/bankTrade"
-            render={() => <BankTradeComp resources={testresources} />}
+            render={() => <BankTrade resources={testresources} />}
           />
           <Route path="/games/:gameId" component={Game} />
           <Route path="/" render={() => <Redirect to="/lobbyList" />} />

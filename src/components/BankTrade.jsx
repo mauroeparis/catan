@@ -6,7 +6,7 @@ import CatanTypes from "../CatanTypes";
 
 import API from "../Api";
 
-function BankTradeComp({ resources }) {
+function BankTrade({ resources }) {
   const { gameId } = useParams();
 
   const amounts = _.countBy(resources);
@@ -114,9 +114,8 @@ function BankTradeComp({ resources }) {
   );
 }
 
-BankTradeComp.propTypes = {
-  resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired,
-  gameId: PropTypes.number.isRequired
+BankTrade.propTypes = {
+  resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired
 };
 
-export default BankTradeComp;
+export default BankTrade;
