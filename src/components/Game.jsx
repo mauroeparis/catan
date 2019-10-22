@@ -5,6 +5,7 @@ import api from "../Api";
 import Board from "../board/Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourcesList";
+import BuyCard from "./BuyCard";
 
 function Game({ match }) {
   const { gameId } = match.params;
@@ -26,6 +27,7 @@ function Game({ match }) {
     <>
       <CardList cards={devCards} />
       <ResourceList resources={resCards} gameId={gameId} />
+      <BuyCard gameId={gameId} />
       <Board />
     </>
   );
