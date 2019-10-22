@@ -23,7 +23,10 @@ const lobbies = {
 
 const games = {
   board: id => API.get(`/games/${id}/board`),
-  cards: id => API.get(`/games/${id}/player`)
+  cards: id => API.get(`/games/${id}/player`),
+  actions: id => API.get(`/games/${id}/player/actions`),
+  makeAction: (id, type, payload) =>
+    API.post(`/games/${id}/player/actions`, { type, payload })
 };
 
 export default {

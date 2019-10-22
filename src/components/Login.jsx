@@ -68,7 +68,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="h-ful md:h-fit w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
+    <div className="h-ful md:table w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
       {localStorage.token && <Redirect to="/lobbyList" />}
       <h1 className="font-cinzel text-center pt-24 leading-tight text-gray-900">
         <span className="text-xl">The Settlers of</span>

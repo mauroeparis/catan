@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 
 import api from "../Api";
-import Board from "../board/Board";
+import Board from "./Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourcesList";
+import BuyCard from "./BuyCard";
 
 function Game() {
   const { id } = useParams();
@@ -27,6 +28,7 @@ function Game() {
     <>
       <CardList cards={devCards} />
       <ResourceList resources={resCards} />
+      <BuyCard gameId={id} />
       <Board gameId={id} />
     </>
   );
@@ -35,7 +37,7 @@ function Game() {
 Game.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string
+      gameId: PropTypes.string
     })
   }).isRequired
 };

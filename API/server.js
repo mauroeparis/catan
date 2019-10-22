@@ -82,7 +82,8 @@ server.put("/rooms/:id", (req, res) => {
 server.use(
   jsonServer.rewriter({
     "/games/:id/player": "/resources",
-    "/games/:id/board": "/hexes"
+    "/games/:id/board": "/hexes",
+    "/games/:id/player/actions": "/player_actions"
   })
 );
 
