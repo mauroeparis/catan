@@ -73,10 +73,17 @@ server.use(/^(?!\/(login|register)).*$/, (req, res, next) => {
   }
 });
 
+server.put("/rooms/:id", (req, res) => {
+  const status = 200;
+  const message = "Lobby joined!";
+  res.status(status).json({ status, message });
+});
+
 server.use(
   jsonServer.rewriter({
     "/games/:id/player": "/resources",
-    "/games/:id/board": "/hexes"
+    "/games/:id/board": "/hexes",
+    "/games/:id/player/actions": "/player_actions"
   })
 );
 
