@@ -7,7 +7,7 @@ import Board from "./Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourceList";
 import BuyCard from "./BuyCard";
-import RollDice from "./RollDice";
+import DiceRoll from "./DiceRoll";
 
 function Game() {
   const { id } = useParams();
@@ -29,7 +29,7 @@ function Game() {
       <CardList cards={devCards} />
       <BuyCard gameId={id} />
       <ResourceList gameId={id} />
-      <RollDice gameId={id} />
+      <DiceRoll gameId={id} />
       <Board gameId={id} />
     </>
   );
