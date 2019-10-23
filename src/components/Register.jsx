@@ -24,10 +24,7 @@ function passIsValid(pass) {
   const passRegex = new RegExp(
     "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
   );
-  if (passRegex.test(pass)) {
-    return true;
-  }
-  return false;
+  return passRegex.test(pass);
 }
 
 function RegisterForm() {
