@@ -12,7 +12,9 @@ const TextClasses = "text-center text-sm tracking-wider text-bold";
 const CommonClasses = "w-full shadow-md rounded h-12";
 
 function Lobby() {
+  // TODO: This is the room id, not the game id, but it is used as such below
   const { id } = useParams();
+
 
   const [room, setRoom] = useState();
 

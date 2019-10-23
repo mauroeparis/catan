@@ -3,7 +3,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import api from "../Api";
 import Hexagon from "./Hexagon";
-import Settlemet from "./Settlement";
+import Settlement, { BuildIndicator } from "./Settlement";
 
 function makeHexagons() {
   const hexagons = [
@@ -30,28 +30,77 @@ function makeHexagons() {
 
 function makeSettlements() {
   const settlements = [];
-  for (let i = 0; i < 6; i += 1)
-    settlements[i] = {
-      position: { level: 0, index: i }
-    };
-  for (let i = 0; i < 18; i += 1)
-    settlements[6 + i] = {
-      position: { level: 1, index: i }
-    };
-  for (let i = 0; i < 30; i += 1)
-    settlements[6 + 18 + i] = {
-      position: { level: 2, index: i }
-    };
+  const makeSett = (l, i) => ({
+    position: { level: l, index: i },
+    isCity: _.sample([true, false]),
+    colour: "#404040",
+    username: "loading"
+  });
+  for (let i = 0; i < 6; i += 1) settlements[i] = makeSett(0, i);
+  for (let i = 0; i < 18; i += 1) settlements[6 + i] = makeSett(1, i);
+  for (let i = 0; i < 30; i += 1) settlements[6 + 18 + i] = makeSett(2, i);
   return settlements;
 }
 
 function Board({ gameId }) {
-  const settlements = makeSettlements();
-  const [hexagons, setHexagons] = useState(makeHexagons());
+  const [
+    { hexagons, settlements, availableBuilds, availableUpgrades },
+    setState
+  ] = useState({
+    hexagons: makeHexagons(),
+    settlements: makeSettlements(),
+    availableBuilds: [],
+    availableUpgrades: []
+  });
   useEffect(() => {
     const fetchBoard = async () => {
-      const response = await api.games.board(gameId);
-      setHexagons(response.data.hexes);
+      // Parallel fetching
+      const [
+        { data: board },
+        {
+          data: { players }
+        },
+        { data: actions }
+      ] = await Promise.all([
+        api.games.board(gameId),
+        api.games.get(gameId),
+        api.games.actions(gameId)
+      ]);
+
+      // Prepare fetched settlements for re-rendering by
+      // combining all vertices from all players in the same array
+      const combinedSettlements = _.flatten(
+        // Get built vertices from players
+        players.map(p =>
+          // Concat those vertices
+          _.concat(
+            // Settlements to usable vertex
+            p.settlements.map(s => ({
+              position: s,
+              isCity: false,
+              colour: p.colour,
+              username: p.username
+            })),
+            // Cities to usable vertex
+            p.cities.map(c => ({
+              position: c,
+              isCity: true,
+              colour: p.colour,
+              username: p.username
+            }))
+          )
+        )
+      );
+
+      // Update board internal state
+      const aBuilds = actions.find(a => a.type === "build_settlement").payload;
+      const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+      setState({
+        hexagons: board.hexes,
+        settlements: combinedSettlements,
+        availableBuilds: aBuilds,
+        availableUpgrades: aUpgrades
+      });
     };
     fetchBoard();
   }, [gameId]);
@@ -84,10 +133,17 @@ function Board({ gameId }) {
           />
         ))}
         {settlements.map(sett => (
-          <Settlemet // TODO: This is just showing
+          <Settlement
             key={Object.values(sett.position)}
             position={sett.position}
+            isCity={sett.isCity}
+            colour={sett.colour}
+            username={sett.username}
+            canUpgrade={_.some(availableUpgrades, sett.position)}
           />
+        ))}
+        {availableBuilds.map(vert => (
+          <BuildIndicator key={Object.values(vert)} position={vert} />
         ))}
       </svg>
     </div>

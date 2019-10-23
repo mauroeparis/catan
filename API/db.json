@@ -69,6 +69,16 @@
       "id": 10,
       "user": "test",
       "pass": "test"
+    },
+    {
+      "id": 11,
+      "user": "mateo",
+      "pass": "mateo"
+    },
+    {
+      "id": 12,
+      "user": "julian",
+      "pass": "julian"
     }
   ],
   "boards": [
@@ -310,5 +320,69 @@
         "token": 2
       }
     ]
-  }
+  },
+  "games": [
+    {
+      "id": 1,
+      "players": [
+        {
+          "username": "mateo",
+          "colour": "#2196F3",
+          "settlements": [
+            { "level": 2, "index": 24 },
+            { "level": 0, "index": 0 },
+            { "level": 2, "index": 6 }
+          ],
+          "cities": [
+            { "level": 1, "index": 15 },
+            { "level": 1, "index": 3 }
+          ],
+          "roads": [],
+          "development_cards": 3,
+          "resources_cards": 6,
+          "last_gained": ["brick", "grain"]
+        },
+        {
+          "username": "julian",
+          "colour": "#4CAF50",
+          "settlements": [
+            { "level": 1, "index": 12 },
+            { "level": 1, "index": 6 }
+          ],
+          "cities": [
+            { "level": 2, "index": 21 },
+            { "level": 2, "index": 9 },
+            { "level": 0, "index": 3 }
+          ],
+          "roads": [],
+          "development_cards": 2,
+          "resources_cards": 8,
+          "last_gained": ["ore", "ore"]
+        }
+      ],
+      "robber": { "level": 0, "index": 0 },
+      "current_turn": { "user": "mateo", "dice": [3, 6]},
+      "winner": null
+    }
+  ],
+  "player_actions": [
+    { "type": "build_settlement", "payload": [
+      { "level": 2, "index": 0 },
+      { "level": 2, "index": 1 },
+      { "level": 2, "index": 2 }
+    ]},
+    { "type": "upgrade_city", "payload": [
+      { "level": 0, "index": 0 },
+      { "level": 2, "index": 24 }
+    ]},
+    { "type": "build_road", "payload": [] },
+    { "type": "move_robber", "payload": [] },
+    { "type": "buy_card", "payload": null },
+    { "type": "play_knight_card", "payload": [] },
+    { "type": "play_road_building_card", "payload": [] },
+    { "type": "play_monopoly_card", "payload": null },
+    { "type": "play_year_of_plenty_card", "payload": null },
+    { "type": "end_turn", "payload": null },
+    { "type": "bank_trade", "payload": null }
+  ]
 }

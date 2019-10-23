@@ -33,9 +33,10 @@ function LoginForm() {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const res = await api.login(user, pass);
+      const res = await api.auth.login(user, pass);
       const { token } = res.data;
       localStorage.setItem("token", token);
+      localStorage.setItem("user", user);
       history.push("/lobbyList");
     } catch (err) {
       console.log(`Error: ${err}`);
