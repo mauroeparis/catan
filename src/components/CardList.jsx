@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import api from "../Api";
 
 function CardList({ gameId }) {
-  const [{ cards }, setState] = useState({ cards: null });
+  const [cards, setState] = useState(null);
   const amounts = _.countBy(cards);
 
   useEffect(() => {
