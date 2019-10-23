@@ -1,6 +1,7 @@
+import "../css/game.css";
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import api from "../Api";
 import Board from "./Board";
@@ -25,13 +26,18 @@ function Game() {
   }, [id]);
 
   return (
-    <>
-      <CardList cards={devCards} />
-      <BuyCard gameId={id} />
-      <ResourceList gameId={id} />
-      <RollDice gameId={id} />
+    <div className="game">
       <Board gameId={id} />
-    </>
+      <div className="information">
+        <CardList cards={devCards} />
+        <BuyCard gameId={id} />
+        <ResourceList gameId={id} />
+        <Link to={`/game/${id}/bankTrade`} className="w-full text-center">
+          <input type="button" value="Trade with bank" />
+        </Link>
+        <RollDice gameId={id} />
+      </div>
+    </div>
   );
 }
 
