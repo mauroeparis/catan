@@ -22,7 +22,7 @@ function BankTrade({ resources }) {
   function tradeResources() {
     const t = `Trading 4 ${giveResource} for 1 ${receiveResource}, are you sure?`;
     if (window.confirm(t)) {
-      API.games.makeAction(gameId, "bank_trade", {
+      API.games.playAction(gameId, "bank_trade", {
         give: giveResource,
         receive: receiveResource
       });
