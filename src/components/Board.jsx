@@ -3,7 +3,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import api from "../Api";
 import Hexagon from "./Hexagon";
-import Settlement from "./Settlement";
+import Settlement, { BuildIndicator } from "./Settlement";
 
 function makeHexagons() {
   const hexagons = [
@@ -43,9 +43,14 @@ function makeSettlements() {
 }
 
 function Board({ gameId }) {
-  const [{ hexagons, settlements }, setState] = useState({
+  const [
+    { hexagons, settlements, availableBuilds, availableUpgrades },
+    setState
+  ] = useState({
     hexagons: makeHexagons(),
-    settlements: makeSettlements()
+    settlements: makeSettlements(),
+    availableBuilds: [],
+    availableUpgrades: []
   });
   useEffect(() => {
     const fetchBoard = async () => {
@@ -54,8 +59,13 @@ function Board({ gameId }) {
         { data: board },
         {
           data: { players }
-        }
-      ] = await Promise.all([api.games.board(gameId), api.games.get(gameId)]);
+        },
+        { data: actions }
+      ] = await Promise.all([
+        api.games.board(gameId),
+        api.games.get(gameId),
+        api.games.actions(gameId)
+      ]);
 
       // Prepare fetched settlements for re-rendering by
       // combining all vertices from all players in the same array
@@ -82,8 +92,17 @@ function Board({ gameId }) {
         )
       );
 
+      // Combine available vertices
+      const aBuilds = actions.find(a => a.type === "build_settlement").payload;
+      const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+
       // Update board internal state
-      setState({ hexagons: board.hexes, settlements: combinedSettlements });
+      setState({
+        hexagons: board.hexes,
+        settlements: combinedSettlements,
+        availableBuilds: aBuilds,
+        availableUpgrades: aUpgrades
+      });
     };
     fetchBoard();
   }, [gameId]);
@@ -116,13 +135,17 @@ function Board({ gameId }) {
           />
         ))}
         {settlements.map(sett => (
-          <Settlement // TODO: This is just showing
+          <Settlement
             key={Object.values(sett.position)}
             position={sett.position}
             isCity={sett.isCity}
             colour={sett.colour}
             username={sett.username}
+            canUpgrade={_.some(availableUpgrades, sett.position)}
           />
+        ))}
+        {availableBuilds.map(vert => (
+          <BuildIndicator key={Object.values(vert)} position={vert} />
         ))}
       </svg>
     </div>
