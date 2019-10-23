@@ -13,13 +13,9 @@ const API = axios.create({
 const POLL_EVERY = 20000000;
 
 const auth = {
-  login: (user, pass) => API.post("/users/login", { user, pass })
+  login: (user, pass) => API.post("/users/login", { user, pass }),
+  register: (user, pass) => API.post("/users/", { user, pass })
 };
-
-function register(user, pass) {
-  const header = { "Content-Type": "application/json" };
-  return API.post("/users/", { user, pass }, header);
-}
 
 const lobbies = {
   all: () => API.get("/rooms"),
