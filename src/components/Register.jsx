@@ -20,21 +20,41 @@ const bgImage = {
   backgroundImage: `url(${Background})`
 };
 
+function passIsValid(pass) {
+  const passRegex = new RegExp(
+    "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
+  );
+  if (passRegex.test(pass)) {
+    return true;
+  }
+  return false;
+}
+
 function RegisterForm() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [repeatPass, setRepeatPass] = useState("");
   const history = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();
-    try {
-      const res = await api.register(user, pass);
-      const { token } = res.data;
-      localStorage.setItem("token", token);
-      history.push("/lobbyList");
-    } catch (err) {
-      console.log(`Error: ${err}`);
-      alert("Invalid register info");
+
+    if (passIsValid()) {
+      if (pass === repeatPass) {
+        try {
+          const res = await api.register(user, pass);
+          const { token } = res.data;
+          localStorage.setItem("token", token);
+          history.push("/lobbyList");
+        } catch (err) {
+          console.log(`Error: ${err}`);
+          alert("Invalid register info.");
+        }
+      } else {
+        alert("Passwords do not match!");
+      }
+    } else {
+      alert("Password needs to be 8 characters long and have a number");
     }
   };
 
@@ -62,6 +82,12 @@ function RegisterForm() {
           value={pass}
           onChange={e => setPass(e.target.value)}
         />
+        <CustomInput
+          type="password"
+          placeholder="REPEAT PASSWORD"
+          value={repeatPass}
+          onChange={e => setRepeatPass(e.target.value)}
+        />
         <input
           type="submit"
           value="REGISTER"
@@ -80,6 +106,9 @@ function RegisterForm() {
         </span>
         <input
           type="button"
+          onClick={() => {
+            history.push("/login");
+          }}
           className={`
             mt-1
             h-12
