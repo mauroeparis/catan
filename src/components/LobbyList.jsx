@@ -67,7 +67,7 @@ function LobbyList() {
           <Link to="/lobby/create" className="w-full text-center self-center ">
             <input
               type="button"
-              value="NUEVO LOBBY"
+              value="NEW LOBBY"
               className={`
               h-12
               bg-blue-800

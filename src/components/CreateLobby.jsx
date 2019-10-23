@@ -45,7 +45,7 @@ function CreateLobbyPage() {
           >
             <CustomInput
               type="text"
-              placeholder="BOARD NAME"
+              placeholder="LOBBY NAME"
               value={name}
               onChange={e => setName(e.target.value)}
             />
