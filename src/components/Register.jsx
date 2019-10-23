@@ -22,9 +22,12 @@ const bgImage = {
 
 function passIsValid(pass) {
   const passRegex = new RegExp(
-    "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})"
   );
-  return passRegex.test(pass);
+  if (passRegex.test(pass)) {
+    return true;
+  }
+  return false;
 }
 
 function RegisterForm() {
@@ -39,7 +42,7 @@ function RegisterForm() {
     if (passIsValid(pass)) {
       if (pass === repeatPass) {
         try {
-          const res = await api.register(user, pass);
+          const res = await api.auth.register(user, pass);
           const { token } = res.data;
           localStorage.setItem("token", token);
           history.push("/lobbyList");
@@ -51,7 +54,9 @@ function RegisterForm() {
         alert("Passwords do not match!");
       }
     } else {
-      alert("Password needs to be 8 characters long and have a number");
+      alert(
+        "Password needs to be 8 characters long, have a number and lower and upper case letters"
+      );
     }
   };
 

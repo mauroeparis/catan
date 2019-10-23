@@ -38,6 +38,5 @@ export default {
   POLL_EVERY,
   auth,
   lobbies,
-  games,
-  register
+  games
 };
