@@ -10,12 +10,16 @@ const API = axios.create({
   }
 });
 
+const POLL_EVERY = 2000;
+
 const auth = {
   login: (user, pass) => API.post("/users/login", { user, pass })
 };
 
-const lobby = {
-  list: API.get("/rooms")
+const lobbies = {
+  all: () => API.get("/rooms"),
+  join: id => API.put(`/rooms/${id}`),
+  get: id => API.get(`/rooms/${id}`)
 };
 
 const games = {
@@ -29,4 +33,9 @@ const games = {
   transactions: id => API.get(`/games/${id}/player/transactions`)
 };
 
-export default { auth, lobby, games };
+export default {
+  POLL_EVERY,
+  auth,
+  lobbies,
+  games
+};

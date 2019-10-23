@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
+import PropTypes from "prop-types";
 import api from "../Api";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
@@ -41,7 +42,7 @@ function makeSettlements() {
   return settlements;
 }
 
-function Board() {
+function Board({ gameId }) {
   const [
     { hexagons, settlements, availableBuilds, availableUpgrades },
     setState
@@ -53,8 +54,6 @@ function Board() {
   });
   useEffect(() => {
     const fetchBoard = async () => {
-      const gameId = 1; // TODO: This should come from an upper state
-
       // Parallel fetching
       const [
         { data: board },
@@ -104,7 +103,7 @@ function Board() {
       });
     };
     fetchBoard();
-  }, []);
+  }, [gameId]);
 
   const unit = 256; // Radius of one hexagon in pixels
 
@@ -150,5 +149,11 @@ function Board() {
     </div>
   );
 }
+
+Board.propTypes = {
+  gameId: PropTypes.string.isRequired
+  // TODO: This should be a number, but react-router treats match
+  //       as strings. We could use regex /game/:id(//d+) as a safe mechanism
+};
 
 export default Board;
