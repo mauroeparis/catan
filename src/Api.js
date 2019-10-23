@@ -10,10 +10,11 @@ const API = axios.create({
   }
 });
 
-function login(user, pass) {
-  const header = { "Content-Type": "application/json" };
-  return API.post("/users/login", { user, pass }, header);
-}
+const POLL_EVERY = 20000000;
+
+const auth = {
+  login: (user, pass) => API.post("/users/login", { user, pass })
+};
 
 function register(user, pass) {
   const header = { "Content-Type": "application/json" };
@@ -27,15 +28,19 @@ const lobbies = {
 };
 
 const games = {
+  all: () => API.get("/games/"),
+  get: id => API.get(`/games/${id}`),
   board: id => API.get(`/games/${id}/board`),
-  cards: id => API.get(`/games/${id}/player`),
+  player: id => API.get(`/games/${id}/player`),
   actions: id => API.get(`/games/${id}/player/actions`),
-  makeAction: (id, type, payload) =>
-    API.post(`/games/${id}/player/actions`, { type, payload })
+  playAction: (id, action, payload) =>
+    API.post(`/games/${id}/player/actions`, { action, payload }),
+  transactions: id => API.get(`/games/${id}/player/transactions`)
 };
 
 export default {
-  login,
+  POLL_EVERY,
+  auth,
   lobbies,
   games,
   register

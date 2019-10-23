@@ -57,9 +57,10 @@ function LoginForm() {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const res = await api.login(user, pass);
+      const res = await api.auth.login(user, pass);
       const { token } = res.data;
       localStorage.setItem("token", token);
+      localStorage.setItem("user", user);
       history.push("/lobbyList");
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -69,7 +70,7 @@ function LoginForm() {
 
   return (
     <div className="h-ful md:table w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
-      {localStorage.token && <Redirect to="/lobbyList" />}
+      {localStorage.token && <Redirect to="/lobby" />}
       <h1 className="font-cinzel text-center pt-24 leading-tight text-gray-900">
         <span className="text-xl">The Settlers of</span>
         <br />

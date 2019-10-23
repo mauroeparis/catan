@@ -1,0 +1,98 @@
+/* TODO: Delete this file, we should be using tailwind */
+
+:root {
+  --dark: #202020;
+  --light: white;
+  --highlight: #E91E63;
+}
+
+.game {
+  background-color: var(--dark);
+  color: var(--light);
+  font: 2rem Cinzel;
+}
+
+.game .board {
+	height: 100vh;
+	width: 100vh;
+	margin-left: auto;
+	background-color: var(--dark);
+	margin-right: 10rem;
+}
+
+.game .board .settlement {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .board .settlement > circle {
+  transition: 0.2s;
+}
+
+.game .board .settlement:hover > circle {
+  r: 72px;
+  fill: var(--highlight);
+  stroke: var(--light);
+}
+
+.game .board .settlement > text {
+  font: bold 2rem Cinzel;
+  fill: var(--light);
+  transition: 0.2s ease;
+}
+
+.game .board .settlement:hover > text {
+  fill: var(--light);
+  font: bold 5rem Cinzel;
+}
+
+.game .board .build-indicator {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .board .build-indicator:hover {
+  r: 72px;
+}
+
+.game .information {
+	top: 0;
+	position: absolute;
+	height: 100vh;
+	width: 25rem;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-evenly;
+	left: 5rem;
+}
+
+.game .information h1 {
+  font: bold 3rem Cinzel;
+}
+
+.game .information input[type=button] {
+  background-color: var(--highlight);
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem 0;
+  float: right;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .information input[type=button]:hover {
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+.game .resource-list {
+  border: 2px solid var(--light);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.game .card-list {
+  border: 2px solid var(--light);
+  border-radius: 1rem;
+  padding: 1rem;
+}

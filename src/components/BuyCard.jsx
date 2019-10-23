@@ -16,7 +16,7 @@ function BuyCard({ gameId }) {
 
   function tryBuy() {
     const t = "Buy Card\nIt will cost 1 ore, 1 wool and 1 grain.";
-    if (window.confirm(t)) api.games.makeAction(gameId, "buy_card", null);
+    if (window.confirm(t)) api.games.playAction(gameId, "buy_card", null);
   }
 
   return (
