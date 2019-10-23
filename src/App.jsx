@@ -15,7 +15,28 @@ import BankTrade from "./components/BankTrade";
 
 function App() {
   // TODO: add API call here
-  const testresources = ["wool", "wool", "wool", "wool", "lumber"];
+  const testresources = [
+    "brick",
+    "brick",
+    "brick",
+    "brick",
+    "lumber",
+    "lumber",
+    "lumber",
+    "lumber",
+    "wool",
+    "wool",
+    "wool",
+    "wool",
+    "grain",
+    "grain",
+    "grain",
+    "grain",
+    "ore",
+    "ore",
+    "ore",
+    "ore"
+  ];
   return (
     <Router>
       <div className="h-screen">

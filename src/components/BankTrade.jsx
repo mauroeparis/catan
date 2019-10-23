@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../css/banktrade.css";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
@@ -36,70 +37,43 @@ function BankTrade({ resources }) {
   const setReceiveResource = res =>
     setState({ giveResource, receiveResource: res });
 
+  const RESOURCES = ["brick", "lumber", "wool", "grain", "ore"];
+
   return (
-    <div>
-      <div>
-        <button
-          type="button"
-          onClick={() => setGiveResource("brick")}
-          disabled={!refreshButtons.includes("brick")}
-        >
-          Give Brick
-        </button>
-        <button
-          type="button"
-          onClick={() => setGiveResource("lumber")}
-          disabled={!refreshButtons.includes("lumber")}
-        >
-          Give Lumber
-        </button>
-        <button
-          type="button"
-          onClick={() => setGiveResource("wool")}
-          disabled={!refreshButtons.includes("wool")}
-        >
-          Give Wool
-        </button>
-        <button
-          type="button"
-          onClick={() => setGiveResource("grain")}
-          disabled={!refreshButtons.includes("grain")}
-        >
-          Give Grain
-        </button>
-        <button
-          type="button"
-          onClick={() => setGiveResource("ore")}
-          disabled={!refreshButtons.includes("ore")}
-        >
-          Give Ore
-        </button>
+    <div className="bank-trade">
+      <h1>Bank Trading</h1>
+      <div className="giving">
+        <span>Give 4</span>
+        {RESOURCES.map(resource => (
+          <button
+            key={resource}
+            className={`${resource} ${
+              giveResource === resource ? "selected" : ""
+            }`}
+            type="button"
+            onClick={() => setGiveResource(resource)}
+            disabled={!refreshButtons.includes(resource)}
+          >
+            {resource[0].toUpperCase() + resource.substring(1)}
+          </button>
+        ))}
       </div>
-      <div>
-        <button type="button" onClick={() => setReceiveResource("brick")}>
-          Receive Brick
-        </button>
-        <button type="button" onClick={() => setReceiveResource("lumber")}>
-          Receive Lumber
-        </button>
-        <button type="button" onClick={() => setReceiveResource("wool")}>
-          Receive Wool
-        </button>
-        <button type="button" onClick={() => setReceiveResource("grain")}>
-          Receive Grain
-        </button>
-        <button type="button" onClick={() => setReceiveResource("ore")}>
-          Receive Ore
-        </button>
+      <div className="receiving">
+        <span>Recv 1</span>
+        {RESOURCES.map(resource => (
+          <button
+            key={resource}
+            className={`${resource} ${
+              receiveResource === resource ? "selected" : ""
+            }`}
+            type="button"
+            onClick={() => setReceiveResource(resource)}
+          >
+            {resource[0].toUpperCase() + resource.substring(1)}
+          </button>
+        ))}
       </div>
-      <div>
-        <button
-          type="button"
-          onClick={() => tradeResources(giveResource, receiveResource)}
-          disabled={giveResource === null || receiveResource === null}
-        >
-          Trade
-        </button>
+      <div className="footer">
         <Link to={`/game/${gameId}`}>
           <button
             type="button"
@@ -110,6 +84,13 @@ function BankTrade({ resources }) {
             Cancel
           </button>
         </Link>
+        <button
+          type="button"
+          onClick={() => tradeResources(giveResource, receiveResource)}
+          disabled={giveResource === null || receiveResource === null}
+        >
+          Trade
+        </button>
       </div>
     </div>
   );
