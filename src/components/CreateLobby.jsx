@@ -26,7 +26,7 @@ function CreateLobbyPage() {
       const res = await api.lobbies.create(name, boardId);
       console.log(res);
       const { room } = res.data;
-      history.push(`/lobby/${room.id}`);
+      history.push(`/lobby`);
     } catch (err) {
       console.log(`Error: ${err}`);
     }

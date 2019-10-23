@@ -79,6 +79,23 @@ server.put("/rooms/:id", (req, res) => {
   res.status(status).json({ status, message });
 });
 
+// TODO: this should set curren user as owner after creation.
+server.post("/rooms", (req, res, next) => {
+  const { name, board_id } = req.body;
+  const b = {
+    name,
+    owner: "asd",
+    max_players: 4,
+    owner: "test",
+    players: ["test"],
+    game_has_started: false,
+    game_id: board_id
+  };
+  req.body = b;
+
+  next();
+});
+
 server.use(
   jsonServer.rewriter({
     "/games/:id/player": "/resources",
