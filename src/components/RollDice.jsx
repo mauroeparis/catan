@@ -16,11 +16,7 @@ function RollDice({ gameId }) {
     return () => clearInterval(interval);
   }, [gameId]);
 
-  return (
-    <div>
-      <h1>Last dices: {`(${dices[0]} , ${dices[1]})`}</h1>
-    </div>
-  );
+  return <i>Last dices: {`(${dices[0]} , ${dices[1]})`}</i>;
 }
 
 RollDice.propTypes = {

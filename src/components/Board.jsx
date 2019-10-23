@@ -103,21 +103,16 @@ function Board({ gameId }) {
       });
     };
     fetchBoard();
+    const interval = setInterval(() => fetchBoard(), api.POLL_EVERY);
+    return () => clearInterval(interval);
   }, [gameId]);
 
   const unit = 256; // Radius of one hexagon in pixels
-
-  const style = {
-    width: "1024px",
-    margin: "4rem auto",
-    backgroundColor: "#202020"
-  };
-
   const width = 2560;
   const height = 2560;
   const viewBox = `${-width / 2} ${-height / 2} ${width} ${height}`;
   return (
-    <div style={style}>
+    <div className="board">
       <svg
         viewBox={viewBox}
         overflow="visible"

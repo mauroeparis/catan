@@ -49,7 +49,7 @@ export default function Settlement({
   };
   const center = getVertex(position.level, position.index, unit);
   return (
-    <g onClick={tryUpgrade}>
+    <g className="settlement" onClick={tryUpgrade}>
       <circle
         cx={center.x}
         cy={center.y}
@@ -63,7 +63,6 @@ export default function Settlement({
         y={center.y + 3} // HACK: +3 seems to center the sans-serif font
         dominantBaseline="middle"
         textAnchor="middle"
-        style={{ font: "bold 2rem Cinzel", fill: "#ffffff" }}
       >
         {position.index}
       </text>
@@ -94,6 +93,7 @@ export function BuildIndicator({ position, unit = 256 }) {
   const center = getVertex(position.level, position.index, unit);
   return (
     <circle
+      className="build-indicator"
       onClick={doBuild}
       cx={center.x}
       cy={center.y}
