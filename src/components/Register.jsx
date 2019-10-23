@@ -39,7 +39,7 @@ function RegisterForm() {
   const handleSubmit = async event => {
     event.preventDefault();
 
-    if (passIsValid()) {
+    if (passIsValid(pass)) {
       if (pass === repeatPass) {
         try {
           const res = await api.register(user, pass);
