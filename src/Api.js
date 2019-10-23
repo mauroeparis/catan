@@ -15,6 +15,11 @@ function login(user, pass) {
   return API.post("/users/login", { user, pass }, header);
 }
 
+function register(user, pass) {
+  const header = { "Content-Type": "application/json" };
+  return API.post("/users/", { user, pass }, header);
+}
+
 const lobbies = {
   all: () => API.get("/rooms"),
   join: id => API.put(`/rooms/${id}`),
@@ -32,5 +37,6 @@ const games = {
 export default {
   login,
   lobbies,
-  games
+  games,
+  register
 };

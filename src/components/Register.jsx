@@ -1,55 +1,26 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { Redirect, useHistory } from "react-router-dom";
 
 import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
+import { CustomInput, TextClasses, CommonClasses } from "./Login";
 
-export const TextClasses = "text-center text-sm self-center tracking-wider text-bold";
-export const CommonClasses = "w-5/6 shadow-md rounded h-12";
-
-export function CustomInput(props) {
-  const { type, placeholder, value, onChange } = props;
-  return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className={`
-        mb-4
-        bg-gray-100
-        placeholder-gray-600
-        ${CommonClasses}
-        ${TextClasses}
-      `}
-    />
-  );
-}
-
-CustomInput.propTypes = {
-  type: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
-};
-
-const bgImage = {
-  backgroundImage: `url(${Background})`
-};
-
-export function LoginPage() {
+function RegisterPage() {
   return (
     <div
       className="h-full bg-cover bg-center flex justify-center"
       style={bgImage}
     >
-      <LoginForm />
+      <RegisterForm />
     </div>
   );
 }
 
-function LoginForm() {
+const bgImage = {
+  backgroundImage: `url(${Background})`
+};
+
+function RegisterForm() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const history = useHistory();
@@ -57,13 +28,13 @@ function LoginForm() {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const res = await api.login(user, pass);
+      const res = await api.register(user, pass);
       const { token } = res.data;
       localStorage.setItem("token", token);
       history.push("/lobbyList");
     } catch (err) {
       console.log(`Error: ${err}`);
-      alert("Invalid login of password");
+      alert("Invalid register info");
     }
   };
 
@@ -93,7 +64,7 @@ function LoginForm() {
         />
         <input
           type="submit"
-          value="LOGIN"
+          value="REGISTER"
           className={`
             cursor-pointer
             mt-2
@@ -105,13 +76,10 @@ function LoginForm() {
             `}
         />
         <span className="text-orange-800 text-center font-medium mt-5">
-          Don’t have an account yet?
+          Already have an account?
         </span>
         <input
           type="button"
-          onClick={() => {
-            history.push("/register");
-          }}
           className={`
             mt-1
             h-12
@@ -121,7 +89,7 @@ function LoginForm() {
             bg-orange-600
             cursor-pointer
             `}
-          value="REGISTER"
+          value="LOGIN"
         />
         <div className="w-5/6 self-center pt-6">
           <a
@@ -136,4 +104,4 @@ function LoginForm() {
   );
 }
 
-export default { LoginPage, CustomInput, TextClasses, CommonClasses };
+export default RegisterPage;
