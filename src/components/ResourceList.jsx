@@ -18,6 +18,12 @@ function ResourceList({ gameId }) {
     return () => clearInterval(interval);
   }, [gameId]);
 
+  // TODO: It would be nice to implement a custom hook like this
+  // usePolling(async () => {
+  //   const player = await api.games.player(gameId);
+  //   setState({ resources: player.data.resources });
+  // }, [gameId]);
+
   if (!resources) return <i>Loading Resource List...</i>;
   return (
     <div>

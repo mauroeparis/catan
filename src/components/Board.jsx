@@ -103,6 +103,8 @@ function Board({ gameId }) {
       });
     };
     fetchBoard();
+    const interval = setInterval(() => fetchBoard(), api.POLL_EVERY);
+    return () => clearInterval(interval);
   }, [gameId]);
 
   const unit = 256; // Radius of one hexagon in pixels
