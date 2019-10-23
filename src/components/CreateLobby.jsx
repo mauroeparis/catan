@@ -24,8 +24,10 @@ function CreateLobbyPage() {
     event.preventDefault();
     try {
       const res = await api.lobbies.create(name, boardId);
-      console.log(res);
       const { room } = res.data;
+      console.log(room);
+      // TODO: API should return a room
+      // And we should redirect to that room lobby
       history.push(`/lobby`);
     } catch (err) {
       console.log(`Error: ${err}`);
