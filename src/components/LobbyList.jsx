@@ -13,7 +13,7 @@ function LobbyList() {
   }, []);
 
   return (
-    <div className="h-full bg-orange-300">
+    <div className="h-full bg-orange-300 justify-center">
       <div className="py-5 flex flex-col">
         <h1 className="font-cinzel text-gray-900 text-4xl lg:text-6xl lg:text-bold lg:pt-5 self-center">
           Lobby List
@@ -61,6 +61,23 @@ function LobbyList() {
               </div>
             </Link>
           ))}
+        </div>
+
+        <div className="table rounded mt-6 lg:mt-12 self-center w-11/12 lg:w-8/12 justify-center">
+          <Link to="/lobby/create" className="w-full text-center self-center ">
+            <input
+              type="button"
+              value="NUEVO LOBBY"
+              className={`
+              h-12
+              bg-blue-800
+              text-white
+              shadow
+              w-full shadow-md rounded
+              text-center text-sm self-center tracking-wider text-bold
+            `}
+            />
+          </Link>
         </div>
       </div>
     </div>
