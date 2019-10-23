@@ -7,13 +7,14 @@ function RollDice({ gameId }) {
 
   useEffect(() => {
     const fetchDices = async () => {
-      const lastDices = [6, 8];
+      const res = await api.games.get(gameId);
+      const lastDices = res.data.current_turn.dice;
       setDices(lastDices);
     };
     fetchDices();
     const interval = setInterval(() => fetchDices(), api.POLL_EVERY);
     return () => clearInterval(interval);
-  }, [gameId, dices]);
+  }, [gameId]);
 
   return (
     <div>
