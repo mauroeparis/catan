@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import api from "../Api";
 
 function CardList({ gameId }) {
-  const [cards, setState] = useState(null);
+  const [{ cards }, setState] = useState({ cards: null });
   const amounts = _.countBy(cards);
 
   useEffect(() => {
@@ -18,7 +18,6 @@ function CardList({ gameId }) {
   }, [gameId]);
 
   if (!cards) return <i>Loading Card List...</i>;
-
   return (
     <div className="card-list">
       <h1>Card List</h1>
