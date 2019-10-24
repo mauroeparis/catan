@@ -1,23 +1,71 @@
 {
   "player_actions": [
-    { "type": "build_settlement", "payload": [
-      { "level": 2, "index": 0 },
-      { "level": 2, "index": 1 },
-      { "level": 2, "index": 2 }
-    ]},
-    { "type": "upgrade_city", "payload": [
-      { "level": 0, "index": 0 },
-      { "level": 2, "index": 24 }
-    ]},
-    { "type": "build_road", "payload": [] },
-    { "type": "move_robber", "payload": [] },
-    { "type": "buy_card", "payload": null },
-    { "type": "play_knight_card", "payload": [] },
-    { "type": "play_road_building_card", "payload": [] },
-    { "type": "play_monopoly_card", "payload": null },
-    { "type": "play_year_of_plenty_card", "payload": null },
-    { "type": "end_turn", "payload": null },
-    { "type": "bank_trade", "payload": null }
+    {
+      "type": "build_settlement",
+      "payload": [
+        {
+          "level": 2,
+          "index": 0
+        },
+        {
+          "level": 2,
+          "index": 1
+        },
+        {
+          "level": 2,
+          "index": 2
+        }
+      ]
+    },
+    {
+      "type": "upgrade_city",
+      "payload": [
+        {
+          "level": 0,
+          "index": 0
+        },
+        {
+          "level": 2,
+          "index": 24
+        }
+      ]
+    },
+    {
+      "type": "build_road",
+      "payload": []
+    },
+    {
+      "type": "move_robber",
+      "payload": []
+    },
+    {
+      "type": "buy_card",
+      "payload": null
+    },
+    {
+      "type": "play_knight_card",
+      "payload": []
+    },
+    {
+      "type": "play_road_building_card",
+      "payload": []
+    },
+    {
+      "type": "play_monopoly_card",
+      "payload": null
+    },
+    {
+      "type": "play_year_of_plenty_card",
+      "payload": null
+    },
+    {
+      "type": "end_turn",
+      "payload": null
+    },
+    {
+      "type": "bank_trade",
+      "payload": null
+    }
   ],
   "users": [
     {

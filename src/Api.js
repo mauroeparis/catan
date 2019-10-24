@@ -13,7 +13,8 @@ const API = axios.create({
 const POLL_EVERY = 20000000;
 
 const auth = {
-  login: (user, pass) => API.post("/users/login", { user, pass })
+  login: (user, pass) => API.post("/users/login", { user, pass }),
+  register: (user, pass) => API.post("/users/", { user, pass })
 };
 
 const boards = {
@@ -22,7 +23,7 @@ const boards = {
 
 const lobbies = {
   all: () => API.get("/rooms"),
-  create: (name, board_id) => API.post("/rooms", { name, board_id }),
+  create: (name, boardId) => API.post("/rooms", { name, boardId }),
   join: id => API.put(`/rooms/${id}`),
   get: id => API.get(`/rooms/${id}`)
 };

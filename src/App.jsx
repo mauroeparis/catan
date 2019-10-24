@@ -6,13 +6,14 @@ import {
   Redirect
 } from "react-router-dom";
 
-import LoginPage from "./components/Login";
+import { LoginPage } from "./components/Login";
+import RegisterPage from "./components/Register";
 import Lobby from "./components/Lobby";
 import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
 import Board from "./components/Board";
 import BankTrade from "./components/BankTrade";
-import CreateLobby from "./components/CreateLobby"
+import CreateLobby from "./components/CreateLobby";
 
 function App() {
   // TODO: add API call here
@@ -44,6 +45,7 @@ function App() {
         {!localStorage.token && <Redirect to="/login" />}
         <Switch>
           <Route path="/login" exact component={LoginPage} />
+          <Route path="/register" exact component={RegisterPage} />
           <Route path="/lobby" exact component={LobbyList} />
           <Route path="/lobby/create" exact component={CreateLobby} />
           <Route path="/lobby/:id" exact component={Lobby} />
