@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import api from "../Api";
 import Container from "./Container";
 
