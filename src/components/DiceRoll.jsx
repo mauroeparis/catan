@@ -17,11 +17,7 @@ function DiceRoll({ gameId }) {
   }, [gameId]);
 
   if (!dices) return <i>Loading Dices...</i>;
-  return (
-    <div>
-      <h1>Last dices: {`(${dices[0]} , ${dices[1]})`}</h1>
-    </div>
-  );
+  return <i>Last dices: {`(${dices[0]} , ${dices[1]})`}</i>;
 }
 
 DiceRoll.propTypes = {
