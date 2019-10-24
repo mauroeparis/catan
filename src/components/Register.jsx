@@ -54,7 +54,7 @@ function RegisterForm() {
       }
     } else {
       alert(
-        "Password needs to be 8 characters long, have a number and lower and upper case letters"
+        "Password needs to be >8 characters long, have a number and lower and upper case letters"
       );
     }
   };
