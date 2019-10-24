@@ -16,8 +16,13 @@ const auth = {
   login: (user, pass) => API.post("/users/login", { user, pass })
 };
 
+const boards = {
+  all: () => API.get("/boards")
+};
+
 const lobbies = {
   all: () => API.get("/rooms"),
+  create: (name, board_id) => API.post("/rooms", { name, board_id }),
   join: id => API.put(`/rooms/${id}`),
   get: id => API.get(`/rooms/${id}`)
 };
@@ -36,6 +41,7 @@ const games = {
 export default {
   POLL_EVERY,
   auth,
+  boards,
   lobbies,
   games
 };
