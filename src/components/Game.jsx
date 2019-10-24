@@ -1,9 +1,7 @@
 import "../css/game.css";
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
 
-import api from "../Api";
 import Board from "./Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourceList";

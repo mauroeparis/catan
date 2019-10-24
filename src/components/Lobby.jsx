@@ -15,7 +15,6 @@ function Lobby() {
   // TODO: This is the room id, not the game id, but it is used as such below
   const { id } = useParams();
 
-
   const [room, setRoom] = useState();
 
   useEffect(() => {
