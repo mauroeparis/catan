@@ -16,7 +16,7 @@ function Lobby() {
   const { id } = useParams();
 
   const [room, setRoom] = useState();
-
+  console.log(room);
   useEffect(() => {
     const fetchRoom = async () => {
       const res = await api.lobbies.get(id);
