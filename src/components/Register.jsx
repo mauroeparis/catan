@@ -41,7 +41,7 @@ function RegisterForm() {
     if (passIsValid(pass)) {
       if (pass === repeatPass) {
         try {
-          const res = await api.auth.register(user, pass);
+          await api.auth.register(user, pass);
           history.push("/login");
         } catch (err) {
           console.log(`Error: ${err}`);
