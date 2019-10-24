@@ -10,7 +10,7 @@ const API = axios.create({
   }
 });
 
-const POLL_EVERY = 20000000;
+const POLL_EVERY = 2000;
 
 const auth = {
   login: (user, pass) => API.post("/users/login", { user, pass })
