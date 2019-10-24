@@ -54,9 +54,10 @@ server.post("/users/login", (req, res) => {
 
 // Check token for other actions diff from login and register
 server.use(/^(?!\/(login|register)).*$/, (req, res, next) => {
+  console.log();
   if (
     req.headers.authorization === undefined ||
-    req.headers.authorization.split(" ")[0] !== "Bearer"
+    req.headers.authorization.split(" ")[0] !== "Token"
   ) {
     const status = 401;
     const message = "Bad authorization header";

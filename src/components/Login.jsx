@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 
+import axios from "axios";
 import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
 
@@ -38,6 +39,9 @@ function LoginForm() {
       const { token } = res.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", user);
+      axios.defaults.headers.common.Authorization = `Token ${token}`;
+      api.API.defaults.headers.Authorization = `Token ${token}`;
+      console.log(api.API);
       history.push("/lobby");
     } catch (err) {
       console.log(`Error: ${err}`);
