@@ -8,9 +8,71 @@ const amounts = _.countBy(resources);
 describe("<Container /> rendering", () => {
   it("should render six <li>", () => {
     const wrapper = shallow(<Container amounts={amounts} />);
-    // Expects the app to have exactly 6 h1 children
-    expect(wrapper.find("ul")).toHaveLength(1);
+    // Expects the app to have exactly 5 hi children
     expect(wrapper.find("li")).toHaveLength(5);
+  });
+
+  // TODO : all tests should be something like this
+  // it("should find amounts.brick", () => {
+  //   const wrapper = shallow(<Container amounts={amounts} />);
+  //   // Expects the app to have exactly 5 hi children
+  //   expect(wrapper.equals(<li>Brick: `amounts.brick`</li>)).toEqual(true);
+  // });
+
+  it("should have correct amount of brick", () => {
+    const wrapper = shallow(<Container amounts={amounts} />);
+    expect(
+      wrapper
+        .find("li")
+        .children()
+        .at(1) // HACK : should find a better way to do this
+        .text()
+    ).toEqual("1");
+  });
+  it("should have correct amount of Lumber", () => {
+    const wrapper = shallow(<Container amounts={amounts} />);
+    expect(
+      wrapper
+        .find("li")
+        .children()
+        .at(3) // HACK : should find a better way to do this
+        .text()
+    ).toEqual("1");
+  });
+  it("should have correct amount of Wool", () => {
+    const wrapper = shallow(<Container amounts={amounts} />);
+    expect(
+      wrapper
+        .find("li")
+        .children()
+        .at(5) // HACK : should find a better way to do this
+        .text()
+    ).toEqual("1");
+  });
+  it("should have correct amount of Grain", () => {
+    const wrapper = shallow(<Container amounts={amounts} />);
+    expect(
+      wrapper
+        .find("li")
+        .children()
+        .at(7) // HACK : should find a better way to do this
+        .text()
+    ).toEqual("1");
+  });
+  it("should have correct amount of Ore", () => {
+    const wrapper = shallow(<Container amounts={amounts} />);
+    expect(
+      wrapper
+        .find("li")
+        .children()
+        .at(9) // HACK : should find a better way to do this
+        .text()
+    ).toEqual("1");
+  });
+
+  it("should render one <ul>", () => {
+    const wrapper = shallow(<Container amounts={amounts} />);
+    expect(wrapper.find("ul")).toHaveLength(1);
   });
 
   it("should render one <div>", () => {
