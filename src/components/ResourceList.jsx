@@ -18,18 +18,23 @@ function ResourceList({ gameId }) {
     return () => clearInterval(interval);
   }, [gameId]);
 
+  // TODO: It would be nice to implement a custom hook like this
+  // usePolling(async () => {
+  //   const player = await api.games.player(gameId);
+  //   setState({ resources: player.data.resources });
+  // }, [gameId]);
+
   if (!resources) return <i>Loading Resource List...</i>;
   return (
-    <div>
-      <h1 className="text-3xl">Resource List</h1>
-      <h1>Brick: {amounts.brick}</h1>
-      <h1>Lumber: {amounts.lumber}</h1>
-      <h1>Wool: {amounts.wool}</h1>
-      <h1>Grain: {amounts.grain}</h1>
-      <h1>Ore: {amounts.ore}</h1>
-      <Link to={`/game/${gameId}/bankTrade`} className="w-full text-center">
-        <input type="button" value="Trade with bank" />
-      </Link>
+    <div className="resource-list">
+      <h1>Resource List</h1>
+      <ul>
+        <li>Brick: {amounts.brick}</li>
+        <li>Lumber: {amounts.lumber}</li>
+        <li>Wool: {amounts.wool}</li>
+        <li>Grain: {amounts.grain}</li>
+        <li>Ore: {amounts.ore}</li>
+      </ul>
     </div>
   );
 }

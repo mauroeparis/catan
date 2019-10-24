@@ -20,13 +20,15 @@ function CardList({ gameId }) {
   if (!cards) return <i>Loading Card List...</i>;
 
   return (
-    <div>
-      <h1 className="text-3xl">Card List</h1>
-      <h1>Road building: {amounts.road_building}</h1>
-      <h1>Year of plenty: {amounts.year_of_plenty}</h1>
-      <h1>Monopoly: {amounts.monopoly}</h1>
-      <h1>Victory point: {amounts.victory_point}</h1>
-      <h1>Knight: {amounts.knight}</h1>
+    <div className="card-list">
+      <h1>Card List</h1>
+      <ul>
+        <li>Road building: {amounts.road_building}</li>
+        <li>Year of plenty: {amounts.year_of_plenty}</li>
+        <li>Monopoly: {amounts.monopoly}</li>
+        <li>Victory point: {amounts.victory_point}</li>
+        <li>Knight: {amounts.knight}</li>
+      </ul>
     </div>
   );
 }
