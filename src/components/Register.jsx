@@ -119,14 +119,6 @@ function RegisterForm() {
             `}
           value="LOGIN"
         />
-        <div className="w-5/6 self-center pt-6">
-          <a
-            href="/#"
-            className="text-orange-800 text-center font-medium mt-5 underline"
-          >
-            Forgot your password?
-          </a>
-        </div>
       </form>
     </div>
   );
