@@ -13,10 +13,32 @@ import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
 import Board from "./components/Board";
 import BankTrade from "./components/BankTrade";
+import CreateLobby from "./components/CreateLobby";
 
 function App() {
   // TODO: add API call here
-  const testresources = ["wool", "wool", "wool", "wool", "lumber"];
+  const testresources = [
+    "brick",
+    "brick",
+    "brick",
+    "brick",
+    "lumber",
+    "lumber",
+    "lumber",
+    "lumber",
+    "wool",
+    "wool",
+    "wool",
+    "wool",
+    "grain",
+    "grain",
+    "grain",
+    "grain",
+    "ore",
+    "ore",
+    "ore",
+    "ore"
+  ];
   return (
     <Router>
       <div className="h-screen">
@@ -25,6 +47,7 @@ function App() {
           <Route path="/login" exact component={LoginPage} />
           <Route path="/register" exact component={RegisterPage} />
           <Route path="/lobby" exact component={LobbyList} />
+          <Route path="/lobby/create" exact component={CreateLobby} />
           <Route path="/lobby/:id" exact component={Lobby} />
           <Route path="/game/:id" exact component={Game} />
           <Route

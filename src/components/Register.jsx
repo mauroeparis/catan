@@ -3,7 +3,8 @@ import { Redirect, useHistory } from "react-router-dom";
 
 import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
-import { CustomInput, TextClasses, CommonClasses } from "./Login";
+import { TextClasses, CommonClasses } from "./Login";
+import CustomInput from "./CustomInput";
 
 function RegisterPage() {
   return (

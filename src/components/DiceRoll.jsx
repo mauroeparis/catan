@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import api from "../Api";
 
-function RollDice({ gameId }) {
-  const [dices, setDices] = useState(true);
+function DiceRoll({ gameId }) {
+  const [dices, setDices] = useState(null);
 
   useEffect(() => {
     const fetchDices = async () => {
@@ -16,11 +16,12 @@ function RollDice({ gameId }) {
     return () => clearInterval(interval);
   }, [gameId]);
 
+  if (!dices) return <i>Loading Dices...</i>;
   return <i>Last dices: {`(${dices[0]} , ${dices[1]})`}</i>;
 }
 
-RollDice.propTypes = {
+DiceRoll.propTypes = {
   gameId: PropTypes.string.isRequired
 };
 
-export default RollDice;
+export default DiceRoll;
