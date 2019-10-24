@@ -8,7 +8,7 @@ import Board from "./Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourceList";
 import BuyCard from "./BuyCard";
-import RollDice from "./RollDice";
+import DiceRoll from "./DiceRoll";
 
 function Game() {
   const { id } = useParams();
@@ -35,7 +35,7 @@ function Game() {
         <Link to={`/game/${id}/bankTrade`} className="w-full text-center">
           <input type="button" value="Trade with bank" />
         </Link>
-        <RollDice gameId={id} />
+        <DiceRoll gameId={id} />
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import LobbyList from "./components/LobbyList";
 import Game from "./components/Game";
 import Board from "./components/Board";
 import BankTrade from "./components/BankTrade";
+import CreateLobby from "./components/CreateLobby"
 
 function App() {
   // TODO: add API call here
@@ -44,6 +45,7 @@ function App() {
         <Switch>
           <Route path="/login" exact component={LoginPage} />
           <Route path="/lobby" exact component={LobbyList} />
+          <Route path="/lobby/create" exact component={CreateLobby} />
           <Route path="/lobby/:id" exact component={Lobby} />
           <Route path="/game/:id" exact component={Game} />
           <Route
