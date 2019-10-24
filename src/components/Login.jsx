@@ -7,8 +7,9 @@ import Background from "../public/img/catan-bg.jpg";
 import CustomInput from "./CustomInput";
 
 // TODO: Remove repeated code
-const TextClasses = "text-center text-sm self-center tracking-wider text-bold";
-const CommonClasses = "w-5/6 shadow-md rounded h-12";
+export const TextClasses =
+  "text-center text-sm self-center tracking-wider text-bold";
+export const CommonClasses = "w-5/6 shadow-md rounded h-12";
 
 const bgImage = {
   backgroundImage: `url(${Background})`

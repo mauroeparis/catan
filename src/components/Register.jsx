@@ -22,9 +22,7 @@ const bgImage = {
 };
 
 function passIsValid(pass) {
-  const passRegex = new RegExp(
-    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})"
-  );
+  const passRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
   if (passRegex.test(pass)) {
     return true;
   }
