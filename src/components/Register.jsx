@@ -22,7 +22,9 @@ const bgImage = {
 };
 
 function passIsValid(pass) {
-  const passRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})");
+  const passRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9\s:])(?=.{8,})"
+  );
   if (passRegex.test(pass)) {
     return true;
   }
@@ -52,7 +54,7 @@ function RegisterForm() {
       }
     } else {
       alert(
-        "Password needs to be >8 characters long, have a number and lower and upper case letters"
+        "Password needs to be >8 characters long, have a number, lower and upper case letters and a symbol"
       );
     }
   };
