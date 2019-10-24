@@ -3,6 +3,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import api from "../Api";
+import Container from "./Container";
 
 function ResourceList({ gameId }) {
   const [{ resources }, setState] = useState({ resources: null });
@@ -25,18 +26,7 @@ function ResourceList({ gameId }) {
   // }, [gameId]);
 
   if (!resources) return <i>Loading Resource List...</i>;
-  return (
-    <div className="resource-list">
-      <h1>Resource List</h1>
-      <ul>
-        <li>Brick: {amounts.brick}</li>
-        <li>Lumber: {amounts.lumber}</li>
-        <li>Wool: {amounts.wool}</li>
-        <li>Grain: {amounts.grain}</li>
-        <li>Ore: {amounts.ore}</li>
-      </ul>
-    </div>
-  );
+  return <Container amounts={amounts} />;
 }
 
 ResourceList.propTypes = { gameId: PropTypes.string.isRequired };

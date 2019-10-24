@@ -6,6 +6,13 @@ const CatanTypes = {
     index: PropTypes.number.isRequired
   }),
   Resource: PropTypes.oneOf(["brick", "lumber", "wool", "grain", "ore"]),
+  amounts: PropTypes.shape({
+    brick: PropTypes.number.isRequired,
+    lumber: PropTypes.number.isRequired,
+    wool: PropTypes.number.isRequired,
+    grain: PropTypes.number.isRequired,
+    ore: PropTypes.number.isRequired
+  }),
   Card: PropTypes.oneOf([
     "road_building",
     "year_of_plenty",
