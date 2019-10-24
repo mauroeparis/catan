@@ -38,7 +38,7 @@ function LoginForm() {
       const { token } = res.data;
       localStorage.setItem("token", token);
       localStorage.setItem("user", user);
-      history.push("/lobbyList");
+      history.push("/lobby");
     } catch (err) {
       console.log(`Error: ${err}`);
       alert("Invalid login of password");

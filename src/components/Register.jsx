@@ -42,9 +42,7 @@ function RegisterForm() {
       if (pass === repeatPass) {
         try {
           const res = await api.auth.register(user, pass);
-          const { token } = res.data;
-          localStorage.setItem("token", token);
-          history.push("/lobbyList");
+          history.push("/login");
         } catch (err) {
           console.log(`Error: ${err}`);
           alert("Invalid register info.");
