@@ -80,6 +80,22 @@ function LobbyList() {
           </Link>
         </div>
       </div>
+      <input
+        style={{
+          position: "absolute",
+          bottom: "1rem",
+          right: "1rem",
+          padding: "0 2rem",
+          cursor: "pointer"
+        }}
+        type="submit"
+        value="LOGOUT"
+        className="mt-2 h-12 bg-blue-800 text-white text-center text-sm self-center tracking-wider text-bold shadow-md rounded h-12"
+        onClick={() => {
+          window.location.reload();
+          delete localStorage.token;
+        }}
+      />
     </div>
   );
 }
