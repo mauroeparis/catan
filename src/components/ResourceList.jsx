@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import api from "../Api";
-import Container from "./Container";
+import ResourceListContainer from "./ResourceListContainer";
 
 function ResourceList({ gameId }) {
   const [{ resources }, setState] = useState({ resources: null });
@@ -25,7 +25,7 @@ function ResourceList({ gameId }) {
   // }, [gameId]);
 
   if (!resources) return <i>Loading Resource List...</i>;
-  return <Container amounts={amounts} />;
+  return <ResourceListContainer amounts={amounts} />;
 }
 
 ResourceList.propTypes = { gameId: PropTypes.string.isRequired };

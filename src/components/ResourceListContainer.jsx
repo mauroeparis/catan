@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CatanTypes from "../CatanTypes";
 
-function Container({ amounts }) {
+function ResourceListContainer({ amounts }) {
   return (
     <div className="resource-list">
       <h1>Resource List</h1>
@@ -17,8 +17,8 @@ function Container({ amounts }) {
   );
 }
 
-Container.propTypes = {
+ResourceListContainer.propTypes = {
   amounts: PropTypes.shape(CatanTypes.amounts).isRequired
 };
 
-export default Container;
+export default ResourceListContainer;

@@ -1,13 +1,13 @@
 import React from "react";
 import _ from "lodash";
-import Container from "../../../src/components/Container";
+import ResourceListContainer from "../../../src/components/ResourceListContainer";
 
 const resources = ["brick", "lumber", "wool", "grain", "ore"];
 const amounts = _.countBy(resources);
 
-describe("<Container /> rendering", () => {
+describe("<ResourceListContainer /> rendering", () => {
   it("should render six <li>", () => {
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     // Expects the app to have exactly 5 hi children
     expect(wrapper.find("li")).toHaveLength(5);
   });
@@ -20,7 +20,7 @@ describe("<Container /> rendering", () => {
   // });
 
   it("should have correct amount of brick", () => {
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     expect(
       wrapper
         .find("li")
@@ -30,7 +30,7 @@ describe("<Container /> rendering", () => {
     ).toEqual("1");
   });
   it("should have correct amount of Lumber", () => {
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     expect(
       wrapper
         .find("li")
@@ -40,7 +40,7 @@ describe("<Container /> rendering", () => {
     ).toEqual("1");
   });
   it("should have correct amount of Wool", () => {
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     expect(
       wrapper
         .find("li")
@@ -50,7 +50,7 @@ describe("<Container /> rendering", () => {
     ).toEqual("1");
   });
   it("should have correct amount of Grain", () => {
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     expect(
       wrapper
         .find("li")
@@ -60,7 +60,7 @@ describe("<Container /> rendering", () => {
     ).toEqual("1");
   });
   it("should have correct amount of Ore", () => {
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     expect(
       wrapper
         .find("li")
@@ -71,13 +71,13 @@ describe("<Container /> rendering", () => {
   });
 
   it("should render one <ul>", () => {
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     expect(wrapper.find("ul")).toHaveLength(1);
   });
 
   it("should render one <div>", () => {
     // Don't know why with the previous command this doesn't work
-    const wrapper = shallow(<Container amounts={amounts} />);
+    const wrapper = shallow(<ResourceListContainer amounts={amounts} />);
     // Expects the app to have exactly one div children
     expect(wrapper.exists("div")).toEqual(true);
     expect(wrapper.find("div").hasClass("resource-list")).toEqual(true);
