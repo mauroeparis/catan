@@ -1,0 +1,86 @@
+/* TODO: Delete this file, we should be using tailwind */
+
+:root {
+  --dark: #202020;
+  --light: white;
+  --highlight: #E91E63;
+  --row-width: 80rem;
+  --row-height: 8rem;
+  background-color: var(--dark);
+}
+
+.bank-trade button.brick {
+  background-color: #B71C1C;
+}
+
+.bank-trade button.lumber {
+  background-color: #3E2723;
+}
+
+.bank-trade button.wool {
+  background-color: #1B5E20;
+}
+
+.bank-trade button.grain {
+  background-color: #FBC02D;
+}
+
+.bank-trade button.ore {
+  background-color: #263238;
+}
+
+
+.bank-trade {
+  position: absolute;
+  color: var(--light);
+  font: bold 2rem Cinzel;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: calc(50vh - var(--row-height) * 4 / 2 );
+  left: calc(50vw - var(--row-width) * 1 / 2 );
+  border: solid 2px white;
+  border-radius: 2rem;
+}
+
+.bank-trade h1 {
+  font-size: 3rem;
+}
+
+.bank-trade > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: var(--row-width);
+  height: var(--row-height);
+}
+
+.bank-trade .footer {
+  justify-content: space-between;
+  padding: 0 4rem;
+}
+
+.bank-trade button {
+  background-color: var(--highlight);
+  padding: 0.5rem 2rem;
+  border-radius: 1rem 0;
+  float: right;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.bank-trade button.selected {
+  padding: 2rem;
+  font-weight: 700;
+}
+
+.bank-trade button:disabled {
+  background-color: var(--dark);
+  pointer-events: none;
+}
+
+.bank-trade button:hover {
+  background-color: var(--light);
+  color: var(--dark);
+}

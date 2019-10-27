@@ -3,51 +3,65 @@ import { Redirect, useHistory } from "react-router-dom";
 
 import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
-
+import { TextClasses, CommonClasses } from "./Login";
 import CustomInput from "./CustomInput";
 
-// TODO: Remove repeated code
-export const TextClasses =
-  "text-center text-sm self-center tracking-wider text-bold";
-export const CommonClasses = "w-5/6 shadow-md rounded h-12";
-
-const bgImage = {
-  backgroundImage: `url(${Background})`
-};
-
-export function LoginPage() {
+function RegisterPage() {
   return (
     <div
       className="h-full bg-cover bg-center flex justify-center"
       style={bgImage}
     >
-      <LoginForm />
+      <RegisterForm />
     </div>
   );
 }
 
-function LoginForm() {
+const bgImage = {
+  backgroundImage: `url(${Background})`
+};
+
+function passIsValid(pass) {
+  const passRegex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9\s:])(?=.{8,})"
+  );
+  if (passRegex.test(pass)) {
+    return true;
+  }
+  return false;
+}
+
+function RegisterForm() {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [repeatPass, setRepeatPass] = useState("");
   const history = useHistory();
 
   const handleSubmit = async event => {
     event.preventDefault();
-    try {
-      const res = await api.auth.login(user, pass);
-      const { token } = res.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", user);
-      history.push("/lobby");
-    } catch (err) {
-      console.log(`Error: ${err}`);
-      alert("Invalid login of password");
+
+    if (passIsValid(pass)) {
+      if (pass === repeatPass) {
+        try {
+          await api.auth.register(user, pass);
+          history.push("/login");
+        } catch (err) {
+          console.log(`Error: ${err}`);
+          alert("Invalid register info.");
+        }
+      } else {
+        alert("Passwords do not match!");
+      }
+    } else {
+      alert(
+        "Password needs to be >8 characters long, have a number, lower and upper case letters and a symbol"
+      );
     }
   };
 
   return (
     <div className="h-ful md:table w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
-      {localStorage.token && <Redirect to="/lobby" />}
+      {localStorage.token && <Redirect to="/lobbyList" />}
       <h1 className="font-cinzel text-center pt-24 leading-tight text-gray-900">
         <span className="text-xl">The Settlers of</span>
         <br />
@@ -69,9 +83,15 @@ function LoginForm() {
           value={pass}
           onChange={e => setPass(e.target.value)}
         />
+        <CustomInput
+          type="password"
+          placeholder="REPEAT PASSWORD"
+          value={repeatPass}
+          onChange={e => setRepeatPass(e.target.value)}
+        />
         <input
           type="submit"
-          value="LOGIN"
+          value="REGISTER"
           className={`
             cursor-pointer
             mt-2
@@ -83,12 +103,12 @@ function LoginForm() {
             `}
         />
         <span className="text-orange-800 text-center font-medium mt-5">
-          Don’t have an account yet?
+          Already have an account?
         </span>
         <input
           type="button"
           onClick={() => {
-            history.push("/register");
+            history.push("/login");
           }}
           className={`
             mt-1
@@ -99,11 +119,11 @@ function LoginForm() {
             bg-orange-600
             cursor-pointer
             `}
-          value="REGISTER"
+          value="LOGIN"
         />
       </form>
     </div>
   );
 }
 
-export default { LoginPage, CustomInput, TextClasses, CommonClasses };
+export default RegisterPage;
