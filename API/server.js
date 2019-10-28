@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
 
 const server = jsonServer.create();
 const router = jsonServer.router("./API/db.json");
-const userdb = JSON.parse(fs.readFileSync("./API/db.json", "UTF-8")).users;
+const db = JSON.parse(fs.readFileSync("./API/db.json", "UTF-8"));
 
 server.use((req, res, next) => setTimeout(next, DELAY));
 server.use(bodyParser.urlencoded({ extended: true }));
@@ -33,7 +33,7 @@ function verifyToken(token) {
 
 // Check if the user exists in database
 function isAuthenticated({ user, pass }) {
-  return userdb.findIndex(u => u.user === user && u.pass === pass) !== -1;
+  return db.users.findIndex(u => u.user === user && u.pass === pass) !== -1;
 }
 
 // Login to one of the users from userdb
@@ -84,7 +84,6 @@ server.post("/rooms", (req, res, next) => {
   const { name, board_id } = req.body;
   const b = {
     name,
-    owner: "asd",
     max_players: 4,
     owner: "test",
     players: ["test"],
@@ -92,6 +91,39 @@ server.post("/rooms", (req, res, next) => {
     game_id: board_id
   };
   req.body = b;
+
+  next();
+});
+
+// Actions handler for bank_trade
+// TODO: Should support other actions.
+server.post("/games/:id/player/actions", (req, res, next) => {
+  const { type, payload } = req.body;
+  if (type !== "bank_trade") {
+    console.log(`Actions type was ${type}`);
+    const status = 400;
+    const message = "Error: Actions not yet implemented";
+    res.status(status).json({ status, message });
+    return;
+  }
+
+  const { give, receive } = payload;
+
+  const remove = (arr, value) => {
+    const index = arr.indexOf(value);
+    if (index > -1) arr.splice(index, 1);
+  };
+
+  const r = db.resources;
+  r.resources.push(receive);
+  remove(r.resources, give);
+  remove(r.resources, give);
+  remove(r.resources, give);
+  remove(r.resources, give);
+
+  req.method = "PUT";
+  req.url = "/games/1/player";
+  req.body = r;
 
   next();
 });
