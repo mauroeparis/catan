@@ -8,7 +8,7 @@ function BuyCard({ gameId }) {
   useEffect(() => {
     const fetchActions = async () => {
       const { data: actions } = await api.games.actions(gameId);
-      const hasBuyCard = actions.includes("buy_card");
+      const hasBuyCard = actions.some(a => a.type === "buy_card");
       setCanBuy(hasBuyCard);
     };
     fetchActions();
@@ -24,8 +24,9 @@ function BuyCard({ gameId }) {
       <input
         type="button"
         value="Buy Card"
-        disabled={canBuy}
+        disabled={!canBuy}
         onClick={tryBuy}
+        className="disabled:cursor-not-allowed disabled:opacity-50"
       />
     </div>
   );
