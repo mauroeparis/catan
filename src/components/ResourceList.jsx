@@ -4,9 +4,14 @@ import PropTypes from "prop-types";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
 
-function ResourceList({ gameId }) {
+// TODO: It would be nice to implement a custom hook like this
+// usePolling(async () => {
+//   const player = await api.games.player(gameId);
+//   setState({ resources: player.data.resources });
+// }, [gameId]);
+
+export default function ResourceList({ gameId }) {
   const [{ resources }, setState] = useState({ resources: null });
-  const amounts = _.countBy(resources);
 
   useEffect(() => {
     const fetchResources = async () => {
@@ -18,19 +23,14 @@ function ResourceList({ gameId }) {
     return () => clearInterval(interval);
   }, [gameId]);
 
-  // TODO: It would be nice to implement a custom hook like this
-  // usePolling(async () => {
-  //   const player = await api.games.player(gameId);
-  //   setState({ resources: player.data.resources });
-  // }, [gameId]);
-
   if (!resources) return <i>Loading Resource List...</i>;
-  return <ResourceListContainer amounts={amounts} />;
+  return <ResourceListContainer resources={resources} />;
 }
 
 ResourceList.propTypes = { gameId: PropTypes.string.isRequired };
 
-function ResourceListContainer({ amounts }) {
+function ResourceListContainer({ resources }) {
+  const amounts = _.countBy(resources);
   return (
     <div className="resource-list">
       <h1>Resource List</h1>
@@ -46,7 +46,5 @@ function ResourceListContainer({ amounts }) {
 }
 
 ResourceListContainer.propTypes = {
-  amounts: PropTypes.shape(CatanTypes.amounts).isRequired
+  resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired
 };
-
-export default ResourceList;
