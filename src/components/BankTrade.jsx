@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/banktrade.css";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
 
 import CatanTypes from "../CatanTypes";
-import API from "../Api";
+import api from "../Api";
 
-function BankTrade({ resources }) {
+function BankTrade() {
+  const [{ resources }, setResources] = useState({ resources: null });
   const { gameId } = useParams();
   const history = useHistory();
+
+  useEffect(() => {
+    const fetchResources = async () => {
+      const player = await api.games.player(gameId);
+      setResources({ resources: player.data.resources });
+    };
+    fetchResources();
+    const interval = setInterval(() => fetchResources(), api.POLL_EVERY);
+    return () => clearInterval(interval);
+  }, [gameId]);
 
   const amounts = _.countBy(resources);
   const availableButtons = _.pickBy(amounts, x => x >= 4);
@@ -23,7 +34,7 @@ function BankTrade({ resources }) {
   function tradeResources() {
     const t = `Trading 4 ${giveResource} for 1 ${receiveResource}, are you sure?`;
     if (window.confirm(t)) {
-      API.games.playAction(gameId, "bank_trade", {
+      api.games.playAction(gameId, "bank_trade", {
         give: giveResource,
         receive: receiveResource
       });
@@ -95,9 +106,5 @@ function BankTrade({ resources }) {
     </div>
   );
 }
-
-BankTrade.propTypes = {
-  resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired
-};
 
 export default BankTrade;
