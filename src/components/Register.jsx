@@ -21,15 +21,7 @@ const bgImage = {
   backgroundImage: `url(${Background})`
 };
 
-function passIsValid(pass) {
-  const passRegex = new RegExp(
-    "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9\s:])(?=.{8,})"
-  );
-  if (passRegex.test(pass)) {
-    return true;
-  }
-  return false;
-}
+const isValidPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9])(?=.{8,})/;
 
 function RegisterForm() {
   const [user, setUser] = useState("");
@@ -39,23 +31,23 @@ function RegisterForm() {
 
   const handleSubmit = async event => {
     event.preventDefault();
-
-    if (passIsValid(pass)) {
-      if (pass === repeatPass) {
-        try {
-          await api.auth.register(user, pass);
-          history.push("/login");
-        } catch (err) {
-          console.log(`Error: ${err}`);
-          alert("Invalid register info.");
-        }
-      } else {
-        alert("Passwords do not match!");
+    if (!isValidPassword.test(pass))
+      alert(`
+        Password needs to:
+        - be >8 characters long,
+        - contain a number,
+        - contain both lower and upper case letters
+        - contain a symbol
+      `);
+    else if (pass !== repeatPass) alert("Passwords do not match!");
+    else {
+      try {
+        await api.auth.register(user, pass);
+        history.push("/login");
+      } catch (err) {
+        console.log(`Error: ${err}`);
+        alert("Invalid register info.");
       }
-    } else {
-      alert(
-        "Password needs to be >8 characters long, have a number, lower and upper case letters and a symbol"
-      );
     }
   };
 
