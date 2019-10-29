@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import api from "../Api";
 
 function BuyCard({ gameId }) {
-  const [canBuy, setCanBuy] = useState(true);
+  const [canBuy, setCanBuy] = useState(false);
 
   useEffect(() => {
     const fetchActions = async () => {
@@ -12,6 +12,8 @@ function BuyCard({ gameId }) {
       setCanBuy(hasBuyCard);
     };
     fetchActions();
+    const interval = setInterval(() => fetchActions(), api.POLL_EVERY);
+    return () => clearInterval(interval);
   }, [gameId]);
 
   function tryBuy() {
