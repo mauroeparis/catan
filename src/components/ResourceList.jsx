@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
+import CatanTypes from "../CatanTypes";
 import api from "../Api";
-import ResourceListContainer from "./ResourceListContainer";
 
 function ResourceList({ gameId }) {
   const [{ resources }, setState] = useState({ resources: null });
@@ -29,5 +29,24 @@ function ResourceList({ gameId }) {
 }
 
 ResourceList.propTypes = { gameId: PropTypes.string.isRequired };
+
+function ResourceListContainer({ amounts }) {
+  return (
+    <div className="resource-list">
+      <h1>Resource List</h1>
+      <ul>
+        <li>Brick: {amounts.brick}</li>
+        <li>Lumber: {amounts.lumber}</li>
+        <li>Wool: {amounts.wool}</li>
+        <li>Grain: {amounts.grain}</li>
+        <li>Ore: {amounts.ore}</li>
+      </ul>
+    </div>
+  );
+}
+
+ResourceListContainer.propTypes = {
+  amounts: PropTypes.shape(CatanTypes.amounts).isRequired
+};
 
 export default ResourceList;
