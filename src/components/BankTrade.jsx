@@ -4,7 +4,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
 
-import CatanTypes from "../CatanTypes";
+import CatanTypes, { RESOURCES } from "../CatanTypes";
 import api from "../Api";
 
 export default function BankTrade() {
@@ -66,7 +66,6 @@ function BankTradeContainer({
 }) {
   const setOffer = resource => setTradeState({ offer: resource, request });
   const setRequest = resource => setTradeState({ offer, request: resource });
-  const RESOURCES = ["brick", "lumber", "wool", "grain", "ore"];
   return (
     <div className="bank-trade">
       <h1>Bank Trading</h1>
@@ -127,6 +126,6 @@ BankTradeContainer.propTypes = {
 // https://github.com/yannickcr/eslint-plugin-react/issues/666
 // when it happens, move this and other occurrences as default parameters
 BankTradeContainer.defaultProps = {
-  offer: null, // NOTE: Eventually defaultProps
+  offer: null,
   request: null
 };

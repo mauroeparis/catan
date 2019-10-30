@@ -2,55 +2,19 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import api from "../Api";
+import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
 
-function makeHexagons() {
-  const hexagons = [
-    {
-      position: { level: 0, index: 0 },
-      resource: "brick",
-      token: 3
-    }
-  ];
-  for (let i = 0; i < 6; i += 1)
-    hexagons[1 + i] = {
-      position: { level: 1, index: i },
-      resource: _.sample(["brick", "lumber", "wool", "grain", "ore"]),
-      token: i
-    };
-  for (let i = 0; i < 12; i += 1)
-    hexagons[1 + 6 + i] = {
-      position: { level: 2, index: i },
-      resource: _.sample(["brick", "lumber", "wool", "grain", "ore"]),
-      token: i
-    };
-  return hexagons;
-}
-
-function makeSettlements() {
-  const settlements = [];
-  const makeSett = (l, i) => ({
-    position: { level: l, index: i },
-    isCity: _.sample([true, false]),
-    colour: "#404040",
-    username: "loading"
-  });
-  for (let i = 0; i < 6; i += 1) settlements[i] = makeSett(0, i);
-  for (let i = 0; i < 18; i += 1) settlements[6 + i] = makeSett(1, i);
-  for (let i = 0; i < 30; i += 1) settlements[6 + 18 + i] = makeSett(2, i);
-  return settlements;
-}
-
-function Board({ gameId }) {
+export default function Board({ gameId }) {
   const [
     { hexagons, settlements, availableBuilds, availableUpgrades },
     setState
   ] = useState({
-    hexagons: makeHexagons(),
-    settlements: makeSettlements(),
-    availableBuilds: [],
-    availableUpgrades: []
+    hexagons: null,
+    settlements: null,
+    availableBuilds: null,
+    availableUpgrades: null
   });
   useEffect(() => {
     const fetchBoard = async () => {
@@ -107,6 +71,30 @@ function Board({ gameId }) {
     return () => clearInterval(interval);
   }, [gameId]);
 
+  // !hexagons is a weird way of saying nothing has loaded yet
+  if (!hexagons) return <i>Loading Board...</i>;
+  return (
+    <BoardContainer
+      hexagons={hexagons}
+      settlements={settlements}
+      availableBuilds={availableBuilds}
+      availableUpgrades={availableUpgrades}
+    />
+  );
+}
+
+Board.propTypes = {
+  gameId: PropTypes.string.isRequired
+  // TODO: This should be a number, but react-router treats match
+  //       as strings. We could use regex /game/:id(//d+) as a safe mechanism
+};
+
+function BoardContainer({
+  hexagons,
+  settlements,
+  availableBuilds,
+  availableUpgrades
+}) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
   const height = 2560;
@@ -122,7 +110,7 @@ function Board({ gameId }) {
           <Hexagon
             key={Object.values(hex.position)}
             position={hex.position}
-            resource={hex.resource}
+            terrain={hex.terrain}
             token={hex.token}
             unit={unit}
           />
@@ -145,10 +133,23 @@ function Board({ gameId }) {
   );
 }
 
-Board.propTypes = {
-  gameId: PropTypes.string.isRequired
-  // TODO: This should be a number, but react-router treats match
-  //       as strings. We could use regex /game/:id(//d+) as a safe mechanism
+BoardContainer.propTypes = {
+  hexagons: PropTypes.arrayOf(CatanTypes.Hex),
+  settlements: PropTypes.arrayOf(
+    PropTypes.shape({
+      position: CatanTypes.VertexPosition.isRequired,
+      isCity: PropTypes.bool.isRequired,
+      colour: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired
+    })
+  ),
+  availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
+  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition)
 };
 
-export default Board;
+BoardContainer.defaultProps = {
+  hexagons: null,
+  settlements: null,
+  availableBuilds: null,
+  availableUpgrades: null
+};
