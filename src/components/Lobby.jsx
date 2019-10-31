@@ -99,6 +99,7 @@ function Lobby() {
               shadow
               ${CommonClasses}
               ${TextClasses}
+              cursor-pointer
               disabled:cursor-not-allowed
               disabled:opacity-50
             `}
@@ -121,6 +122,7 @@ function Lobby() {
                 shadow
                 ${CommonClasses}
                 ${TextClasses}
+                cursor-pointer
                 disabled:cursor-not-allowed
                 disabled:opacity-50
               `}
