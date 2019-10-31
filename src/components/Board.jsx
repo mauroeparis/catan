@@ -5,8 +5,16 @@ import api from "../Api";
 import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
+import Road from "./Road";
 
 export default function Board({ gameId }) {
+  const roads = [
+    [{ level: 0, index: 0 }, { level: 0, index: 1 }],
+    [{ level: 0, index: 1 }, { level: 1, index: 3 }],
+    [{ level: 1, index: 2 }, { level: 2, index: 4 }],
+    [{ level: 2, index: 4 }, { level: 2, index: 3 }],
+    [{ level: 2, index: 2 }, { level: 2, index: 3 }]
+  ];
   const [
     { hexagons, settlements, availableBuilds, availableUpgrades },
     setState
@@ -77,6 +85,7 @@ export default function Board({ gameId }) {
     <BoardContainer
       hexagons={hexagons}
       settlements={settlements}
+      roads={roads}
       availableBuilds={availableBuilds}
       availableUpgrades={availableUpgrades}
     />
@@ -92,6 +101,7 @@ Board.propTypes = {
 function BoardContainer({
   hexagons,
   settlements,
+  roads,
   availableBuilds,
   availableUpgrades
 }) {
@@ -113,6 +123,15 @@ function BoardContainer({
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
+          />
+        ))}
+        {roads.map(road => (
+          <Road
+            // TODO: Use better keys on maps
+            key={JSON.stringify(road)}
+            vertices={road}
+            colour="#2196F3"
+            username="mateo"
           />
         ))}
         {settlements.map(sett => (
@@ -143,6 +162,7 @@ BoardContainer.propTypes = {
       username: PropTypes.string.isRequired
     })
   ),
+  roads: PropTypes.arrayOf(CatanTypes.RoadPosition),
   availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
   availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition)
 };
@@ -150,6 +170,7 @@ BoardContainer.propTypes = {
 BoardContainer.defaultProps = {
   hexagons: null,
   settlements: null,
+  roads: null,
   availableBuilds: null,
   availableUpgrades: null
 };
