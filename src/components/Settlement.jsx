@@ -16,7 +16,10 @@ const getVertex = (level, index, unit) => {
   if (level === 0) {
     axis = P(0, -unit);
   } else if (level === 1) {
-    axis = index % 3 ? V.rot(P(wunit, 2.5 * -unit), -20) : P(0, 2 * -unit);
+    const imod3 = index % 3;
+    if (imod3 === 0) axis = P(0, 2 * -unit);
+    else if (imod3 === 1) axis = V.rot(P(wunit, 2.5 * -unit), -20);
+    else if (imod3 === 2) axis = V.rot(P(2 * wunit, 2 * -unit), -2 * 20);
   } else if (level === 2) {
     const imod5 = index % 5;
     if (imod5 === 0) axis = P(0, 4 * -unit);
