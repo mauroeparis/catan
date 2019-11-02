@@ -5,7 +5,7 @@ import api from "../Api";
 import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
-import Road from "./Road";
+import Road, { BuildRoadIndicator } from "./Road";
 
 export default function Board({ gameId }) {
   const [
@@ -18,6 +18,10 @@ export default function Board({ gameId }) {
     availableBuilds: null,
     availableUpgrades: null
   });
+  const availableRoadSlots = [
+    [{ level: 1, index: 3 }, { level: 1, index: 2 }],
+    [{ level: 0, index: 0 }, { level: 0, index: 5 }]
+  ];
   useEffect(() => {
     const fetchBoard = async () => {
       // Parallel fetching
@@ -98,6 +102,7 @@ export default function Board({ gameId }) {
       roads={roads}
       availableBuilds={availableBuilds}
       availableUpgrades={availableUpgrades}
+      availableRoadSlots={availableRoadSlots}
     />
   );
 }
@@ -113,7 +118,8 @@ function BoardContainer({
   settlements,
   roads,
   availableBuilds,
-  availableUpgrades
+  availableUpgrades,
+  availableRoadSlots
 }) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
@@ -133,6 +139,12 @@ function BoardContainer({
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
+          />
+        ))}
+        {availableRoadSlots.map(road => (
+          <BuildRoadIndicator
+            key={JSON.stringify(road.vertices)}
+            vertices={road}
           />
         ))}
         {roads.map(road => (
@@ -180,7 +192,8 @@ BoardContainer.propTypes = {
     })
   ),
   availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
-  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition)
+  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition),
+  availableRoadSlots: PropTypes.arrayOf(CatanTypes.RoadPosition)
 };
 
 BoardContainer.defaultProps = {
@@ -188,5 +201,6 @@ BoardContainer.defaultProps = {
   settlements: null,
   roads: null,
   availableBuilds: null,
-  availableUpgrades: null
+  availableUpgrades: null,
+  availableRoadSlots: null
 };
