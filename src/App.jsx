@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +14,7 @@ import Game from "./components/Game";
 import Board from "./components/Board";
 import BankTrade from "./components/BankTrade";
 import CreateLobby from "./components/CreateLobby";
+import AuthContext from "./AuthContext";
 
 function App() {
   // TODO: add API call here
@@ -39,16 +40,22 @@ function App() {
     "ore",
     "ore"
   ];
+
+  const [auth, setAuth] = useState({ token: null, user: null });
+
   return (
     <Router>
       <div className="h-screen">
-        {!localStorage.token && <Redirect to="/login" />}
+        {auth.token}
+        {!auth.token && <Redirect to="/login" />}
         <Switch>
-          <Route path="/login" exact component={LoginPage} />
-          <Route path="/register" exact component={RegisterPage} />
-          <Route path="/lobby" exact component={LobbyList} />
-          <Route path="/lobby/create" exact component={CreateLobby} />
-          <Route path="/lobby/:id" exact component={Lobby} />
+          <AuthContext.Provider value={{ auth, setAuth }}>
+            <Route path="/login" exact component={LoginPage} />
+            <Route path="/register" exact component={RegisterPage} />
+            <Route path="/lobby" exact component={LobbyList} />
+            <Route path="/lobby/create" exact component={CreateLobby} />
+            <Route path="/lobby/:id" exact component={Lobby} />
+          </AuthContext.Provider>
           <Route path="/game/:id" exact component={Game} />
           <Route
             path="/game/:gameId/bankTrade"

@@ -6,6 +6,7 @@ const API = axios.create({
   baseURL: URL,
   timeout: 10000,
   headers: {
+    // TODO: how to use context hook here?
     Authorization: `Bearer ${localStorage.token}`
   }
 });

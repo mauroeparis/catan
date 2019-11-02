@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 
 import api from "../Api";
 import Background from "../public/img/catan-bg.jpg";
 
 import CustomInput from "./CustomInput";
+import AuthContext from "../AuthContext";
 
 // TODO: Remove repeated code
 export const TextClasses =
@@ -31,13 +32,15 @@ function LoginForm() {
   const [pass, setPass] = useState("");
   const history = useHistory();
 
+  const { auth, setAuth } = useContext(AuthContext);
+
+
   const handleSubmit = async event => {
     event.preventDefault();
     try {
       const res = await api.auth.login(user, pass);
       const { token } = res.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user", user);
+      setAuth({ token, user });
       history.push("/lobby");
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -47,7 +50,7 @@ function LoginForm() {
 
   return (
     <div className="h-ful md:table w-full md:w-6/12 lg:w-4/12 md:mt-20 md:rounded-lg shadow-lg bg-orange-300">
-      {localStorage.token && <Redirect to="/lobby" />}
+      {auth.token && <Redirect to="/lobby" />}
       <h1 className="font-cinzel text-center pt-24 leading-tight text-gray-900">
         <span className="text-xl">The Settlers of</span>
         <br />
