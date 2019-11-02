@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 import Board from "./Board";
 import CardList from "./CardList";
-import ResourceList from "./ResourceList";
+import { ResourceList } from "./ResourceList";
 import BuyCard from "./BuyCard";
 import DiceRoll from "./DiceRoll";
 import EndTurn from "./EndTurn";
