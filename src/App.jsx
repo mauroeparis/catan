@@ -21,8 +21,6 @@ function App() {
   const testresources = [
     "brick",
     "brick",
-    "brick",
-    "brick",
     "lumber",
     "lumber",
     "lumber",

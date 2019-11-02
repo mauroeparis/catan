@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 
-function Hexagon({ position, resource, token, unit = 256 }) {
+function Hexagon({ position, terrain, token, unit = 256 }) {
   // Point positioning
   const width = Math.sqrt(3) * unit;
   const radius = unit;
@@ -37,34 +37,35 @@ function Hexagon({ position, resource, token, unit = 256 }) {
   const points = ps.join(" ");
 
   // Style
-  const resourceColor = {
-    brick: "#B71C1C",
-    lumber: "#3E2723",
-    wool: "#1B5E20",
+  const terrainColor = {
+    desert: "#F57C00",
+    brick: "#D32F2F",
+    lumber: "#5D4037",
+    wool: "#689F38",
     grain: "#FBC02D",
-    ore: "#263238"
-  }[resource];
-  const resourceTextPos = center;
-  const resourceTextStyle = { font: "bold 5rem Cinzel", fill: "white" };
+    ore: "#7B1FA2"
+  }[terrain];
+  const terrainTextPos = center;
+  const terrainTextStyle = { font: "bold 5rem Cinzel", fill: "white" };
   const tokenPos = V.add(center, P(0, 128));
-  const tokenTextStyle = { font: "bold 5rem Cinzel", fill: resourceColor };
+  const tokenTextStyle = { font: "bold 5rem Cinzel", fill: terrainColor };
 
   return (
     <>
       <polygon
         points={points}
-        fill={resourceColor}
+        fill={terrainColor}
         stroke="white"
         strokeWidth="1rem"
       />
       <text
         dominantBaseline="middle"
         textAnchor="middle"
-        x={resourceTextPos.x}
-        y={resourceTextPos.y}
-        style={resourceTextStyle}
+        x={terrainTextPos.x}
+        y={terrainTextPos.y}
+        style={terrainTextStyle}
       >
-        {resource}
+        {terrain}
       </text>
       <circle cx={tokenPos.x} cy={tokenPos.y} r="50" fill="white" />
       <text
@@ -82,7 +83,7 @@ function Hexagon({ position, resource, token, unit = 256 }) {
 
 Hexagon.propTypes = {
   position: CatanTypes.HexPosition.isRequired,
-  resource: CatanTypes.Resource.isRequired,
+  terrain: CatanTypes.Terrain.isRequired,
   token: PropTypes.number.isRequired,
   unit: PropTypes.number
 };
