@@ -32,7 +32,48 @@
     },
     {
       "type": "build_road",
-      "payload": []
+      "payload": [
+        [
+          {
+            "level": 1,
+            "index": 3
+          },
+          {
+            "level": 1,
+            "index": 2
+          }
+        ],
+        [
+          {
+            "level": 0,
+            "index": 0
+          },
+          {
+            "level": 0,
+            "index": 5
+          }
+        ],
+        [
+          {
+            "level": 1,
+            "index": 15
+          },
+          {
+            "level": 0,
+            "index": 5
+          }
+        ],
+        [
+          {
+            "level": 1,
+            "index": 15
+          },
+          {
+            "level": 1,
+            "index": 14
+          }
+        ]
+      ]
     },
     {
       "type": "move_robber",

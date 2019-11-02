@@ -9,19 +9,24 @@ import Road, { BuildRoadIndicator } from "./Road";
 
 export default function Board({ gameId }) {
   const [
-    { hexagons, settlements, roads, availableBuilds, availableUpgrades },
+    {
+      hexagons,
+      settlements,
+      roads,
+      availableBuilds,
+      availableUpgrades,
+      availableRoadSlots
+    },
     setState
   ] = useState({
     hexagons: null,
     settlements: null,
     roads: null,
     availableBuilds: null,
-    availableUpgrades: null
+    availableUpgrades: null,
+    availableRoadSlots: null
   });
-  const availableRoadSlots = [
-    [{ level: 1, index: 3 }, { level: 1, index: 2 }],
-    [{ level: 0, index: 0 }, { level: 0, index: 5 }]
-  ];
+
   useEffect(() => {
     const fetchBoard = async () => {
       // Parallel fetching
@@ -78,6 +83,7 @@ export default function Board({ gameId }) {
       // Available builds and upgrades
       const aBuilds = actions.find(a => a.type === "build_settlement").payload;
       const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+      const aRoadSlots = actions.find(a => a.type === "build_road").payload;
 
       // Update board internal state
       setState({
@@ -85,7 +91,8 @@ export default function Board({ gameId }) {
         settlements: combinedSettlements,
         roads: builtRoads,
         availableBuilds: aBuilds,
-        availableUpgrades: aUpgrades
+        availableUpgrades: aUpgrades,
+        availableRoadSlots: aRoadSlots
       });
     };
     fetchBoard();
