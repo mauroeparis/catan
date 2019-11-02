@@ -1,6 +1,6 @@
 import React from "react";
 import _ from "lodash";
-import ResourceListContainer from "../../../src/components/ResourceListContainer";
+import ResourceListContainer from "../../../src/components/ResourceList";
 
 const resources = ["brick", "lumber", "wool", "grain", "ore"];
 const amounts = _.countBy(resources);

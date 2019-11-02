@@ -7,6 +7,7 @@ import CardList from "./CardList";
 import ResourceList from "./ResourceList";
 import BuyCard from "./BuyCard";
 import DiceRoll from "./DiceRoll";
+import EndTurn from "./EndTurn";
 
 function Game() {
   const { id } = useParams();
@@ -21,6 +22,7 @@ function Game() {
           <input type="button" value="Trade with bank" />
         </Link>
         <DiceRoll gameId={id} />
+        <EndTurn />
       </div>
     </div>
   );

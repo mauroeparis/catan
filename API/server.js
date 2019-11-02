@@ -99,7 +99,13 @@ server.post("/rooms", (req, res, next) => {
 // TODO: Should support other actions.
 server.post("/games/:id/player/actions", (req, res, next) => {
   const { type, payload } = req.body;
-  if (type !== "bank_trade") {
+  if (type === "end_turn") {
+    console.log("The user requested to end its turn");
+    const status = 200;
+    const message = "Turn ended correctly";
+    res.status(status).json({ status, message });
+    return;
+  } if (type !== "bank_trade") {
     console.log(`Actions type was ${type}`);
     const status = 400;
     const message = "Error: Actions not yet implemented";
