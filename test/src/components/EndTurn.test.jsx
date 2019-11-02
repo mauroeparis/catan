@@ -1,8 +1,5 @@
 import React from "react";
-import sinon from "sinon"
 import EndTurn from "../../../src/components/EndTurn";
-
-const clickCallback = sinon.spy();
 
 // TeamPage.test.js
 jest.mock("react-router-dom", () => ({
@@ -21,14 +18,15 @@ describe("<EndTurn /> rendering", () => {
 
   it("should click something", () => {
     const wrapper = shallow(<EndTurn />);
-    // Expects the app to have exactly 5 hi children
     expect(wrapper.find("div").simulate("click"));
   });
 
-  it("t should have the correct value", () => {
-    const wrapper = shallow(<EndTurn/>);
-    // Expects the app to have exactly 5 hi children
-    console.log(wrapper.debug());
-    expect(wrapper.find("onClick")).toEqual(true);
+  it("should correctly click the button", () => {
+    window.confirm = jest.fn();
+    const mockCallBack = jest.fn();
+    const button = shallow(<EndTurn onClick={mockCallBack} />);
+    button.find("input").simulate("click");
+    button.find("input").simulate("Ok");
+    expect(window.confirm.mock.calls.length).toEqual(1);
   });
 });
