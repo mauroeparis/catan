@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,7 +14,7 @@ import Game from "./components/Game";
 import Board from "./components/Board";
 import BankTrade from "./components/BankTrade";
 import CreateLobby from "./components/CreateLobby";
-import AuthContext from "./AuthContext";
+import AuthContext, { authReducer } from "./AuthContext";
 
 function App() {
   // TODO: add API call here
@@ -39,15 +39,17 @@ function App() {
     "ore"
   ];
 
-  const [auth, setAuth] = useState({ token: null, user: null });
+  const [auth, authDispatch] = useReducer(authReducer, {
+    token: localStorage.token,
+    user: localStorage.user
+  });
 
   return (
     <Router>
       <div className="h-screen">
-        {auth.token}
         {!auth.token && <Redirect to="/login" />}
         <Switch>
-          <AuthContext.Provider value={{ auth, setAuth }}>
+          <AuthContext.Provider value={{ auth, authDispatch }}>
             <Route path="/login" exact component={LoginPage} />
             <Route path="/register" exact component={RegisterPage} />
             <Route path="/lobby" exact component={LobbyList} />

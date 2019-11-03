@@ -6,7 +6,7 @@ import AuthContext from "../AuthContext";
 
 function LobbyList() {
   const [rooms, setRooms] = useState([]);
-  const { setAuth } = useContext(AuthContext);
+  const { authDispatch } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -96,7 +96,7 @@ function LobbyList() {
         value="LOGOUT"
         className="mt-2 h-12 bg-blue-800 text-white text-center text-sm self-center tracking-wider text-bold shadow-md rounded h-12"
         onClick={() => {
-          setAuth({ token: null, user: null });
+          authDispatch({ type: "LOGOUT" });
           window.location.reload();
         }}
       />

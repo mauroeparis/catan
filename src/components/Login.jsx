@@ -32,15 +32,14 @@ function LoginForm() {
   const [pass, setPass] = useState("");
   const history = useHistory();
 
-  const { auth, setAuth } = useContext(AuthContext);
-
+  const { auth, authDispatch } = useContext(AuthContext);
 
   const handleSubmit = async event => {
     event.preventDefault();
     try {
       const res = await api.auth.login(user, pass);
       const { token } = res.data;
-      setAuth({ token, user });
+      authDispatch({ type: "LOGIN", user, token });
       history.push("/lobby");
     } catch (err) {
       console.log(`Error: ${err}`);
