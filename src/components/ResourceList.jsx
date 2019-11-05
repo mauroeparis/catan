@@ -10,7 +10,7 @@ import api from "../Api";
 //   setState({ resources: player.data.resources });
 // }, [gameId]);
 
-export default function ResourceList({ gameId }) {
+export function ResourceList({ gameId }) {
   const [{ resources }, setState] = useState({ resources: null });
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function ResourceList({ gameId }) {
 
 ResourceList.propTypes = { gameId: PropTypes.string.isRequired };
 
-function ResourceListContainer({ resources }) {
+export function ResourceListContainer({ resources }) {
   const amounts = _.countBy(resources);
   return (
     <div className="resource-list">
@@ -48,3 +48,5 @@ function ResourceListContainer({ resources }) {
 ResourceListContainer.propTypes = {
   resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired
 };
+
+export default { ResourceList, ResourceListContainer };
