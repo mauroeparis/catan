@@ -5,19 +5,28 @@ import api from "../Api";
 import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
-import Road from "./Road";
+import Road, { BuildRoadIndicator } from "./Road";
 
 export default function Board({ gameId }) {
   const [
-    { hexagons, settlements, roads, availableBuilds, availableUpgrades },
+    {
+      hexagons,
+      settlements,
+      roads,
+      availableBuilds,
+      availableUpgrades,
+      availableRoadSlots
+    },
     setState
   ] = useState({
     hexagons: null,
     settlements: null,
     roads: null,
     availableBuilds: null,
-    availableUpgrades: null
+    availableUpgrades: null,
+    availableRoadSlots: null
   });
+
   useEffect(() => {
     const fetchBoard = async () => {
       // Parallel fetching
@@ -74,6 +83,7 @@ export default function Board({ gameId }) {
       // Available builds and upgrades
       const aBuilds = actions.find(a => a.type === "build_settlement").payload;
       const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+      const aRoadSlots = actions.find(a => a.type === "build_road").payload;
 
       // Update board internal state
       setState({
@@ -81,7 +91,8 @@ export default function Board({ gameId }) {
         settlements: combinedSettlements,
         roads: builtRoads,
         availableBuilds: aBuilds,
-        availableUpgrades: aUpgrades
+        availableUpgrades: aUpgrades,
+        availableRoadSlots: aRoadSlots
       });
     };
     fetchBoard();
@@ -98,6 +109,7 @@ export default function Board({ gameId }) {
       roads={roads}
       availableBuilds={availableBuilds}
       availableUpgrades={availableUpgrades}
+      availableRoadSlots={availableRoadSlots}
     />
   );
 }
@@ -113,7 +125,8 @@ function BoardContainer({
   settlements,
   roads,
   availableBuilds,
-  availableUpgrades
+  availableUpgrades,
+  availableRoadSlots
 }) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
@@ -133,6 +146,12 @@ function BoardContainer({
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
+          />
+        ))}
+        {availableRoadSlots.map(road => (
+          <BuildRoadIndicator
+            key={JSON.stringify(road.vertices)}
+            vertices={road}
           />
         ))}
         {roads.map(road => (
@@ -180,7 +199,8 @@ BoardContainer.propTypes = {
     })
   ),
   availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
-  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition)
+  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition),
+  availableRoadSlots: PropTypes.arrayOf(CatanTypes.RoadPosition)
 };
 
 BoardContainer.defaultProps = {
@@ -188,5 +208,6 @@ BoardContainer.defaultProps = {
   settlements: null,
   roads: null,
   availableBuilds: null,
-  availableUpgrades: null
+  availableUpgrades: null,
+  availableRoadSlots: null
 };

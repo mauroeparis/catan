@@ -16,27 +16,6 @@ import BankTrade from "./components/BankTrade";
 import CreateLobby from "./components/CreateLobby";
 
 function App() {
-  // TODO: add API call here
-  const testresources = [
-    "brick",
-    "brick",
-    "lumber",
-    "lumber",
-    "lumber",
-    "lumber",
-    "wool",
-    "wool",
-    "wool",
-    "wool",
-    "grain",
-    "grain",
-    "grain",
-    "grain",
-    "ore",
-    "ore",
-    "ore",
-    "ore"
-  ];
   return (
     <Router>
       <div className="h-screen">
@@ -48,10 +27,7 @@ function App() {
           <Route path="/lobby/create" exact component={CreateLobby} />
           <Route path="/lobby/:id" exact component={Lobby} />
           <Route path="/game/:id" exact component={Game} />
-          <Route
-            path="/game/:gameId/bankTrade"
-            render={() => <BankTrade resources={testresources} />}
-          />
+          <Route path="/game/:gameId/bankTrade" component={BankTrade} />
           <Route path="/board" exact component={Board} />
           <Route path="/" render={() => <Redirect to="/lobby" />} />
         </Switch>
