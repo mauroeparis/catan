@@ -385,7 +385,13 @@
             { "level": 1, "index": 15 },
             { "level": 1, "index": 3 }
           ],
-          "roads": [],
+          "roads": [
+            [{ "level": 0, "index": 0 }, { "level": 0, "index": 1 }],
+            [{ "level": 0, "index": 1 }, { "level": 1, "index": 3 }],
+            [{ "level": 1, "index": 2 }, { "level": 2, "index": 4 }],
+            [{ "level": 2, "index": 4 }, { "level": 2, "index": 3 }],
+            [{ "level": 2, "index": 2 }, { "level": 2, "index": 3 }]
+          ],
           "development_cards": 3,
           "resources_cards": 6,
           "last_gained": ["brick", "grain"]
@@ -402,7 +408,11 @@
             { "level": 2, "index": 9 },
             { "level": 0, "index": 3 }
           ],
-          "roads": [],
+          "roads": [
+            [{ "level": 1, "index": 12 }, { "level": 0, "index": 4 }],
+            [{ "level": 0, "index": 3 }, { "level": 0, "index": 4 }],
+            [{ "level": 1, "index": 12 }, { "level": 1, "index": 13 }]
+          ],
           "development_cards": 2,
           "resources_cards": 8,
           "last_gained": ["ore", "ore"]
