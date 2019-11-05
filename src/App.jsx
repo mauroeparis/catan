@@ -48,22 +48,22 @@ function App() {
     <Router>
       <div className="h-screen">
         {!auth.token && <Redirect to="/login" />}
-        <Switch>
-          <AuthContext.Provider value={{ auth, authDispatch }}>
+        <AuthContext.Provider value={{ auth, authDispatch }}>
+          <Switch>
             <Route path="/login" exact component={LoginPage} />
             <Route path="/register" exact component={RegisterPage} />
             <Route path="/lobby" exact component={LobbyList} />
             <Route path="/lobby/create" exact component={CreateLobby} />
             <Route path="/lobby/:id" exact component={Lobby} />
-          </AuthContext.Provider>
-          <Route path="/game/:id" exact component={Game} />
-          <Route
-            path="/game/:gameId/bankTrade"
-            render={() => <BankTrade resources={testresources} />}
-          />
-          <Route path="/board" exact component={Board} />
-          <Route path="/" render={() => <Redirect to="/lobby" />} />
-        </Switch>
+            <Route path="/game/:id" exact component={Game} />
+            <Route
+              path="/game/:gameId/bankTrade"
+              render={() => <BankTrade resources={testresources} />}
+            />
+            <Route path="/board" exact component={Board} />
+            <Route path="/" render={() => <Redirect to="/lobby" />} />
+          </Switch>
+        </AuthContext.Provider>
       </div>
     </Router>
   );

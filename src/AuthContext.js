@@ -1,6 +1,9 @@
 import { createContext } from "react";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext({
+  token: localStorage.token,
+  user: localStorage.user
+});
 
 export function authReducer(state, action) {
   switch (action.type) {

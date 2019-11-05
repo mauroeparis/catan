@@ -73,6 +73,7 @@ function LobbyList() {
               type="button"
               value="NEW LOBBY"
               className={`
+              cursor-pointer
               h-12
               bg-blue-800
               text-white
