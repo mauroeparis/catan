@@ -28,11 +28,7 @@ Road.propTypes = {
   vertices: CatanTypes.RoadPosition.isRequired,
   colour: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  unit: PropTypes.number
-};
-
-Road.defaultProps = {
-  unit: 256
+  unit: PropTypes.number // eslint-disable-line react/require-default-props
 };
 
 export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
@@ -57,9 +53,5 @@ export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
 
 BuildRoadIndicator.propTypes = {
   vertices: CatanTypes.RoadPosition.isRequired,
-  unit: PropTypes.number
-};
-
-BuildRoadIndicator.defaultProps = {
-  unit: 256
+  unit: PropTypes.number // eslint-disable-line react/require-default-props
 };
