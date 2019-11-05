@@ -105,7 +105,8 @@ server.post("/games/:id/player/actions", (req, res, next) => {
     const message = "Turn ended correctly";
     res.status(status).json({ status, message });
     return;
-  } if (type !== "bank_trade") {
+  }
+  if (type !== "bank_trade") {
     console.log(`Actions type was ${type}`);
     const status = 400;
     const message = "Error: Actions not yet implemented";

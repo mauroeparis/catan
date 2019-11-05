@@ -17,7 +17,7 @@ function EndTurn() {
       <input
         type="button"
         value="End Turn"
-        onClick={() => FinishTurn()}
+        onClick={FinishTurn}
         className="disabled:cursor-not-allowed disabled:opacity-50"
       />
     </div>
