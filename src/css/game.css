@@ -55,6 +55,26 @@
   r: 72px;
 }
 
+.game .board .road {
+  stroke-width: 1.5rem;
+  stroke-linecap: round;
+}
+
+.game .board .build-road-indicator {
+  cursor: pointer;
+  stroke: var(--light);
+  stroke-width: 2rem;
+  stroke-linecap: round;
+  stroke-dasharray: 32px;
+  transition: 0.2s;
+}
+
+.game .board .build-road-indicator:hover {
+  stroke-width: 2rem;
+  stroke: var(--highlight);
+  stroke-dasharray: 1px;
+}
+
 .game .information {
 	top: 0;
 	position: absolute;

@@ -32,6 +32,8 @@ CatanTypes.Hex = PropTypes.shape({
   terrain: CatanTypes.Terrain.isRequired,
   token: PropTypes.number.isRequired
 });
+// TODO: only size two arrays (tuples) should be allowed in RoadPosition
+CatanTypes.RoadPosition = PropTypes.arrayOf(CatanTypes.VertexPosition);
 
 export { RESOURCES, DEV_CARDS };
 export default CatanTypes;

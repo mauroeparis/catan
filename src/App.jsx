@@ -17,28 +17,6 @@ import CreateLobby from "./components/CreateLobby";
 import AuthContext, { authReducer } from "./AuthContext";
 
 function App() {
-  // TODO: add API call here
-  const testresources = [
-    "brick",
-    "brick",
-    "lumber",
-    "lumber",
-    "lumber",
-    "lumber",
-    "wool",
-    "wool",
-    "wool",
-    "wool",
-    "grain",
-    "grain",
-    "grain",
-    "grain",
-    "ore",
-    "ore",
-    "ore",
-    "ore"
-  ];
-
   const [auth, authDispatch] = useReducer(authReducer, {
     token: localStorage.token,
     user: localStorage.user
@@ -47,7 +25,7 @@ function App() {
   return (
     <Router>
       <div className="h-screen">
-        {!auth.token && <Redirect to="/login" />}
+        {!localStorage.token && <Redirect to="/login" />}
         <AuthContext.Provider value={{ auth, authDispatch }}>
           <Switch>
             <Route path="/login" exact component={LoginPage} />
@@ -56,10 +34,7 @@ function App() {
             <Route path="/lobby/create" exact component={CreateLobby} />
             <Route path="/lobby/:id" exact component={Lobby} />
             <Route path="/game/:id" exact component={Game} />
-            <Route
-              path="/game/:gameId/bankTrade"
-              render={() => <BankTrade resources={testresources} />}
-            />
+            <Route path="/game/:gameId/bankTrade" component={BankTrade} />
             <Route path="/board" exact component={Board} />
             <Route path="/" render={() => <Redirect to="/lobby" />} />
           </Switch>

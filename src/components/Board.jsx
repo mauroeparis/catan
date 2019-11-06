@@ -5,17 +5,28 @@ import api from "../Api";
 import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
+import Road, { BuildRoadIndicator } from "./Road";
 
 export default function Board({ gameId }) {
   const [
-    { hexagons, settlements, availableBuilds, availableUpgrades },
+    {
+      hexagons,
+      settlements,
+      roads,
+      availableBuilds,
+      availableUpgrades,
+      availableRoadSlots
+    },
     setState
   ] = useState({
     hexagons: null,
     settlements: null,
+    roads: null,
     availableBuilds: null,
-    availableUpgrades: null
+    availableUpgrades: null,
+    availableRoadSlots: null
   });
+
   useEffect(() => {
     const fetchBoard = async () => {
       // Parallel fetching
@@ -56,14 +67,32 @@ export default function Board({ gameId }) {
         )
       );
 
-      // Update board internal state
+      // Combine all roads from all players in the same array
+      const builtRoads = _.flatten(
+        // Get built roads from players
+        players.map(p =>
+          // Expand roads with more information like username and colour
+          p.roads.map(r => ({
+            vertices: r,
+            colour: p.colour,
+            username: p.username
+          }))
+        )
+      );
+
+      // Available builds and upgrades
       const aBuilds = actions.find(a => a.type === "build_settlement").payload;
       const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+      const aRoadSlots = actions.find(a => a.type === "build_road").payload;
+
+      // Update board internal state
       setState({
         hexagons: board.hexes,
         settlements: combinedSettlements,
+        roads: builtRoads,
         availableBuilds: aBuilds,
-        availableUpgrades: aUpgrades
+        availableUpgrades: aUpgrades,
+        availableRoadSlots: aRoadSlots
       });
     };
     fetchBoard();
@@ -77,8 +106,10 @@ export default function Board({ gameId }) {
     <BoardContainer
       hexagons={hexagons}
       settlements={settlements}
+      roads={roads}
       availableBuilds={availableBuilds}
       availableUpgrades={availableUpgrades}
+      availableRoadSlots={availableRoadSlots}
     />
   );
 }
@@ -92,8 +123,10 @@ Board.propTypes = {
 function BoardContainer({
   hexagons,
   settlements,
+  roads,
   availableBuilds,
-  availableUpgrades
+  availableUpgrades,
+  availableRoadSlots
 }) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
@@ -113,6 +146,21 @@ function BoardContainer({
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
+          />
+        ))}
+        {availableRoadSlots.map(road => (
+          <BuildRoadIndicator
+            key={JSON.stringify(road.vertices)}
+            vertices={road}
+          />
+        ))}
+        {roads.map(road => (
+          <Road
+            // TODO: Use better keys on maps
+            key={JSON.stringify(road.vertices)}
+            vertices={road.vertices}
+            colour={road.colour}
+            username={road.username}
           />
         ))}
         {settlements.map(sett => (
@@ -143,13 +191,23 @@ BoardContainer.propTypes = {
       username: PropTypes.string.isRequired
     })
   ),
+  roads: PropTypes.arrayOf(
+    PropTypes.shape({
+      vertices: CatanTypes.RoadPosition.isRequired,
+      colour: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired
+    })
+  ),
   availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
-  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition)
+  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition),
+  availableRoadSlots: PropTypes.arrayOf(CatanTypes.RoadPosition)
 };
 
 BoardContainer.defaultProps = {
   hexagons: null,
   settlements: null,
+  roads: null,
   availableBuilds: null,
-  availableUpgrades: null
+  availableUpgrades: null,
+  availableRoadSlots: null
 };
