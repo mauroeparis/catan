@@ -36,4 +36,16 @@ describe("<LobbyList Logout/> rendering", () => {
       .at(1)
       .simulate("click");
   });
+
+  it("should delete localStorage correctly", () => {
+    const TOKEN = "token";
+    localStorage.setItem("token", TOKEN);
+    expect(Object.keys(localStorage).length).toBe(1);
+    const button = shallow(<LobbyList />);
+    button
+      .find("input")
+      .at(1)
+      .simulate("click");
+    expect(Object.keys(localStorage).length).toBe(0);
+  });
 });
