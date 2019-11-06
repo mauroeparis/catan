@@ -32,7 +32,48 @@
     },
     {
       "type": "build_road",
-      "payload": []
+      "payload": [
+        [
+          {
+            "level": 1,
+            "index": 3
+          },
+          {
+            "level": 1,
+            "index": 2
+          }
+        ],
+        [
+          {
+            "level": 0,
+            "index": 0
+          },
+          {
+            "level": 0,
+            "index": 5
+          }
+        ],
+        [
+          {
+            "level": 1,
+            "index": 15
+          },
+          {
+            "level": 0,
+            "index": 5
+          }
+        ],
+        [
+          {
+            "level": 1,
+            "index": 15
+          },
+          {
+            "level": 1,
+            "index": 14
+          }
+        ]
+      ]
     },
     {
       "type": "move_robber",
@@ -205,6 +246,12 @@
       "lumber",
       "wool",
       "grain",
+      "grain",
+      "grain",
+      "grain",
+      "ore",
+      "ore",
+      "ore",
       "ore"
     ],
     "cards": [
@@ -380,39 +427,166 @@
           "username": "mateo",
           "colour": "#2196F3",
           "settlements": [
-            { "level": 2, "index": 24 },
-            { "level": 0, "index": 0 },
-            { "level": 2, "index": 6 }
+            {
+              "level": 2,
+              "index": 24
+            },
+            {
+              "level": 0,
+              "index": 0
+            },
+            {
+              "level": 2,
+              "index": 6
+            }
           ],
           "cities": [
-            { "level": 1, "index": 15 },
-            { "level": 1, "index": 3 }
+            {
+              "level": 1,
+              "index": 15
+            },
+            {
+              "level": 1,
+              "index": 3
+            }
           ],
-          "roads": [],
+          "roads": [
+            [
+              {
+                "level": 0,
+                "index": 0
+              },
+              {
+                "level": 0,
+                "index": 1
+              }
+            ],
+            [
+              {
+                "level": 0,
+                "index": 1
+              },
+              {
+                "level": 1,
+                "index": 3
+              }
+            ],
+            [
+              {
+                "level": 1,
+                "index": 2
+              },
+              {
+                "level": 2,
+                "index": 4
+              }
+            ],
+            [
+              {
+                "level": 2,
+                "index": 4
+              },
+              {
+                "level": 2,
+                "index": 3
+              }
+            ],
+            [
+              {
+                "level": 2,
+                "index": 2
+              },
+              {
+                "level": 2,
+                "index": 3
+              }
+            ]
+          ],
           "development_cards": 3,
           "resources_cards": 6,
-          "last_gained": ["brick", "grain"]
+          "last_gained": [
+            "brick",
+            "grain"
+          ]
         },
         {
           "username": "julian",
           "colour": "#4CAF50",
           "settlements": [
-            { "level": 1, "index": 12 },
-            { "level": 1, "index": 6 }
+            {
+              "level": 1,
+              "index": 12
+            },
+            {
+              "level": 1,
+              "index": 6
+            }
           ],
           "cities": [
-            { "level": 2, "index": 21 },
-            { "level": 2, "index": 9 },
-            { "level": 0, "index": 3 }
+            {
+              "level": 2,
+              "index": 21
+            },
+            {
+              "level": 2,
+              "index": 9
+            },
+            {
+              "level": 0,
+              "index": 3
+            }
           ],
-          "roads": [],
+          "roads": [
+            [
+              {
+                "level": 1,
+                "index": 12
+              },
+              {
+                "level": 0,
+                "index": 4
+              }
+            ],
+            [
+              {
+                "level": 0,
+                "index": 3
+              },
+              {
+                "level": 0,
+                "index": 4
+              }
+            ],
+            [
+              {
+                "level": 1,
+                "index": 12
+              },
+              {
+                "level": 1,
+                "index": 13
+              }
+            ]
+          ],
           "development_cards": 2,
           "resources_cards": 8,
-          "last_gained": ["ore", "ore"]
+          "last_gained": [
+            "ore",
+            "ore"
+          ]
         }
       ],
-      "robber": { "level": 0, "index": 0 },
-      "current_turn": { "user": "mateo", "dice": [3, 6]},
+      "robber": {
+        "level": 0,
+        "index": 0
+      },
+      "current_turn": {
+        "user": "mateo",
+        "dice": [
+          3,
+          6
+        ]
+      },
       "winner": null
     }
   ]
