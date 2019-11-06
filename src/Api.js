@@ -26,7 +26,9 @@ const lobbies = {
   all: () => API.get("/rooms"),
   create: (name, boardId) => API.post("/rooms", { name, boardId }),
   join: id => API.put(`/rooms/${id}`),
-  get: id => API.get(`/rooms/${id}`)
+  get: id => API.get(`/rooms/${id}`),
+  start: id => API.patch(`/rooms/${id}`),
+  cancel: id => API.delete(`/rooms/${id}`)
 };
 
 const games = {

@@ -37,6 +37,16 @@ function Lobby() {
     }
   };
 
+  const handleStartGame = async event => {
+    event.preventDefault();
+    try {
+      const res = await api.lobbies.start(id);
+      console.log(res); // TODO: Handle start response
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
+  };
+
   if (!room) return <div> Loading! </div>;
   return (
     <div className="h-full bg-orange-300">
@@ -94,6 +104,7 @@ function Lobby() {
             value="JOIN GAME"
             disabled={
               !(room.players.length < room.max_players) ||
+              room.game_has_started ||
               room.players.includes(localStorage.user)
               // TODO: this should not get the user from localStorage
             }
@@ -111,7 +122,7 @@ function Lobby() {
             `}
           />
           <div className="m-4" />
-          <Link to={`/game/${id}`} className="w-full text-center">
+          {!room.game_has_started && room.owner === localStorage.user && (
             <input
               type="button"
               value="START GAME"
@@ -121,9 +132,10 @@ function Lobby() {
                   room.players.length <= room.max_players
                 )
               }
+              onClick={handleStartGame}
               className={`
                 h-12
-                bg-blue-800
+                bg-green-800
                 text-white
                 shadow
                 ${CommonClasses}
@@ -131,9 +143,28 @@ function Lobby() {
                 cursor-pointer
                 disabled:cursor-not-allowed
                 disabled:opacity-50
-              `}
+              `} // TODO: Green? Rly?
             />
-          </Link>
+          )}
+          {room.game_has_started && (
+            <Link to={`/game/${room.game_id}`} className="w-full text-center">
+              <input
+                type="button"
+                value="VIEW GAME"
+                className={`
+                  h-12
+                  bg-blue-800
+                  text-white
+                  shadow
+                  ${CommonClasses}
+                  ${TextClasses}
+                  cursor-pointer
+                  disabled:cursor-not-allowed
+                  disabled:opacity-50
+                `}
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>
