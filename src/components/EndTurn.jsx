@@ -13,14 +13,12 @@ function EndTurn() {
   }
 
   return (
-    <div>
-      <input
-        type="button"
-        value="End Turn"
-        onClick={FinishTurn}
-        className="disabled:cursor-not-allowed disabled:opacity-50"
-      />
-    </div>
+    <input
+      type="button"
+      value="End Turn"
+      onClick={FinishTurn}
+      className="end-turn"
+    />
   );
 }
 
