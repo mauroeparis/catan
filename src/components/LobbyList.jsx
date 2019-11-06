@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+
 import api from "../Api";
+import AuthContext from "../AuthContext";
 
 function LobbyList() {
   const [rooms, setRooms] = useState([]);
+  const { authDispatch } = useContext(AuthContext);
+
   useEffect(() => {
     const fetchRooms = async () => {
       const res = await api.lobbies.all();
       setRooms(res.data);
     };
     fetchRooms();
+    const interval = setInterval(() => fetchRooms(), api.POLL_EVERY);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -69,6 +75,7 @@ function LobbyList() {
               type="button"
               value="NEW LOBBY"
               className={`
+              cursor-pointer
               h-12
               bg-blue-800
               text-white
@@ -92,8 +99,8 @@ function LobbyList() {
         value="LOGOUT"
         className="mt-2 h-12 bg-blue-800 text-white text-center text-sm self-center tracking-wider text-bold shadow-md rounded h-12"
         onClick={() => {
+          authDispatch({ type: "LOGOUT" });
           window.location.reload();
-          delete localStorage.token;
         }}
       />
     </div>
