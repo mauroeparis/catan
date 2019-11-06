@@ -23,6 +23,8 @@ function Lobby() {
       setRoom(res.data);
     };
     fetchRoom();
+    const interval = setInterval(() => fetchRoom(), api.POLL_EVERY);
+    return () => clearInterval(interval);
   }, [id]);
 
   const handleJoin = async event => {
