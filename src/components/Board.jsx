@@ -16,7 +16,8 @@ export default function Board({ gameId }) {
       availableBuilds,
       availableUpgrades,
       availableRoadSlots,
-      adjacentPlayersPerHex
+      adjacentPlayersPerHex,
+      robber
     },
     setState
   ] = useState({
@@ -26,7 +27,8 @@ export default function Board({ gameId }) {
     availableBuilds: null,
     availableUpgrades: null,
     availableRoadSlots: null,
-    adjacentPlayersPerHex: null
+    adjacentPlayersPerHex: null,
+    robber: null
   });
 
   useEffect(() => {
@@ -35,7 +37,7 @@ export default function Board({ gameId }) {
       const [
         { data: board },
         {
-          data: { players }
+          data: { players, robber: robberPosition }
         },
         { data: actions }
       ] = await Promise.all([
@@ -86,7 +88,8 @@ export default function Board({ gameId }) {
       const aBuilds = actions.find(a => a.type === "build_settlement").payload;
       const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
       const aRoadSlots = actions.find(a => a.type === "build_road").payload;
-      const adjacentPlayers = actions.find(a => a.type === "move_robber").payload;
+      const adjacentPlayers = actions.find(a => a.type === "move_robber")
+        .payload;
 
       // Update board internal state
       setState({
@@ -96,7 +99,8 @@ export default function Board({ gameId }) {
         availableBuilds: aBuilds,
         availableUpgrades: aUpgrades,
         availableRoadSlots: aRoadSlots,
-        adjacentPlayersPerHex: adjacentPlayers
+        adjacentPlayersPerHex: adjacentPlayers,
+        robber: robberPosition
       });
     };
     fetchBoard();
@@ -115,6 +119,7 @@ export default function Board({ gameId }) {
       availableUpgrades={availableUpgrades}
       availableRoadSlots={availableRoadSlots}
       adjacentPlayersPerHex={adjacentPlayersPerHex}
+      robber={robber}
     />
   );
 }
@@ -132,7 +137,8 @@ function BoardContainer({
   availableBuilds,
   availableUpgrades,
   availableRoadSlots,
-  adjacentPlayersPerHex
+  adjacentPlayersPerHex,
+  robber
 }) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
@@ -159,6 +165,7 @@ function BoardContainer({
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
+            hasRobber={_.isEqual(hex.position, robber)}
           />
         ))}
         {availableRoadSlots.map(road => (
@@ -219,7 +226,8 @@ BoardContainer.propTypes = {
       position: CatanTypes.HexPosition.isRequired,
       players: PropTypes.arrayOf(PropTypes.string).isRequired
     })
-  )
+  ),
+  robber: CatanTypes.HexPosition.isRequired
 };
 
 BoardContainer.defaultProps = {

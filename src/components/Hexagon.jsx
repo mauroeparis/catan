@@ -4,7 +4,14 @@ import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
 
-function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
+function Hexagon({
+  position,
+  terrain,
+  token,
+  unit = 256,
+  adjacentPlayers,
+  hasRobber
+}) {
   // Point positioning
   const width = Math.sqrt(3) * unit;
   const radius = unit;
@@ -74,6 +81,7 @@ function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
   const terrainTextStyle = { font: "bold 5rem Cinzel", fill: "white" };
   const tokenPos = V.add(center, P(0, 128));
   const tokenTextStyle = { font: "bold 5rem Cinzel", fill: terrainColor };
+  const robberPos = V.add(center, P(0, -128));
 
   return (
     <g className="hexagon" onClick={moveRobber}>
@@ -93,6 +101,9 @@ function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
         {terrain}
       </text>
       <circle cx={tokenPos.x} cy={tokenPos.y} r="50" fill="white" />
+      {hasRobber && (
+        <circle cx={robberPos.x} cy={robberPos.y} r="25" fill={terrainColor} stroke="white" strokeWidth="1rem" />
+      )}
       <text
         x={tokenPos.x}
         y={tokenPos.y + 6} // HACK: +6 seems to center the sans-serif font
@@ -111,7 +122,8 @@ Hexagon.propTypes = {
   terrain: CatanTypes.Terrain.isRequired,
   token: PropTypes.number.isRequired,
   unit: PropTypes.number,
-  adjacentPlayers: PropTypes.arrayOf(PropTypes.string).isRequired
+  adjacentPlayers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  hasRobber: PropTypes.bool.isRequired
 };
 
 Hexagon.defaultProps = {
