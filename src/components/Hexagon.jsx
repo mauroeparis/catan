@@ -102,7 +102,14 @@ function Hexagon({
       </text>
       <circle cx={tokenPos.x} cy={tokenPos.y} r="50" fill="white" />
       {hasRobber && (
-        <circle cx={robberPos.x} cy={robberPos.y} r="25" fill={terrainColor} stroke="white" strokeWidth="1rem" />
+        <circle
+          cx={robberPos.x}
+          cy={robberPos.y}
+          r="25"
+          fill={terrainColor}
+          stroke="white"
+          strokeWidth="1rem"
+        />
       )}
       <text
         x={tokenPos.x}
