@@ -117,7 +117,7 @@ export default function Board({ gameId }) {
 Board.propTypes = {
   gameId: PropTypes.string.isRequired
   // TODO: This should be a number, but react-router treats match
-  //       as strings. We could use regex /game/:id(//d+) as a safe mechanism
+  // as strings. We could use regex /game/:id(//d+) as a safe mechanism
 };
 
 function BoardContainer({

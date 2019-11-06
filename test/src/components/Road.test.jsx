@@ -9,7 +9,7 @@ describe("Road", () => {
 });
 
 describe.each([true, false])("BuildRoadIndicator", confirm => {
-  it("should render", () => {
+  it(`can be answered with ${confirm}`, () => {
     const oldConfirm = window.confirm;
     window.confirm = () => confirm;
     const vertices = [{ level: 0, index: 0 }, { level: 0, index: 1 }];
