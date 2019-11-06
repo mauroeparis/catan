@@ -14,6 +14,8 @@ function LobbyList() {
       setRooms(res.data);
     };
     fetchRooms();
+    const interval = setInterval(() => fetchRooms(), api.POLL_EVERY);
+    return () => clearInterval(interval);
   }, []);
 
   return (
