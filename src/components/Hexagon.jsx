@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
+import api from "../Api";
 
 function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
   // Point positioning
@@ -37,8 +38,27 @@ function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
   const points = ps.join(" ");
 
   const moveRobber = () => {
+    const disabled = false;
+    const title = "Move Robber";
+    const body = "Who would you like to take a resource from?";
+    const buttons = adjacentPlayers.map(player => ({
+      text: player,
+      callback: () =>
+        api.games.playAction(gameId, "move_robber", {
+          position,
+          player
+        })
+    }));
+    buttons.push({
+      text: "No One",
+      callback: () =>
+        api.games.playAction(gameId, "move_robber", {
+          position,
+          player: null
+        })
+    });
     const gameId = 1;
-    const t = "Are you sure?";
+    window.showModal({ disabled, title, body, buttons });
     // if (canMoveRobber && window.confirm(t))
     // api.games.playAction(gameId, "move_robber", {position, player});
   };
