@@ -424,7 +424,10 @@
       { "level": 2, "index": 24 }
     ]},
     { "type": "build_road", "payload": [] },
-    { "type": "move_robber", "payload": [] },
+    { "type": "move_robber", "payload": [
+        {{ "level": 2, "index": 1}, [Syble_Kunde, Rusty_OKeefe]},
+        {{ "level": 1, "index": 3}, [test]}
+    ]},
     { "type": "buy_card", "payload": null },
     { "type": "play_knight_card", "payload": [] },
     { "type": "play_road_building_card", "payload": [] },

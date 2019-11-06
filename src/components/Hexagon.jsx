@@ -36,6 +36,13 @@ function Hexagon({ position, terrain, token, unit = 256 }) {
   ];
   const points = ps.join(" ");
 
+  const moveRobber = () => {
+    const gameId = 1;
+    const t = "Are you sure?";
+    if (canMoveRobber && window.confirm(t))
+      api.games.playAction(gameId, "move_robber", {position, player});
+  };
+
   // Style
   const terrainColor = {
     desert: "#F57C00",
@@ -51,7 +58,7 @@ function Hexagon({ position, terrain, token, unit = 256 }) {
   const tokenTextStyle = { font: "bold 5rem Cinzel", fill: terrainColor };
 
   return (
-    <>
+    <g onClick={moveRobber}>
       <polygon
         points={points}
         fill={terrainColor}
@@ -77,7 +84,7 @@ function Hexagon({ position, terrain, token, unit = 256 }) {
       >
         {token}
       </text>
-    </>
+    <g/>
   );
 }
 

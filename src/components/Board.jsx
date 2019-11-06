@@ -59,11 +59,13 @@ export default function Board({ gameId }) {
       // Update board internal state
       const aBuilds = actions.find(a => a.type === "build_settlement").payload;
       const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+      const aMoveRobber = actions.find(a => a.type === "move_robber").payload;
       setState({
         hexagons: board.hexes,
         settlements: combinedSettlements,
         availableBuilds: aBuilds,
-        availableUpgrades: aUpgrades
+        availableUpgrades: aUpgrades,
+        availableRobber: aMoveRobber
       });
     };
     fetchBoard();
@@ -79,6 +81,7 @@ export default function Board({ gameId }) {
       settlements={settlements}
       availableBuilds={availableBuilds}
       availableUpgrades={availableUpgrades}
+      availableRobber={availableRobber}
     />
   );
 }
@@ -93,7 +96,8 @@ function BoardContainer({
   hexagons,
   settlements,
   availableBuilds,
-  availableUpgrades
+  availableUpgrades,
+  listaDePlayersARobarPorCadaHexagono
 }) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
@@ -110,6 +114,10 @@ function BoardContainer({
           <Hexagon
             key={Object.values(hex.position)}
             position={hex.position}
+            robbablePlayers={
+              // busca este hexagono en listaDePlayersARobarPorCadaHexagono
+              // y dame la lista de playesr a robar
+            }
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
@@ -144,12 +152,14 @@ BoardContainer.propTypes = {
     })
   ),
   availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
-  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition)
+  availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition),
+  availableRobber: PropTypes.arrayOf(CatanTypes.VertexPosition)
 };
 
 BoardContainer.defaultProps = {
   hexagons: null,
   settlements: null,
   availableBuilds: null,
-  availableUpgrades: null
+  availableUpgrades: null,
+  availableRobber: null
 };
