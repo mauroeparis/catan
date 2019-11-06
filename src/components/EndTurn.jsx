@@ -5,12 +5,21 @@ import api from "../Api";
 function EndTurn() {
   const { id } = useParams();
 
-  function FinishTurn() {
-    const t = "Would you like to finish your turn?";
-    if (window.confirm(t)) {
-      api.games.playAction(id, "end_turn", null);
-    }
-  }
+  const FinishTurn = () => {
+    const disabled = false;
+    const title = "End Turn";
+    const body = "Are you sure you want to end your turn?";
+    const buttons = [
+      {
+        text: "Accept",
+        callback: () => api.games.playAction(id, "end_turn", null)
+      },
+      {
+        text: "Cancel"
+      }
+    ];
+    window.showModal({ disabled, title, body, buttons });
+  };
 
   return (
     <input

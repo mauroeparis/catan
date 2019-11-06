@@ -19,7 +19,7 @@ function BuyCard({ gameId }) {
   const tryBuy = () => {
     const disabled = false;
     const title = "Buy Card";
-    const body = "Are you sure?";
+    const body = "It will cost you 1 grain, 1 ore and 1 wool. Are you sure you want to buy one?";
     const buttons = [
       {
         text: "Accept",
@@ -29,12 +29,7 @@ function BuyCard({ gameId }) {
         text: "Cancel"
       }
     ];
-    // buttons.push({
-    //   text: "Cancel"
-    // });
     window.showModal({ disabled, title, body, buttons });
-    // const t = "Buy Card\nIt will cost 1 ore, 1 wool and 1 grain.";
-    // if (window.confirm(t)) api.games.playAction(gameId, "buy_card", null);
   };
 
   return (
