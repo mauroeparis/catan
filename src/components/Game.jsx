@@ -1,5 +1,5 @@
 import "../css/game.css";
-import React from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
 import Board from "./Board";
@@ -12,6 +12,13 @@ import Modal from "./Modal";
 
 function Game() {
   const { id } = useParams();
+  const [{ disabled, title, body, buttons }, setModal] = useState({
+    disabled: false,
+    title: "",
+    body: "",
+    buttons: []
+  });
+  window.showModal = setModal;
   return (
     <div className="game">
       <Board gameId={id} />
@@ -25,17 +32,7 @@ function Game() {
         <DiceRoll gameId={id} />
         <EndTurn />
       </div>
-      <Modal
-        disabled
-        title="This is a modal title"
-        body="This is the modal very very long basdaksdjaksdja lsdjalks djalksjd laksjd lkasjd klasjd lkajsd lkajsd lkasjdkl asjd lkasjd lkasjdody"
-        buttons={[
-          { text: "Mateo", callback: () => console.log("mateo") },
-          { text: "Julian", callback: () => console.log("julian") },
-          { text: "Mayco", callback: () => console.log("mayco") },
-          { text: "No One", callback: () => console.log("no one") }
-        ]}
-      />
+      <Modal disabled={disabled} title={title} body={body} buttons={buttons} />
     </div>
   );
 }

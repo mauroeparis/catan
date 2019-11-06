@@ -8,7 +8,7 @@ function Modal({ disabled, title, body, buttons }) {
       <button
         className="close"
         type="button"
-        onClick={() => console.log("close")}
+        onClick={() => window.showModal({ disabled: true })}
       >
         ☓
       </button>
