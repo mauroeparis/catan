@@ -15,9 +15,22 @@ export default function Settlement({
 }) {
   const tryUpgrade = () => {
     const gameId = 1; // TODO: Should come from an upper state
-    const t = "Upgrade City\nIt costs 3 ore and 2 grain.";
-    if (canUpgrade && window.confirm(t))
-      api.games.playAction(gameId, "upgrade_city", position);
+    if (canUpgrade) {
+      const disabled = false;
+      const title = "Upgrade City";
+      const body =
+        "It will cost you 3 ore and 2 grain. Are you sure you want to upgrade it?";
+      const buttons = [
+        {
+          text: "Accept",
+          callback: () => api.games.playAction(gameId, "upgrade_city", position)
+        },
+        {
+          text: "Cancel"
+        }
+      ];
+      window.showModal({ disabled, title, body, buttons });
+    }
   };
   const center = getVertex(position.level, position.index, unit);
   return (
