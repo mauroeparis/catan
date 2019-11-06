@@ -20,6 +20,23 @@
 	margin-right: 10rem;
 }
 
+.game .board .hexagon {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .board .hexagon * {
+  transition: 0.2s;
+}
+
+.game .board .hexagon:hover polygon {
+  fill: var(--light) !important;
+}
+
+.game .board .hexagon:hover text {
+  fill: var(--dark) !important;
+}
+
 .game .board .settlement {
   cursor: pointer;
   transition: 0.2s;

@@ -16,7 +16,14 @@ function Modal({ disabled, title, body, buttons }) {
         <p>{body}</p>
         <div className="buttons-footer">
           {buttons.map(({ text, callback }) => (
-            <button key={text} type="button" onClick={callback}>
+            <button
+              key={text}
+              type="button"
+              onClick={() => {
+                callback && callback();
+                window.showModal({ disabled: true });
+              }}
+            >
               {text}
             </button>
           ))}
