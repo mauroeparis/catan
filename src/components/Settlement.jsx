@@ -71,10 +71,23 @@ Settlement.defaultProps = {
 export function BuildIndicator({ position, unit = 256 }) {
   const doBuild = () => {
     const gameId = 1; // TODO: Should come from an upper state
-    const t = "Build Settlement\nIt costs 1 of brick, lumber, wool and grain.";
-    if (window.confirm(t))
-      api.games.playAction(gameId, "build_settlement", position);
+    const disabled = false;
+    const title = "Build Settlement";
+    const body =
+      "It will cost you 1 brick, 1 lumber, 1 wool and 1 grain. Are you sure you want to build it?";
+    const buttons = [
+      {
+        text: "Accept",
+        callback: () =>
+          api.games.playAction(gameId, "build_settlement", position)
+      },
+      {
+        text: "Cancel"
+      }
+    ];
+    window.showModal({ disabled, title, body, buttons });
   };
+
   const center = getVertex(position.level, position.index, unit);
   return (
     <circle
