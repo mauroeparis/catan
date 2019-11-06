@@ -8,13 +8,14 @@ import Settlement, { BuildIndicator } from "./Settlement";
 
 export default function Board({ gameId }) {
   const [
-    { hexagons, settlements, availableBuilds, availableUpgrades },
+    { hexagons, settlements, availableBuilds, availableUpgrades, adjacentPlayersPerHex },
     setState
   ] = useState({
     hexagons: null,
     settlements: null,
     availableBuilds: null,
-    availableUpgrades: null
+    availableUpgrades: null,
+    adjacentPlayersPerHex: null
   });
   useEffect(() => {
     const fetchBoard = async () => {
@@ -59,13 +60,13 @@ export default function Board({ gameId }) {
       // Update board internal state
       const aBuilds = actions.find(a => a.type === "build_settlement").payload;
       const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
-      const aMoveRobber = actions.find(a => a.type === "move_robber").payload;
+      const adjacentPlayers = actions.find(a => a.type === "move_robber").payload;
       setState({
         hexagons: board.hexes,
         settlements: combinedSettlements,
         availableBuilds: aBuilds,
         availableUpgrades: aUpgrades,
-        availableRobber: aMoveRobber
+        adjacentPlayersPerHex: adjacentPlayers
       });
     };
     fetchBoard();
@@ -81,7 +82,7 @@ export default function Board({ gameId }) {
       settlements={settlements}
       availableBuilds={availableBuilds}
       availableUpgrades={availableUpgrades}
-      availableRobber={availableRobber}
+      adjacentPlayersPerHex={adjacentPlayersPerHex}
     />
   );
 }
@@ -97,12 +98,18 @@ function BoardContainer({
   settlements,
   availableBuilds,
   availableUpgrades,
-  listaDePlayersARobarPorCadaHexagono
+  adjacentPlayersPerHex
 }) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
   const height = 2560;
   const viewBox = `${-width / 2} ${-height / 2} ${width} ${height}`;
+  const adjacentPlayers = position => {
+    const playersForHex = adjacentPlayersPerHex.find(hp =>
+      _.isEqual(hp.position, position)
+    );
+    return playersForHex ? playersForHex.players : [];
+  };
   return (
     <div className="board">
       <svg
@@ -114,10 +121,7 @@ function BoardContainer({
           <Hexagon
             key={Object.values(hex.position)}
             position={hex.position}
-            robbablePlayers={
-              // busca este hexagono en listaDePlayersARobarPorCadaHexagono
-              // y dame la lista de playesr a robar
-            }
+            adjacentPlayers={adjacentPlayers(hex.position)}
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
@@ -153,7 +157,12 @@ BoardContainer.propTypes = {
   ),
   availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
   availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition),
-  availableRobber: PropTypes.arrayOf(CatanTypes.VertexPosition)
+  adjacentPlayersPerHex: PropTypes.arrayOf(
+    PropTypes.shape({
+      position: CatanTypes.HexPosition.isRequired,
+      players: PropTypes.arrayOf(PropTypes.string).isRequired
+    })
+  )
 };
 
 BoardContainer.defaultProps = {
@@ -161,5 +170,5 @@ BoardContainer.defaultProps = {
   settlements: null,
   availableBuilds: null,
   availableUpgrades: null,
-  availableRobber: null
+  adjacentPlayersPerHex: null
 };

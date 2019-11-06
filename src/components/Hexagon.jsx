@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 
-function Hexagon({ position, terrain, token, unit = 256 }) {
+function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
   // Point positioning
   const width = Math.sqrt(3) * unit;
   const radius = unit;
@@ -39,8 +39,8 @@ function Hexagon({ position, terrain, token, unit = 256 }) {
   const moveRobber = () => {
     const gameId = 1;
     const t = "Are you sure?";
-    if (canMoveRobber && window.confirm(t))
-      api.games.playAction(gameId, "move_robber", {position, player});
+    // if (canMoveRobber && window.confirm(t))
+    // api.games.playAction(gameId, "move_robber", {position, player});
   };
 
   // Style
@@ -84,7 +84,7 @@ function Hexagon({ position, terrain, token, unit = 256 }) {
       >
         {token}
       </text>
-    <g/>
+    </g>
   );
 }
 
@@ -92,7 +92,8 @@ Hexagon.propTypes = {
   position: CatanTypes.HexPosition.isRequired,
   terrain: CatanTypes.Terrain.isRequired,
   token: PropTypes.number.isRequired,
-  unit: PropTypes.number
+  unit: PropTypes.number,
+  adjacentPlayers: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 Hexagon.defaultProps = {
