@@ -61,9 +61,13 @@ function LobbyList() {
                 </span>
               </div>
               <div className="table-cell py-4 px-6 text-right text-gray-900">
-                <span>
-                  {room.players.length}/{room.max_players}
-                </span>
+                {room.game_has_started ? (
+                  <span>STARTED</span>
+                ) : (
+                  <span>
+                    {room.players.length}/{room.max_players}
+                  </span>
+                )}
               </div>
             </Link>
           ))}
