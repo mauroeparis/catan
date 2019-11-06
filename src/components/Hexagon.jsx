@@ -59,8 +59,6 @@ function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
     });
     const gameId = 1;
     window.showModal({ disabled, title, body, buttons });
-    // if (canMoveRobber && window.confirm(t))
-    // api.games.playAction(gameId, "move_robber", {position, player});
   };
 
   // Style
@@ -78,7 +76,7 @@ function Hexagon({ position, terrain, token, unit = 256, adjacentPlayers }) {
   const tokenTextStyle = { font: "bold 5rem Cinzel", fill: terrainColor };
 
   return (
-    <g onClick={moveRobber}>
+    <g className="hexagon" onClick={moveRobber}>
       <polygon
         points={points}
         fill={terrainColor}

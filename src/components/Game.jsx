@@ -13,7 +13,7 @@ import Modal from "./Modal";
 function Game() {
   const { id } = useParams();
   const [{ disabled, title, body, buttons }, setModal] = useState({
-    disabled: false,
+    disabled: true,
     title: "",
     body: "",
     buttons: []
