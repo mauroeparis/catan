@@ -92,7 +92,11 @@ function Lobby() {
           <input
             type="button"
             value="JOIN GAME"
-            disabled={!(room.players.length < room.max_players)}
+            disabled={
+              !(room.players.length < room.max_players) ||
+              room.players.includes(localStorage.user)
+              // TODO: this should not get the user from localStorage
+            }
             onClick={handleJoin}
             className={`
               h-12
