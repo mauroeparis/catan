@@ -1,7 +1,6 @@
 import React from "react";
 import EndTurn from "../../../src/components/EndTurn";
 
-// TeamPage.test.js
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"), // use actual for all non-hook parts
   useParams: () => ({
@@ -10,15 +9,10 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("<EndTurn /> rendering", () => {
-  it("should render one div", () => {
+  it("should render one input", () => {
     const wrapper = shallow(<EndTurn />);
-    // Expects the app to have exactly 5 hi children
-    expect(wrapper.find("div")).toHaveLength(1);
-  });
-
-  it("should click something", () => {
-    const wrapper = shallow(<EndTurn />);
-    expect(wrapper.find("div").simulate("click"));
+    // Expects the app to have one input
+    expect(wrapper.find("input")).toHaveLength(1);
   });
 
   it("should correctly click the button", () => {
