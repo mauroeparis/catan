@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 
 import { ReactComponent as Crown } from "../public/icons/crown-solid.svg";
 import { ReactComponent as Dot } from "../public/icons/circle-solid.svg";
@@ -8,13 +8,14 @@ import { ReactComponent as NormalUser } from "../public/icons/user-shield-solid.
 
 import api from "../Api";
 
-const TextClasses = "text-center text-sm tracking-wider text-bold";
-const CommonClasses = "w-full shadow-md rounded h-12";
+const TextClasses = "text-center text-sm tracking-wider text-bold text-white";
+const CommonClasses =
+  "h-12 shadow-md shadow rounded cursor-pointer disabled:cursor-not-allowed disabled:opacity-50";
 
 function Lobby() {
   // TODO: This is the room id, not the game id, but it is used as such below
   const { id } = useParams();
-
+  const history = useHistory();
   const [room, setRoom] = useState();
 
   useEffect(() => {
@@ -32,6 +33,28 @@ function Lobby() {
     try {
       const res = await api.lobbies.join(id);
       console.log(res); // TODO: Handle join response
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
+  };
+
+  const handleStartGame = async event => {
+    event.preventDefault();
+    try {
+      const res = await api.lobbies.start(id);
+      console.log(res); // TODO: Handle start response
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
+  };
+
+  const handleCancelGame = async event => {
+    event.preventDefault();
+    if (!window.confirm("You're about to cancel the lobby. Confirm?")) return;
+    try {
+      history.push(`/lobby`);
+      const res = await api.lobbies.cancel(id);
+      console.log(res); // TODO: Handle start response
     } catch (err) {
       console.log(`Error: ${err}`);
     }
@@ -92,44 +115,68 @@ function Lobby() {
           <input
             type="button"
             value="JOIN GAME"
-            disabled={!(room.players.length < room.max_players)}
+            disabled={
+              !(room.players.length < room.max_players) ||
+              room.game_has_started ||
+              room.players.includes(localStorage.user)
+              // TODO: this should not get the user from localStorage
+            }
             onClick={handleJoin}
             className={`
-              h-12
+              w-full
               bg-orange-600
-              text-white
-              shadow
               ${CommonClasses}
               ${TextClasses}
-              cursor-pointer
-              disabled:cursor-not-allowed
-              disabled:opacity-50
             `}
           />
           <div className="m-4" />
-          <Link to={`/game/${id}`} className="w-full text-center">
-            <input
-              type="button"
-              value="START GAME"
-              disabled={
-                !(
-                  room.players.length >= 3 &&
-                  room.players.length <= room.max_players
-                )
-              }
-              className={`
-                h-12
-                bg-blue-800
-                text-white
-                shadow
-                ${CommonClasses}
-                ${TextClasses}
-                cursor-pointer
-                disabled:cursor-not-allowed
-                disabled:opacity-50
-              `}
-            />
-          </Link>
+          {!room.game_has_started && room.owner === localStorage.user && (
+            <div className="flex items-center justify-between">
+              <input
+                type="button"
+                value="CANCEL GAME"
+                onClick={handleCancelGame}
+                className={`
+                  w-1/2
+                  bg-red-800
+                  ${CommonClasses}
+                  ${TextClasses}
+                `}
+              />
+              <div className="m-2" />
+              <input
+                type="button"
+                value="START GAME"
+                disabled={
+                  !(
+                    room.players.length >= 3 &&
+                    room.players.length <= room.max_players
+                  )
+                }
+                onClick={handleStartGame}
+                className={`
+                  w-1/2
+                  bg-green-800
+                  ${CommonClasses}
+                  ${TextClasses}
+                `} // TODO: Green? Rly?
+              />
+            </div>
+          )}
+          {room.game_has_started && (
+            <Link to={`/game/${room.game_id}`} className="w-full text-center">
+              <input
+                type="button"
+                value="VIEW GAME"
+                className={`
+                  w-full
+                  bg-blue-800
+                  ${CommonClasses}
+                  ${TextClasses}
+                `}
+              />
+            </Link>
+          )}
         </div>
       </div>
     </div>

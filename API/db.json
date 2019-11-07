@@ -204,18 +204,22 @@
         "Sven25",
         "Ethel.Dibbert95"
       ],
-      "max_players": 4
+      "max_players": 4,
+      "game_has_started": true,
+      "game_id": 1
     },
     {
       "id": 2,
       "name": "sapiente",
-      "owner": "Cruz.Medhurst91",
+      "owner": "test",
       "players": [
-        "Cruz.Medhurst91",
+        "test",
         "Linwood53",
         "Sonny.Hessel"
       ],
-      "max_players": 4
+      "max_players": 4,
+      "game_has_started": false,
+      "game_id": null
     },
     {
       "id": 3,
@@ -223,10 +227,12 @@
       "owner": "Einar55",
       "players": [
         "Einar55",
-        "Marcelina_Crooks",
+        "test",
         "Lamar_Ernser"
       ],
-      "max_players": 4
+      "max_players": 4,
+      "game_has_started": true,
+      "game_id": 3
     },
     {
       "id": 4,
@@ -237,7 +243,9 @@
         "Aisha_DuBuque15",
         "Catalina_Wehner45"
       ],
-      "max_players": 4
+      "max_players": 4,
+      "game_has_started": false,
+      "game_id": null
     }
   ],
   "resources": {
