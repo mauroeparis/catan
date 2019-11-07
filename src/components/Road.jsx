@@ -34,8 +34,20 @@ Road.propTypes = {
 export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
   const doBuild = () => {
     const gameId = 1; // TODO: Should come from an upper state
-    const t = "Build Road\nIt costs 1 brick and 1 lumber.";
-    if (window.confirm(t)) api.games.playAction(gameId, "build_road", [v, w]);
+    const disabled = false;
+    const title = "Build Road";
+    const body =
+      "It will cost you 1 brick and 1 lumber. Are you sure you want to build it?";
+    const buttons = [
+      {
+        text: "Accept",
+        callback: () => api.games.playAction(gameId, "build_road", [v, w])
+      },
+      {
+        text: "Cancel"
+      }
+    ];
+    window.showModal({ disabled, title, body, buttons });
   };
   const vmap = getVertex(v.level, v.index, unit);
   const wmap = getVertex(w.level, w.index, unit);

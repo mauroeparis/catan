@@ -45,27 +45,29 @@ function Hexagon({
   const points = ps.join(" ");
 
   const moveRobber = () => {
-    const disabled = false;
-    const title = "Move Robber";
-    const body = "Who would you like to take a resource from?";
-    const buttons = adjacentPlayers.map(player => ({
-      text: player,
-      callback: () =>
-        api.games.playAction(gameId, "move_robber", {
-          position,
-          player
-        })
-    }));
-    buttons.push({
-      text: "No One",
-      callback: () =>
-        api.games.playAction(gameId, "move_robber", {
-          position,
-          player: null
-        })
-    });
-    const gameId = 1;
-    window.showModal({ disabled, title, body, buttons });
+    if (!hasRobber) {
+      const disabled = false;
+      const title = "Move Robber";
+      const body = "Who would you like to take a resource from?";
+      const buttons = adjacentPlayers.map(player => ({
+        text: player,
+        callback: () =>
+          api.games.playAction(gameId, "move_robber", {
+            position,
+            player
+          })
+      }));
+      buttons.push({
+        text: "No One",
+        callback: () =>
+          api.games.playAction(gameId, "move_robber", {
+            position,
+            player: null
+          })
+      });
+      const gameId = 1;
+      window.showModal({ disabled, title, body, buttons });
+    }
   };
 
   // Style
@@ -102,7 +104,14 @@ function Hexagon({
       </text>
       <circle cx={tokenPos.x} cy={tokenPos.y} r="50" fill="white" />
       {hasRobber && (
-        <circle cx={robberPos.x} cy={robberPos.y} r="25" fill={terrainColor} stroke="white" strokeWidth="1rem" />
+        <circle
+          cx={robberPos.x}
+          cy={robberPos.y}
+          r="25"
+          fill={terrainColor}
+          stroke="white"
+          strokeWidth="1rem"
+        />
       )}
       <text
         x={tokenPos.x}

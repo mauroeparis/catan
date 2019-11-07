@@ -78,7 +78,7 @@
     {
       "type": "move_robber",
       "payload": [
-        {"position": { "level": 0, "index": 0}, "players": ["mateo", "julian"]},
+        {"position": { "level": 1, "index": 4}, "players": ["mateo", "julian"]},
         {"position": { "level": 1, "index": 0}, "players": ["mateo"]}
       ]
     },
