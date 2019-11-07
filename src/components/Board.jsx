@@ -169,10 +169,7 @@ function BoardContainer({
           />
         ))}
         {availableRoadSlots.map(road => (
-          <BuildRoadIndicator
-            key={JSON.stringify(road.vertices)}
-            vertices={road}
-          />
+          <BuildRoadIndicator key={JSON.stringify(road)} vertices={road} />
         ))}
         {roads.map(road => (
           <Road

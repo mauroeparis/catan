@@ -4,6 +4,7 @@
   --dark: #202020;
   --light: white;
   --highlight: #E91E63;
+  user-select: none;
 }
 
 .game {

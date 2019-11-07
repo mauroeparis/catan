@@ -35,17 +35,18 @@ function Modal({ disabled, title, body, buttons }) {
 
 Modal.propTypes = {
   disabled: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   body: PropTypes.string,
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
-      callback: PropTypes.func.isRequired
+      callback: PropTypes.func
     })
   )
 };
 
 Modal.defaultProps = {
+  title: "",
   body: "",
   buttons: []
 };
