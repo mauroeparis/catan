@@ -16,11 +16,11 @@ describe("<EndTurn /> rendering", () => {
   });
 
   it("should correctly click the button", () => {
-    window.confirm = jest.fn();
+    window.showModal = jest.fn();
     const mockCallBack = jest.fn();
     const button = shallow(<EndTurn onClick={mockCallBack} />);
     button.find("input").simulate("click");
     button.find("input").simulate("Ok");
-    expect(window.confirm.mock.calls.length).toEqual(1);
+    expect(window.showModal.mock.calls.length).toEqual(1);
   });
 });

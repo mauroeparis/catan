@@ -10,11 +10,11 @@ describe("Road", () => {
 
 describe.each([true, false])("BuildRoadIndicator", confirm => {
   it(`can be answered with ${confirm}`, () => {
-    const oldConfirm = window.confirm;
-    window.confirm = () => confirm;
+    const oldConfirm = window.showModal;
+    window.showModal = () => confirm;
     const vertices = [{ level: 0, index: 0 }, { level: 0, index: 1 }];
     const wrapper = shallow(<BuildRoadIndicator vertices={vertices} />);
     wrapper.simulate("click");
-    window.confirm = oldConfirm;
+    window.showModal = oldConfirm;
   });
 });
