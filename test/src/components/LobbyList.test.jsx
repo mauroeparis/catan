@@ -1,6 +1,13 @@
 import React from "react";
 import LobbyList from "../../../src/components/LobbyList";
 
+jest.mock("react", () => ({
+  ...jest.requireActual("react"), // use actual for all non-hook parts
+  useContext: () => ({
+    authDispatch: () => {}
+  })
+}));
+
 describe("<LobbyList Logout/> rendering", () => {
   it("should render two inputs", () => {
     const wrapper = shallow(<LobbyList />);
@@ -35,17 +42,5 @@ describe("<LobbyList Logout/> rendering", () => {
       .find("input")
       .at(1)
       .simulate("click");
-  });
-
-  it("should delete localStorage correctly", () => {
-    const TOKEN = "token";
-    localStorage.setItem("token", TOKEN);
-    expect(Object.keys(localStorage).length).toBe(1);
-    const button = shallow(<LobbyList />);
-    button
-      .find("input")
-      .at(1)
-      .simulate("click");
-    expect(Object.keys(localStorage).length).toBe(0);
   });
 });

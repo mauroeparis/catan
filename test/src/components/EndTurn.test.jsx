@@ -1,7 +1,6 @@
 import React from "react";
 import EndTurn from "../../../src/components/EndTurn";
 
-// TeamPage.test.js
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"), // use actual for all non-hook parts
   useParams: () => ({
