@@ -88,7 +88,7 @@ server.post("/rooms", (req, res, next) => {
     owner: "test",
     players: ["test"],
     game_has_started: false,
-    game_id: board_id
+    game_id: null
   };
   req.body = b;
 
@@ -99,40 +99,53 @@ server.post("/rooms", (req, res, next) => {
 // TODO: Should support other actions.
 server.post("/games/:id/player/actions", (req, res, next) => {
   const { type, payload } = req.body;
-  if (type === "end_turn") {
+  if (type === "move_robber") {
+    const { player, position } = payload;
+    const { level, index } = position;
+    const { games } = db;
+
+    const r = games[0];
+    r.robber = { level, index };
+
+    req.method = "PUT";
+    req.url = "/games/1";
+    req.body = r;
+
+    next();
+
+    console.log("after next");
+  } else if (type === "end_turn") {
     console.log("The user requested to end its turn");
     const status = 200;
     const message = "Turn ended correctly";
     res.status(status).json({ status, message });
     return;
-  }
-  if (type !== "bank_trade") {
+  } else if (type === "bank_trade") {
+    const { give, receive } = payload;
+
+    const remove = (arr, value) => {
+      const index = arr.indexOf(value);
+      if (index > -1) arr.splice(index, 1);
+    };
+
+    const r = db.resources;
+    r.resources.push(receive);
+    remove(r.resources, give);
+    remove(r.resources, give);
+    remove(r.resources, give);
+    remove(r.resources, give);
+
+    req.method = "PUT";
+    req.url = "/games/1/player";
+    req.body = r;
+
+    next();
+  } else {
     console.log(`Actions type was ${type}`);
     const status = 400;
     const message = "Error: Actions not yet implemented";
     res.status(status).json({ status, message });
-    return;
   }
-
-  const { give, receive } = payload;
-
-  const remove = (arr, value) => {
-    const index = arr.indexOf(value);
-    if (index > -1) arr.splice(index, 1);
-  };
-
-  const r = db.resources;
-  r.resources.push(receive);
-  remove(r.resources, give);
-  remove(r.resources, give);
-  remove(r.resources, give);
-  remove(r.resources, give);
-
-  req.method = "PUT";
-  req.url = "/games/1/player";
-  req.body = r;
-
-  next();
 });
 
 server.use(
