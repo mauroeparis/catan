@@ -38,6 +38,9 @@ describe("<LobbyList Logout/> rendering", () => {
 
   it("should correctly click the logout button", () => {
     const button = shallow(<LobbyList />);
+    const { location } = window;
+    delete window.location;
+    window.location = { reload: jest.fn() };
     button
       .find("input")
       .at(1)
