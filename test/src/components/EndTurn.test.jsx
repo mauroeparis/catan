@@ -9,10 +9,10 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("<EndTurn /> rendering", () => {
-  it("should render one div", () => {
+  it("should render one input", () => {
     const wrapper = shallow(<EndTurn />);
-    // Expects the app to have one div
-    expect(wrapper.find("div")).toHaveLength(1);
+    // Expects the app to have one input
+    expect(wrapper.find("input")).toHaveLength(1);
   });
 
   it("should correctly click the button", () => {
