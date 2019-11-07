@@ -19,7 +19,8 @@ function BuyCard({ gameId }) {
   const tryBuy = () => {
     const disabled = false;
     const title = "Buy Card";
-    const body = "It will cost you 1 grain, 1 ore and 1 wool. Are you sure you want to buy one?";
+    const body =
+      "It will cost you 1 grain, 1 ore and 1 wool. Are you sure you want to buy one?";
     const buttons = [
       {
         text: "Accept",
