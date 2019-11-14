@@ -25,18 +25,18 @@ function App() {
   return (
     <Router>
       <div className="h-screen">
-        {!localStorage.token && <Redirect to="/login" />}
+        {!localStorage.token && <Redirect to="/login/" />}
         <AuthContext.Provider value={{ auth, authDispatch }}>
           <Switch>
-            <Route path="/login" exact component={LoginPage} />
-            <Route path="/register" exact component={RegisterPage} />
-            <Route path="/lobby" exact component={LobbyList} />
-            <Route path="/lobby/create" exact component={CreateLobby} />
-            <Route path="/lobby/:id" exact component={Lobby} />
-            <Route path="/game/:id" exact component={Game} />
-            <Route path="/game/:gameId/bankTrade" component={BankTrade} />
-            <Route path="/board" exact component={Board} />
-            <Route path="/" render={() => <Redirect to="/lobby" />} />
+            <Route path="/login/" exact component={LoginPage} />
+            <Route path="/register/" exact component={RegisterPage} />
+            <Route path="/lobby/" exact component={LobbyList} />
+            <Route path="/lobby/create/" exact component={CreateLobby} />
+            <Route path="/lobby/:id/" exact component={Lobby} />
+            <Route path="/game/:id/" exact component={Game} />
+            <Route path="/game/:gameId/bankTrade/" component={BankTrade} />
+            <Route path="/board/" exact component={Board} />
+            <Route path="/" render={() => <Redirect to="/lobby/" />} />
           </Switch>
         </AuthContext.Provider>
       </div>

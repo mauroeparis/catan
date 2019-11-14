@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const URL = "http://localhost:8000/";
+// const URL = "http://3.83.205.168/"; // pied-pipers
+// const URL = "http://tlphraul.sytes.net:1314/";
+const URL = "http://127.0.0.1:8000";
 
 const API = axios.create({
   baseURL: URL,
@@ -11,10 +13,10 @@ const API = axios.create({
   }
 });
 
-const POLL_EVERY = 2000;
+const POLL_EVERY = 20000;
 
 const auth = {
-  login: (user, pass) => API.post("/users/login", { user, pass }),
+  login: (user, pass) => API.post("/users/login/", { user, pass }),
   register: (user, pass) => API.post("/users/", { user, pass })
 };
 
@@ -23,12 +25,12 @@ const boards = {
 };
 
 const lobbies = {
-  all: () => API.get("/rooms"),
-  create: (name, boardId) => API.post("/rooms", { name, boardId }),
-  join: id => API.put(`/rooms/${id}`),
-  get: id => API.get(`/rooms/${id}`),
-  start: id => API.patch(`/rooms/${id}`),
-  cancel: id => API.delete(`/rooms/${id}`)
+  all: () => API.get("/rooms/"),
+  create: (name, boardId) => API.post("/rooms/", { name, boardId }),
+  join: id => API.put(`/rooms/${id}/`),
+  get: id => API.get(`/rooms/${id}/`),
+  start: id => API.patch(`/rooms/${id}/`),
+  cancel: id => API.delete(`/rooms/${id}/`)
 };
 
 const games = {
@@ -38,8 +40,8 @@ const games = {
   player: id => API.get(`/games/${id}/player`),
   actions: id => API.get(`/games/${id}/player/actions`),
   playAction: (id, type, payload) =>
-    API.post(`/games/${id}/player/actions`, { type, payload }),
-  transactions: id => API.get(`/games/${id}/player/transactions`)
+    API.post(`/games/1/player/actions`, { type, payload }),
+  transactions: id => API.get(`/games/${id}/player/transactions/`)
 };
 
 export default {

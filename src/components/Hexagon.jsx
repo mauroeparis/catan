@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
+
 
 function Hexagon({
   position,
@@ -43,6 +45,7 @@ function Hexagon({
     V.add(center, P(-wunit, -hunit)) // nw
   ];
   const points = ps.join(" ");
+  const { gameId } = useParams();
 
   const moveRobber = () => {
     if (!hasRobber) {
@@ -65,7 +68,6 @@ function Hexagon({
             player: null
           })
       });
-      const gameId = 1;
       window.showModal({ disabled, title, body, buttons });
     }
   };

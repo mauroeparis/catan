@@ -48,6 +48,7 @@ export default function Board({ gameId }) {
 
       // Prepare fetched settlements for re-rendering by
       // combining all vertices from all players in the same array
+      console.log(players);
       const combinedSettlements = _.flatten(
         // Get built vertices from players
         players.map(p =>
@@ -61,12 +62,13 @@ export default function Board({ gameId }) {
               username: p.username
             })),
             // Cities to usable vertex
-            p.cities.map(c => ({
-              position: c,
-              isCity: true,
-              colour: p.colour,
-              username: p.username
-            }))
+            []
+            // p.cities.map(c => ({
+            //   position: c,
+            //   isCity: true,
+            //   colour: p.colour,
+            //   username: p.username
+            // }))
           )
         )
       );
@@ -85,11 +87,16 @@ export default function Board({ gameId }) {
       );
 
       // Available builds and upgrades
-      const aBuilds = actions.find(a => a.type === "build_settlement").payload;
-      const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+      console.log(actions, "this is actions");
+      // const aBuilds = actions.find(a => a.type === "build_settlement").payload;
+      const aBuilds = [];
+      // const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
+      const aUpgrades = [];
       const aRoadSlots = actions.find(a => a.type === "build_road").payload;
-      const adjacentPlayers = actions.find(a => a.type === "move_robber")
-        .payload;
+      // const aRoadSlots = []
+      // const adjacentPlayers = actions.find(a => a.type === "move_robber")
+        // .payload;
+      const adjacentPlayers = [];
 
       // Update board internal state
       setState({
@@ -180,16 +187,18 @@ function BoardContainer({
             username={road.username}
           />
         ))}
-        {settlements.map(sett => (
-          <Settlement
-            key={Object.values(sett.position)}
-            position={sett.position}
-            isCity={sett.isCity}
-            colour={sett.colour}
-            username={sett.username}
-            canUpgrade={_.some(availableUpgrades, sett.position)}
-          />
-        ))}
+        {settlements.map(sett => {
+          console.log(sett);
+          return (<Settlement
+              key={Object.values(sett.position)}
+              position={sett.position}
+              isCity={sett.isCity}
+              colour={sett.colour}
+              username={sett.username}
+              canUpgrade={_.some(availableUpgrades, sett.position)}
+            />
+          );
+        })}
         {availableBuilds.map(vert => (
           <BuildIndicator key={Object.values(vert)} position={vert} />
         ))}

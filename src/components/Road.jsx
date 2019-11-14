@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import CatanTypes from "../CatanTypes";
 import getVertex from "../Vertex";
 import api from "../Api";
@@ -33,9 +34,9 @@ Road.propTypes = {
 
 export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
   const doBuild = () => {
-    const gameId = 1; // TODO: Should come from an upper state
     const disabled = false;
     const title = "Build Road";
+
     const body =
       "It will cost you 1 brick and 1 lumber. Are you sure you want to build it?";
     const buttons = [
@@ -51,6 +52,7 @@ export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
   };
   const vmap = getVertex(v.level, v.index, unit);
   const wmap = getVertex(w.level, w.index, unit);
+  const { gameId } = useParams();
   return (
     <line
       className="build-road-indicator"
