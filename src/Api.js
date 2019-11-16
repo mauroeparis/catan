@@ -2,6 +2,8 @@ import axios from "axios";
 
 const URL = "http://localhost:8000/";
 
+const POLL_EVERY = 2000;
+
 const API = axios.create({
   baseURL: URL,
   timeout: 10000,
@@ -10,8 +12,6 @@ const API = axios.create({
     Authorization: `Bearer ${localStorage.token}`
   }
 });
-
-const POLL_EVERY = 2000;
 
 const auth = {
   login: (user, pass) => API.post("/users/login/", { user, pass }),

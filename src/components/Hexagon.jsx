@@ -10,8 +10,9 @@ function Hexagon({
   terrain,
   token,
   unit = 256,
-  adjacentPlayers,
-  hasRobber
+  hasRobber,
+  availableRobberMove,
+  adjacentPlayersToRob
 }) {
   const { id: gameId } = useParams(); // TODO: Should come from a GameContext
 
@@ -48,11 +49,11 @@ function Hexagon({
   const points = ps.join(" ");
 
   const moveRobber = () => {
-    if (!hasRobber) {
+    if (availableRobberMove) {
       const disabled = false;
       const title = "Move Robber";
       const body = "Who would you like to take a resource from?";
-      const buttons = adjacentPlayers.map(player => ({
+      const buttons = adjacentPlayersToRob.map(player => ({
         text: player,
         callback: () =>
           api.games.playAction(gameId, "move_robber", {
@@ -88,7 +89,10 @@ function Hexagon({
   const robberPos = V.add(center, P(0, -128));
 
   return (
-    <g className="hexagon" onClick={moveRobber}>
+    <g
+      className={`hexagon ${availableRobberMove ? "can-move-robber" : ""}`}
+      onClick={moveRobber}
+    >
       <polygon
         points={points}
         fill={terrainColor}
@@ -133,8 +137,9 @@ Hexagon.propTypes = {
   terrain: CatanTypes.Terrain.isRequired,
   token: PropTypes.number.isRequired,
   unit: PropTypes.number,
-  adjacentPlayers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  hasRobber: PropTypes.bool.isRequired
+  hasRobber: PropTypes.bool.isRequired,
+  availableRobberMove: PropTypes.bool.isRequired,
+  adjacentPlayersToRob: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 Hexagon.defaultProps = {
