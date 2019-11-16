@@ -28,7 +28,7 @@ function CardList({ gameId }) {
           <DevelopmentCard
             key={cardType}
             cardType={cardType}
-            amount={amounts[cardType]}
+            amount={amounts[cardType] || 0}
             gameId={gameId}
           />
         ))}
