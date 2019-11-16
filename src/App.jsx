@@ -28,6 +28,7 @@ function App() {
         {!localStorage.token && <Redirect to="/login" />}
         <AuthContext.Provider value={{ auth, authDispatch }}>
           <Switch>
+            {/* TODO: Revisit these URLS, they are a little off */}
             <Route path="/login" exact component={LoginPage} />
             <Route path="/register" exact component={RegisterPage} />
             <Route path="/lobby" exact component={LobbyList} />

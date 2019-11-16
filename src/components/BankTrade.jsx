@@ -14,7 +14,7 @@ export default function BankTrade() {
     request: null
   });
 
-  const { gameId } = useParams();
+  const { gameId } = useParams(); // TODO: Should come from a GameContext
   const history = useHistory();
 
   // Resources the player can offer for a bank trade (i.e. has more than 4)

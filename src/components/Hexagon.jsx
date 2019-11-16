@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
@@ -12,6 +13,8 @@ function Hexagon({
   adjacentPlayers,
   hasRobber
 }) {
+  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
+
   // Point positioning
   const width = Math.sqrt(3) * unit;
   const radius = unit;
@@ -65,7 +68,6 @@ function Hexagon({
             player: null
           })
       });
-      const gameId = 1;
       window.showModal({ disabled, title, body, buttons });
     }
   };
