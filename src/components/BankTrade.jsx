@@ -56,6 +56,11 @@ export default function BankTrade() {
   );
 }
 
+// TODO: We are missusing the term container.
+// In redux jargon component is used to refer to presentational components
+// and container for logic components that contains those components
+// we are using the term container as the exact opposite of what it is
+// and we are not even using redux :)
 function BankTradeContainer({
   offer = null,
   request = null,
