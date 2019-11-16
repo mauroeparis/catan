@@ -1,12 +1,13 @@
 import "../css/game.css";
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
 
 import Board from "./Board";
 import CardList from "./CardList";
 import { ResourceList } from "./ResourceList";
 import BuyCard from "./BuyCard";
+import { BankTradeButton } from "./BankTrade";
 import DiceRoll from "./DiceRoll";
 import EndTurn from "./EndTurn";
 import Modal from "./Modal";
@@ -29,9 +30,7 @@ function Game() {
           <BuyCard gameId={id} />
           <ResourceList gameId={id} />
         </ToastProvider>
-        <Link to={`/game/${id}/bankTrade`} className="w-full text-center">
-          <input type="button" value="Trade with bank" />
-        </Link>
+        <BankTradeButton gameId={id} />
         <DiceRoll gameId={id} />
         <EndTurn />
       </div>

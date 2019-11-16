@@ -121,11 +121,41 @@ BankTradeContainer.propTypes = {
   trade: PropTypes.func.isRequired
 };
 
-// NOTE: Eventually defaultProps will be deprecated, but for now eslint
+// TODO: Eventually defaultProps will be deprecated, but for now eslint
 // has not been updated to use es6 default parameters instead
 // https://github.com/yannickcr/eslint-plugin-react/issues/666
 // when it happens, move this and other occurrences as default parameters
 BankTradeContainer.defaultProps = {
   offer: null,
   request: null
+};
+
+export function BankTradeButton({ gameId }) {
+  const [canTrade, setCanTrade] = useState(false);
+
+  useEffect(() => {
+    const fetchActions = async () => {
+      const { data: actions } = await api.games.actions(gameId);
+      const bankTradeAvailable = actions.some(a => a.type === "bank_trade");
+      setCanTrade(bankTradeAvailable);
+    };
+    fetchActions();
+    const interval = setInterval(() => fetchActions(), api.POLL_EVERY);
+    return () => clearInterval(interval);
+  }, [gameId]);
+
+  return (
+    <Link to={`/game/${gameId}/bankTrade`} className="w-full text-center">
+      <input
+        type="button"
+        value="Trade with bank"
+        disabled={!canTrade}
+        className="disabled:cursor-not-allowed disabled:opacity-50"
+      />
+    </Link>
+  );
+}
+
+BankTradeButton.propTypes = {
+  gameId: PropTypes.string.isRequired
 };
