@@ -8,8 +8,11 @@ const API = axios.create({
   baseURL: URL,
   timeout: 10000,
   headers: {
-    // TODO: Edit this part on the authReducer. I didnt make it work yet.
-    Authorization: `Bearer ${localStorage.token}`
+    Authorization: {
+      toString() {
+        return `Bearer ${localStorage.token}`;
+      }
+    }
   }
 });
 
