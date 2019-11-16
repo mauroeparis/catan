@@ -11,27 +11,26 @@ import api from "../Api";
 const TextClasses = "text-center text-sm tracking-wider text-bold text-white";
 const CommonClasses =
   "h-12 shadow-md shadow rounded cursor-pointer disabled:cursor-not-allowed disabled:opacity-50";
-
+// TODO: Change all names with Lobby to Room, they are the same
 function Lobby() {
-  // TODO: This is the room id, not the game id, but it is used as such below
-  const { id } = useParams();
+  const { roomId } = useParams();
   const history = useHistory();
   const [room, setRoom] = useState();
 
   useEffect(() => {
     const fetchRoom = async () => {
-      const res = await api.lobbies.get(id);
+      const res = await api.lobbies.get(roomId);
       setRoom(res.data);
     };
     fetchRoom();
     const interval = setInterval(() => fetchRoom(), api.POLL_EVERY);
     return () => clearInterval(interval);
-  }, [id]);
+  }, [roomId]);
 
   const handleJoin = async event => {
     event.preventDefault();
     try {
-      const res = await api.lobbies.join(id);
+      const res = await api.lobbies.join(roomId);
       console.log(res); // TODO: Handle join response
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -41,7 +40,7 @@ function Lobby() {
   const handleStartGame = async event => {
     event.preventDefault();
     try {
-      const res = await api.lobbies.start(id);
+      const res = await api.lobbies.start(roomId);
       console.log(res); // TODO: Handle start response
     } catch (err) {
       console.log(`Error: ${err}`);
@@ -53,7 +52,7 @@ function Lobby() {
     if (!window.confirm("You're about to cancel the lobby. Confirm?")) return;
     try {
       history.push(`/lobby`);
-      const res = await api.lobbies.cancel(id);
+      const res = await api.lobbies.cancel(roomId);
       console.log(res); // TODO: Handle start response
     } catch (err) {
       console.log(`Error: ${err}`);

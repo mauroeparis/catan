@@ -13,7 +13,7 @@ import EndTurn from "./EndTurn";
 import Modal from "./Modal";
 
 function Game() {
-  const { id } = useParams();
+  const { gameId } = useParams();
   const [{ disabled, title, body, buttons }, setModal] = useState({
     disabled: true,
     title: "",
@@ -23,15 +23,15 @@ function Game() {
   window.showModal = setModal;
   return (
     <div className="game">
-      <Board gameId={id} />
+      <Board gameId={gameId} />
       <div className="information">
         <ToastProvider>
-          <CardList gameId={id} />
-          <BuyCard gameId={id} />
-          <ResourceList gameId={id} />
+          <CardList gameId={gameId} />
+          <BuyCard gameId={gameId} />
+          <ResourceList gameId={gameId} />
         </ToastProvider>
-        <BankTradeButton gameId={id} />
-        <DiceRoll gameId={id} />
+        <BankTradeButton gameId={gameId} />
+        <DiceRoll gameId={gameId} />
         <EndTurn />
       </div>
       <Modal disabled={disabled} title={title} body={body} buttons={buttons} />

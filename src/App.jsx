@@ -33,8 +33,8 @@ function App() {
             <Route path="/register" exact component={RegisterPage} />
             <Route path="/lobby" exact component={LobbyList} />
             <Route path="/lobby/create" exact component={CreateLobby} />
-            <Route path="/lobby/:id" exact component={Lobby} />
-            <Route path="/game/:id" exact component={Game} />
+            <Route path="/lobby/:roomId" exact component={Lobby} />
+            <Route path="/game/:gameId" exact component={Game} />
             <Route path="/game/:gameId/bankTrade" component={BankTrade} />
             <Route path="/board" exact component={Board} />
             <Route path="/" render={() => <Redirect to="/lobby" />} />
