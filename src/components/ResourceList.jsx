@@ -23,8 +23,11 @@ export function ResourceList({ gameId }) {
       // Get a dict with resources as keys and the ocurences as values
       const newResourcesCount = _.countBy(player.data.resources);
       const currResourcesCount = _.countBy(resources);
-      // Check if something changed
-      if (!_.isEqual(currResourcesCount, newResourcesCount)) {
+      // Check if it is necessary to update state
+      if (
+        resources === null || // First render?
+        !_.isEqual(currResourcesCount, newResourcesCount) // Something changed?
+      ) {
         // Merge both calculating the difference of old and new value
         const resourceMerge = _.mergeWith(
           currResourcesCount,
@@ -54,8 +57,8 @@ export function ResourceList({ gameId }) {
           );
           addToast(warnToastText, { appearance: "error", autoDismiss: true });
         }
+        setState({ resources: player.data.resources });
       }
-      setState({ resources: player.data.resources });
     };
     fetchResources();
     const interval = setInterval(() => fetchResources(), api.POLL_EVERY);
