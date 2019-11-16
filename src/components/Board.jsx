@@ -85,11 +85,13 @@ export default function Board({ gameId }) {
       );
 
       // Available builds and upgrades
-      const aBuilds = actions.find(a => a.type === "build_settlement").payload;
-      const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
-      const aRoadSlots = actions.find(a => a.type === "build_road").payload;
-      const adjacentPlayers = actions.find(a => a.type === "move_robber")
-        .payload;
+      const getPayload = type =>
+        (actions.find(a => a.type === type) || { payload: [] }).payload;
+      const aBuilds = getPayload("build_settlement");
+      const aUpgrades = getPayload("upgrade_city");
+      const aRoadSlots = getPayload("build_road");
+      // TODO: If move_robber is not defined, should disallow hexagon clicks
+      const adjacentPlayers = getPayload("move_robber");
 
       // Update board internal state
       setState({
