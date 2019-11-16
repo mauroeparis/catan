@@ -36,35 +36,26 @@ export function ResourceList({ gameId }) {
             return _.isNumber(currV) ? currV : newV;
           }
         );
-        // Get the resources that have gone up
-        const upResources = _.pickBy(resourceMerge, elem => {
-          return elem > 0;
-        });
-        // Get the resources that have gone down
-        const downResources = _.pickBy(resourceMerge, elem => {
-          return elem < 0;
-        });
+
+        // Inform about resources that have gone up
+        const upResources = _.pickBy(resourceMerge, elem => elem > 0);
         if (!_.isEmpty(upResources)) {
-          const succToastText = _.toPairs(upResources).map(elem => {
-            return `+${elem[1]} ${elem[0].toUpperCase()} `;
-          });
-          addToast(succToastText, {
-            appearance: "success",
-            autoDismiss: true
-          });
+          const succToastText = _.toPairs(upResources).map(
+            elem => `+${elem[1]} ${elem[0].toUpperCase()} `
+          );
+          addToast(succToastText, { appearance: "success", autoDismiss: true });
         }
 
+        // Inform about resources that have gone down
+        const downResources = _.pickBy(resourceMerge, elem => elem < 0);
         if (!_.isEmpty(downResources)) {
-          const warnToastText = _.toPairs(downResources).map(elem => {
-            return `${elem[1]} ${elem[0].toUpperCase()} `;
-          });
-          addToast(warnToastText, {
-            appearance: "error",
-            autoDismiss: true
-          });
+          const warnToastText = _.toPairs(downResources).map(
+            elem => `${elem[1]} ${elem[0].toUpperCase()} `
+          );
+          addToast(warnToastText, { appearance: "error", autoDismiss: true });
         }
-        setState({ resources: player.data.resources });
       }
+      setState({ resources: player.data.resources });
     };
     fetchResources();
     const interval = setInterval(() => fetchResources(), api.POLL_EVERY);
@@ -83,11 +74,11 @@ export function ResourceListContainer({ resources }) {
     <div className="resource-list">
       <h1>Resource List</h1>
       <ul>
-        <li>Brick: {amounts.brick}</li>
-        <li>Lumber: {amounts.lumber}</li>
-        <li>Wool: {amounts.wool}</li>
-        <li>Grain: {amounts.grain}</li>
-        <li>Ore: {amounts.ore}</li>
+        <li>Brick: {amounts.brick || 0}</li>
+        <li>Lumber: {amounts.lumber || 0}</li>
+        <li>Wool: {amounts.wool || 0}</li>
+        <li>Grain: {amounts.grain || 0}</li>
+        <li>Ore: {amounts.ore || 0}</li>
       </ul>
     </div>
   );
