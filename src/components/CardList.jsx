@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
+import { DEV_CARDS } from "../CatanTypes";
+import DevelopmentCard from "./DevelopmentCard";
 import api from "../Api";
 
 function CardList({ gameId }) {
@@ -22,11 +24,14 @@ function CardList({ gameId }) {
     <div className="card-list">
       <h1>Card List</h1>
       <ul>
-        <li>Road building: {amounts.road_building}</li>
-        <li>Year of plenty: {amounts.year_of_plenty}</li>
-        <li>Monopoly: {amounts.monopoly}</li>
-        <li>Victory point: {amounts.victory_point}</li>
-        <li>Knight: {amounts.knight}</li>
+        {DEV_CARDS.map(cardType => (
+          <DevelopmentCard
+            key={cardType}
+            cardType={cardType}
+            amount={amounts[cardType]}
+            gameId={gameId}
+          />
+        ))}
       </ul>
     </div>
   );

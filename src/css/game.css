@@ -148,6 +148,26 @@
   padding: 1rem;
 }
 
+.game .card-list button {
+  transition: 0.1s;
+  text-decoration: underline solid transparent 64px;
+}
+
+.game .card-list button:disabled {
+  cursor: unset;
+  font-style: italic;
+  text-decoration: unset;
+}
+
+.game .card-list button:disabled:hover {
+  text-decoration: unset;
+}
+
+.game .card-list button:hover {
+  transition: 0.1s;
+  text-decoration: underline solid var(--highlight) 2px;
+}
+
 .game .modal.disabled {
   display: none;
 }
