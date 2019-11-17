@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
-import GameContext, { DEFAULT } from "../GameContext";
+import GameContext, { DEFAULT, SET_PLAY_KNIGHT } from "../GameContext";
 
 export default function DevelopmentCard({ cardType, amount }) {
-  const { phase, gameId, showModal } = useContext(GameContext);
+  const { phase, gameId, gameDispatch, showModal } = useContext(GameContext);
   const validPhase = [DEFAULT].includes(phase);
   const [canPlayCard, setCanPlayCard] = useState(false);
   const enabled = canPlayCard && validPhase;
@@ -26,11 +26,22 @@ export default function DevelopmentCard({ cardType, amount }) {
   const readableType = _.startCase(cardType);
 
   const tryPlay = () => {
+    let body;
+    let callback;
+    switch (cardType) {
+      case "knight":
+        body = "Select where you want to move the robber.";
+        callback = () => gameDispatch({ type: SET_PLAY_KNIGHT });
+        break;
+      default:
+        body = "Sorry, but this feature is not yet implemented";
+        callback = () => {};
+    }
     showModal({
       disabled: false,
       title: `Play ${readableType}`,
-      body: "Sorry, but this feature is not yet implemented",
-      buttons: [{ text: "Dismiss" }]
+      body,
+      buttons: [{ text: "Ok", callback }]
     });
   };
 

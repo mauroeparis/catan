@@ -12,7 +12,7 @@ export const PLAY_KNIGHT = "PLAY_KNIGHT";
 // TODO: FINISHED
 // TODO: INVALID_GAME_ID
 
-export const initGameState = gameId => ({ phase: PLAY_KNIGHT, gameId });
+export const initGameState = gameId => ({ phase: DEFAULT, gameId });
 
 const GameContext = createContext();
 
