@@ -3,14 +3,14 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 
 import api from "../Api";
-import GameContext from "../GameContext";
+import GameContext, { PLAY_KNIGHT } from "../GameContext";
 import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
 import Road, { BuildRoadIndicator } from "./Road";
 
 export default function Board() {
-  const { gameId } = useContext(GameContext);
+  const { phase, gameId } = useContext(GameContext);
   const [
     {
       hexagons,
@@ -90,7 +90,10 @@ export default function Board() {
         (actions.find(a => a.type === type) || { payload: [] }).payload;
 
       // Combine board.hexes with information related to the robber
-      const availableRobberMoves = getPayload("move_robber");
+      const availableRobberMoves = [PLAY_KNIGHT].includes(phase)
+        ? getPayload("play_knight_card")
+        : getPayload("move_robber");
+
       const robberInfoForHex = hex => {
         const move = availableRobberMoves.find(a =>
           _.isEqual(a.position, hex.position)
@@ -125,7 +128,7 @@ export default function Board() {
     fetchBoard();
     const interval = setInterval(() => fetchBoard(), api.POLL_EVERY);
     return () => clearInterval(interval);
-  }, [gameId]);
+  }, [phase, gameId]);
 
   // !hexagons is a weird way of saying nothing has loaded yet
   if (!hexagons) return <i>Loading Board...</i>;

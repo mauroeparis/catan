@@ -105,7 +105,36 @@
     },
     {
       "type": "play_knight_card",
-      "payload": []
+      "payload": [
+        {
+          "position": {
+            "level": 2,
+            "index": 4
+          },
+          "players": [
+            "mateo",
+            "julian"
+          ]
+        },
+        {
+          "position": {
+            "level": 2,
+            "index": 0
+          },
+          "players": [
+            "mateo"
+          ]
+        },
+        {
+          "position": {
+            "level": 1,
+            "index": 5
+          },
+          "players": [
+            "tupac"
+          ]
+        }
+      ]
     },
     {
       "type": "play_road_building_card",
@@ -603,7 +632,7 @@
       ],
       "robber": {
         "level": 1,
-        "index": 4
+        "index": 0
       },
       "current_turn": {
         "user": "mateo",
