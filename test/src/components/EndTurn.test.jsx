@@ -1,12 +1,13 @@
 import React from "react";
 import EndTurn from "../../../src/components/EndTurn";
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"), // use actual for all non-hook parts
-  useParams: () => ({
-    id: 1
-  })
-}));
+jest.mock("react", () => {
+  const ActualReact = require.requireActual("react");
+  return {
+    ...ActualReact,
+    useContext: () => ({ gameId: 1, showModal: () => {} }) // what you want to return when useContext get fired goes here
+  };
+});
 
 describe("<EndTurn /> rendering", () => {
   it("should render one input", () => {
