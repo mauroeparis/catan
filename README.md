@@ -33,6 +33,10 @@ Then do `npm install` inside the project folder.
 
 For running catan run `npm start` and for running the mockapi `npm run mockapi`.
 
+Before running, set API url creating a file called `.env` in the root, and adding the line `REACT_APP_API=address`.
+
+You can also use temporary env variables running the app with `REACT_APP_API=address npm start`.
+
 # Wiki
 
 We have more documentation in the [repo's
