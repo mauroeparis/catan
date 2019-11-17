@@ -22,7 +22,6 @@
 }
 
 .game .board .hexagon {
-  cursor: pointer;
   transition: 0.2s;
 }
 
@@ -30,11 +29,19 @@
   transition: 0.2s;
 }
 
-.game .board .hexagon:hover polygon {
+.game .board .hexagon.can-move-robber {
+  cursor: pointer;
+}
+
+.game .board .hexagon.can-move-robber:hover polygon {
   fill: var(--light) !important;
 }
 
-.game .board .hexagon:hover text {
+.game .board .hexagon.can-move-robber text:first-of-type {
+  text-decoration: overline;
+}
+
+.game .board .hexagon.can-move-robber:hover text {
   fill: var(--dark) !important;
 }
 
@@ -139,6 +146,26 @@
   border: 2px solid var(--light);
   border-radius: 1rem;
   padding: 1rem;
+}
+
+.game .card-list button {
+  transition: 0.1s;
+  text-decoration: underline solid transparent 64px;
+}
+
+.game .card-list button:disabled {
+  cursor: unset;
+  font-style: italic;
+  text-decoration: unset;
+}
+
+.game .card-list button:disabled:hover {
+  text-decoration: unset;
+}
+
+.game .card-list button:hover {
+  transition: 0.1s;
+  text-decoration: underline solid var(--highlight) 2px;
 }
 
 .game .modal.disabled {

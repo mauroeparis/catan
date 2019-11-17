@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import getVertex from "../Vertex";
 import CatanTypes from "../CatanTypes";
@@ -13,8 +14,8 @@ export default function Settlement({
   username,
   canUpgrade
 }) {
+  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
   const tryUpgrade = () => {
-    const gameId = 1; // TODO: Should come from an upper state
     if (canUpgrade) {
       const disabled = false;
       const title = "Upgrade City";
@@ -69,8 +70,8 @@ Settlement.defaultProps = {
 };
 
 export function BuildIndicator({ position, unit = 256 }) {
+  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
   const doBuild = () => {
-    const gameId = 1; // TODO: Should come from an upper state
     const disabled = false;
     const title = "Build Settlement";
     const body =

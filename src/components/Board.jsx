@@ -16,7 +16,6 @@ export default function Board({ gameId }) {
       availableBuilds,
       availableUpgrades,
       availableRoadSlots,
-      adjacentPlayersPerHex,
       robber
     },
     setState
@@ -27,7 +26,6 @@ export default function Board({ gameId }) {
     availableBuilds: null,
     availableUpgrades: null,
     availableRoadSlots: null,
-    adjacentPlayersPerHex: null,
     robber: null
   });
 
@@ -84,22 +82,40 @@ export default function Board({ gameId }) {
         )
       );
 
+      // Returns empty list if action not available, else action-of-type payload
+      const getPayload = type =>
+        (actions.find(a => a.type === type) || { payload: [] }).payload;
+
+      // Combine board.hexes with information related to the robber
+      const availableRobberMoves = getPayload("move_robber");
+      const robberInfoForHex = hex => {
+        const move = availableRobberMoves.find(a =>
+          _.isEqual(a.position, hex.position)
+        );
+        return {
+          hasRobber: _.isEqual(hex.position, robberPosition),
+          availableRobberMove: Boolean(move),
+          adjacentPlayersToRob: move ? move.players : []
+        };
+      };
+      const combinedHexagons = board.hexes.map(h => ({
+        ...h,
+        ...robberInfoForHex(h)
+      }));
+
       // Available builds and upgrades
-      const aBuilds = actions.find(a => a.type === "build_settlement").payload;
-      const aUpgrades = actions.find(a => a.type === "upgrade_city").payload;
-      const aRoadSlots = actions.find(a => a.type === "build_road").payload;
-      const adjacentPlayers = actions.find(a => a.type === "move_robber")
-        .payload;
+      const aBuilds = getPayload("build_settlement");
+      const aUpgrades = getPayload("upgrade_city");
+      const aRoadSlots = getPayload("build_road");
 
       // Update board internal state
       setState({
-        hexagons: board.hexes,
+        hexagons: combinedHexagons,
         settlements: combinedSettlements,
         roads: builtRoads,
         availableBuilds: aBuilds,
         availableUpgrades: aUpgrades,
         availableRoadSlots: aRoadSlots,
-        adjacentPlayersPerHex: adjacentPlayers,
         robber: robberPosition
       });
     };
@@ -118,7 +134,6 @@ export default function Board({ gameId }) {
       availableBuilds={availableBuilds}
       availableUpgrades={availableUpgrades}
       availableRoadSlots={availableRoadSlots}
-      adjacentPlayersPerHex={adjacentPlayersPerHex}
       robber={robber}
     />
   );
@@ -137,19 +152,12 @@ function BoardContainer({
   availableBuilds,
   availableUpgrades,
   availableRoadSlots,
-  adjacentPlayersPerHex,
   robber
 }) {
   const unit = 256; // Radius of one hexagon in pixels
   const width = 2560;
   const height = 2560;
   const viewBox = `${-width / 2} ${-height / 2} ${width} ${height}`;
-  const adjacentPlayers = position => {
-    const playersForHex = adjacentPlayersPerHex.find(hp =>
-      _.isEqual(hp.position, position)
-    );
-    return playersForHex ? playersForHex.players : [];
-  };
   return (
     <div className="board">
       <svg
@@ -161,11 +169,12 @@ function BoardContainer({
           <Hexagon
             key={Object.values(hex.position)}
             position={hex.position}
-            adjacentPlayers={adjacentPlayers(hex.position)}
             terrain={hex.terrain}
             token={hex.token}
             unit={unit}
-            hasRobber={_.isEqual(hex.position, robber)}
+            hasRobber={hex.hasRobber}
+            availableRobberMove={hex.availableRobberMove}
+            adjacentPlayersToRob={hex.adjacentPlayersToRob}
           />
         ))}
         {availableRoadSlots.map(road => (
@@ -218,12 +227,6 @@ BoardContainer.propTypes = {
   availableBuilds: PropTypes.arrayOf(CatanTypes.VertexPosition),
   availableUpgrades: PropTypes.arrayOf(CatanTypes.VertexPosition),
   availableRoadSlots: PropTypes.arrayOf(CatanTypes.RoadPosition),
-  adjacentPlayersPerHex: PropTypes.arrayOf(
-    PropTypes.shape({
-      position: CatanTypes.HexPosition.isRequired,
-      players: PropTypes.arrayOf(PropTypes.string).isRequired
-    })
-  ),
   robber: CatanTypes.HexPosition.isRequired
 };
 
@@ -233,6 +236,5 @@ BoardContainer.defaultProps = {
   roads: null,
   availableBuilds: null,
   availableUpgrades: null,
-  availableRoadSlots: null,
-  adjacentPlayersPerHex: null
+  availableRoadSlots: null
 };

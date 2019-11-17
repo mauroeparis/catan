@@ -5,8 +5,8 @@ const DEV_CARDS = [
   "road_building",
   "year_of_plenty",
   "monopoly",
-  "victory_point",
-  "knight"
+  "knight",
+  "victory_point"
 ];
 
 const CatanTypes = {
