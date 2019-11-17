@@ -30,7 +30,7 @@ export function gameReducer(state, action) {
       // Assumes state.roads and action.road exists and are CatanTypes.Road
       let roads;
       if (state.roads.length < 2) {
-        roads = state.roads.concat(action.road);
+        roads = state.roads.concat([action.road]);
       } else {
         // enqueue new road as fifo
         roads = [...state.roads];

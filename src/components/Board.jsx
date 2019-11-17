@@ -3,7 +3,7 @@ import _ from "lodash";
 import PropTypes from "prop-types";
 
 import api from "../Api";
-import GameContext, { PLAY_KNIGHT } from "../GameContext";
+import GameContext, { PLAY_KNIGHT, PLAY_ROAD_BUILDING } from "../GameContext";
 import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
@@ -89,11 +89,12 @@ export default function Board() {
       const getPayload = type =>
         (actions.find(a => a.type === type) || { payload: [] }).payload;
 
-      // Combine board.hexes with information related to the robber
+      // Available places to move the robber changes if playing knight card
       const availableRobberMoves = [PLAY_KNIGHT].includes(phase)
         ? getPayload("play_knight_card")
         : getPayload("move_robber");
 
+      // Combine board.hexes with information related to the robber
       const robberInfoForHex = hex => {
         const move = availableRobberMoves.find(a =>
           _.isEqual(a.position, hex.position)
@@ -109,10 +110,14 @@ export default function Board() {
         ...robberInfoForHex(h)
       }));
 
+      // Available roads changes if playing road_building card
+      const aRoadSlots = [PLAY_ROAD_BUILDING].includes(phase)
+        ? getPayload("play_road_building_card")
+        : getPayload("build_road");
+
       // Available builds and upgrades
       const aBuilds = getPayload("build_settlement");
       const aUpgrades = getPayload("upgrade_city");
-      const aRoadSlots = getPayload("build_road");
 
       // Update board internal state
       setState({
