@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect, useContext } from "react";
+
+import GameContext from "../GameContext";
 import api from "../Api";
 
-function BuyCard({ gameId }) {
+export default function BuyCard() {
+  const { gameId } = useContext(GameContext);
   const [canBuy, setCanBuy] = useState(false);
 
   useEffect(() => {
@@ -45,9 +47,3 @@ function BuyCard({ gameId }) {
     </div>
   );
 }
-
-BuyCard.propTypes = {
-  gameId: PropTypes.string.isRequired
-};
-
-export default BuyCard;

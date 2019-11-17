@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import api from "../Api";
+import React, { useState, useEffect, useContext } from "react";
 
-function DiceRoll({ gameId }) {
+import api from "../Api";
+import GameContext from "../GameContext";
+
+function DiceRoll() {
+  const { gameId } = useContext(GameContext);
   const [dices, setDices] = useState(null);
 
   useEffect(() => {
@@ -19,9 +21,5 @@ function DiceRoll({ gameId }) {
   if (!dices) return <i>Loading Dices...</i>;
   return <i>Last dices: {`(${dices[0]} , ${dices[1]})`}</i>;
 }
-
-DiceRoll.propTypes = {
-  gameId: PropTypes.string.isRequired
-};
 
 export default DiceRoll;

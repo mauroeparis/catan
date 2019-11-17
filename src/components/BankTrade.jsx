@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import "../css/banktrade.css";
+import React, { useState, useEffect, useContext } from "react";
+
 import _ from "lodash";
 import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
 
+import "../css/banktrade.css";
+import GameContext from "../GameContext";
 import CatanTypes, { RESOURCES } from "../CatanTypes";
 import api from "../Api";
 
@@ -14,7 +16,9 @@ export default function BankTrade() {
     request: null
   });
 
-  const { gameId } = useParams(); // TODO: Should come from a GameContext
+  // TODO: gameId can't come frome GameContext since BankTrade is another view
+  // that is not inside <Game />
+  const { gameId } = useParams();
   const history = useHistory();
 
   // Resources the player can offer for a bank trade (i.e. has more than 4)
@@ -135,7 +139,8 @@ BankTradeContainer.defaultProps = {
   request: null
 };
 
-export function BankTradeButton({ gameId }) {
+export function BankTradeButton() {
+  const { gameId } = useContext(GameContext);
   const [canTrade, setCanTrade] = useState(false);
 
   useEffect(() => {
@@ -160,7 +165,3 @@ export function BankTradeButton({ gameId }) {
     </Link>
   );
 }
-
-BankTradeButton.propTypes = {
-  gameId: PropTypes.string.isRequired
-};

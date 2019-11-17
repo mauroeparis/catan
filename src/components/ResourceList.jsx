@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useToasts } from "react-toast-notifications";
-
+import React, { useState, useEffect, useContext } from "react";
 import _ from "lodash";
+import { useToasts } from "react-toast-notifications";
 import PropTypes from "prop-types";
+
+import GameContext from "../GameContext";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
 
@@ -12,7 +13,8 @@ import api from "../Api";
 //   setState({ resources: player.data.resources });
 // }, [gameId]);
 
-export function ResourceList({ gameId }) {
+export default function ResourceList() {
+  const { gameId } = useContext(GameContext);
   const [{ resources }, setState] = useState({ resources: null });
   const { addToast } = useToasts();
 
@@ -69,8 +71,6 @@ export function ResourceList({ gameId }) {
   return <ResourceListContainer resources={resources} />;
 }
 
-ResourceList.propTypes = { gameId: PropTypes.string.isRequired };
-
 export function ResourceListContainer({ resources }) {
   const amounts = _.countBy(resources);
   return (
@@ -90,5 +90,3 @@ export function ResourceListContainer({ resources }) {
 ResourceListContainer.propTypes = {
   resources: PropTypes.arrayOf(CatanTypes.Resource).isRequired
 };
-
-export default { ResourceList, ResourceListContainer };
