@@ -26,7 +26,7 @@ export default function GameStatus() {
             ☓
           </button>
         )}
-        {[PLAY_KNIGHT, PLAY_ROAD_BUILDING].includes(phase) && (
+        {[PLAY_ROAD_BUILDING].includes(phase) && (
           <button
             className="close"
             type="button"
