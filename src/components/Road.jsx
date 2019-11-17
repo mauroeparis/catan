@@ -34,7 +34,7 @@ Road.propTypes = {
 };
 
 export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
   const doBuild = () => {
     const disabled = false;
     const title = "Build Road";
@@ -49,7 +49,7 @@ export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
         text: "Cancel"
       }
     ];
-    window.showModal({ disabled, title, body, buttons });
+    showModal({ disabled, title, body, buttons });
   };
   const vmap = getVertex(v.level, v.index, unit);
   const wmap = getVertex(w.level, w.index, unit);

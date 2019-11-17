@@ -4,7 +4,7 @@ import api from "../Api";
 import GameContext from "../GameContext";
 
 export default function EndTurn() {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
   const [canEndTurn, setCanEndTurn] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function EndTurn() {
         text: "Cancel"
       }
     ];
-    window.showModal({ disabled, title, body, buttons });
+    showModal({ disabled, title, body, buttons });
   };
 
   return (

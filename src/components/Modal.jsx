@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
+import GameContext from "../GameContext";
+
 function Modal({ disabled, title, body, buttons }) {
+  const { showModal } = useContext(GameContext);
   return (
     <div className={`modal ${disabled ? "disabled" : ""}`}>
       <button
         className="close"
         type="button"
-        onClick={() => window.showModal({ disabled: true })}
+        onClick={() => showModal({ disabled: true })}
       >
         ☓
       </button>
@@ -21,7 +24,7 @@ function Modal({ disabled, title, body, buttons }) {
               type="button"
               onClick={() => {
                 callback && callback();
-                window.showModal({ disabled: true });
+                showModal({ disabled: true });
               }}
             >
               {text}

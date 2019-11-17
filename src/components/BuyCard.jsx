@@ -4,7 +4,7 @@ import GameContext from "../GameContext";
 import api from "../Api";
 
 export default function BuyCard() {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
   const [canBuy, setCanBuy] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function BuyCard() {
         text: "Cancel"
       }
     ];
-    window.showModal({ disabled, title, body, buttons });
+    showModal({ disabled, title, body, buttons });
   };
 
   return (

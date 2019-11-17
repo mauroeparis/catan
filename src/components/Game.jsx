@@ -17,15 +17,14 @@ function Game() {
   // TODO: gameId must be a number. We could use regex /game/:gameId(//d+)
   const { gameId } = useParams();
   const [game, gameDispatch] = useReducer(gameReducer, initGameState(gameId));
-  const [{ disabled, title, body, buttons }, setModal] = useState({
+  const [{ disabled, title, body, buttons }, showModal] = useState({
     disabled: true,
     title: "",
     body: "",
     buttons: []
   });
-  window.showModal = setModal;
   return (
-    <GameContext.Provider value={{ ...game, gameDispatch }}>
+    <GameContext.Provider value={{ ...game, gameDispatch, showModal }}>
       <div className="game">
         <Board />
         <div className="information">
