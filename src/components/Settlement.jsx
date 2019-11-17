@@ -1,9 +1,10 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+
 import getVertex from "../Vertex";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
+import GameContext from "../GameContext";
 
 // TODO: Unit param should probably come from an upper global config state
 export default function Settlement({
@@ -14,7 +15,7 @@ export default function Settlement({
   username,
   canUpgrade
 }) {
-  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
+  const { gameId } = useContext(GameContext);
   const tryUpgrade = () => {
     if (canUpgrade) {
       const disabled = false;
@@ -70,7 +71,7 @@ Settlement.defaultProps = {
 };
 
 export function BuildIndicator({ position, unit = 256 }) {
-  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
+  const { gameId } = useContext(GameContext);
   const doBuild = () => {
     const disabled = false;
     const title = "Build Settlement";

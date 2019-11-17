@@ -31,7 +31,6 @@ function CardList() {
             key={cardType}
             cardType={cardType}
             amount={amounts[cardType] || 0}
-            gameId={gameId}
           />
         ))}
       </ul>

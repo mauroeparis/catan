@@ -1,9 +1,10 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+
 import CatanTypes from "../CatanTypes";
 import getVertex from "../Vertex";
 import api from "../Api";
+import GameContext from "../GameContext";
 
 export default function Road({
   vertices: [v, w],
@@ -33,7 +34,7 @@ Road.propTypes = {
 };
 
 export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
-  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
+  const { gameId } = useContext(GameContext);
   const doBuild = () => {
     const disabled = false;
     const title = "Build Road";
