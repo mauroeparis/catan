@@ -19,9 +19,9 @@ const GameContext = createContext();
 export function gameReducer(state, action) {
   switch (action.type) {
     case SET_PLAY_KNIGHT:
-      return { phase: PLAY_KNIGHT };
+      return { ...state, phase: PLAY_KNIGHT };
     case SET_DEFAULT:
-      return { phase: DEFAULT };
+      return { ...state, phase: DEFAULT };
     default:
       throw Error(`Invalid action.type === ${action.type} for gameReducer`);
   }

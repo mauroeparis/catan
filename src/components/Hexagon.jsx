@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
-import GameContext, { PLAY_KNIGHT } from "../GameContext";
+import GameContext, { PLAY_KNIGHT, SET_DEFAULT } from "../GameContext";
 
 function Hexagon({
   position,
@@ -15,7 +15,7 @@ function Hexagon({
   availableRobberMove,
   adjacentPlayersToRob
 }) {
-  const { phase, gameId, showModal } = useContext(GameContext);
+  const { phase, gameId, gameDispatch, showModal } = useContext(GameContext);
   const validPhase = [PLAY_KNIGHT].includes(phase);
   const enabled = availableRobberMove && validPhase;
   // Point positioning
@@ -52,25 +52,18 @@ function Hexagon({
 
   const moveRobber = () => {
     if (enabled) {
+      const robFrom = async player => {
+        await api.games.playAction(gameId, "move_robber", { position, player });
+        gameDispatch({ type: SET_DEFAULT });
+      };
       const disabled = false;
       const title = "Move Robber";
       const body = "Who would you like to take a resource from?";
       const buttons = adjacentPlayersToRob.map(player => ({
         text: player,
-        callback: () =>
-          api.games.playAction(gameId, "move_robber", {
-            position,
-            player
-          })
+        callback: () => robFrom(player)
       }));
-      buttons.push({
-        text: "No One",
-        callback: () =>
-          api.games.playAction(gameId, "move_robber", {
-            position,
-            player: null
-          })
-      });
+      buttons.push({ text: "No One", callback: () => robFrom(null) });
       showModal({ disabled, title, body, buttons });
     }
   };

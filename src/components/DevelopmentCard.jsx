@@ -34,7 +34,7 @@ export default function DevelopmentCard({ cardType, amount }) {
         callback = () => gameDispatch({ type: SET_PLAY_KNIGHT });
         break;
       default:
-        body = "Sorry, but this feature is not yet implemented";
+        body = "Sorry, this feature is not yet implemented";
         callback = () => {};
     }
     showModal({
