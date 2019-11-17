@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Link, useParams, useHistory } from "react-router-dom";
 
 import "../css/banktrade.css";
-import GameContext from "../GameContext";
+import GameContext, { DEFAULT } from "../GameContext";
 import CatanTypes, { RESOURCES } from "../CatanTypes";
 import api from "../Api";
 
@@ -140,8 +140,10 @@ BankTradeContainer.defaultProps = {
 };
 
 export function BankTradeButton() {
-  const { gameId } = useContext(GameContext);
+  const { phase, gameId } = useContext(GameContext);
+  const validPhase = [DEFAULT].includes(phase);
   const [canTrade, setCanTrade] = useState(false);
+  const enabled = canTrade && validPhase;
 
   useEffect(() => {
     const fetchActions = async () => {
@@ -159,7 +161,7 @@ export function BankTradeButton() {
       <input
         type="button"
         value="Trade with bank"
-        disabled={!canTrade}
+        disabled={!enabled}
         className="disabled:cursor-not-allowed disabled:opacity-50"
       />
     </Link>

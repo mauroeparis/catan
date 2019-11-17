@@ -56,8 +56,6 @@
 
 .game .board .settlement:hover > circle {
   r: 72px;
-  fill: var(--highlight);
-  stroke: var(--light);
 }
 
 .game .board .settlement > text {
@@ -92,6 +90,11 @@
   stroke-linecap: round;
   stroke-dasharray: 32px;
   transition: 0.2s;
+}
+
+.game .board .build-road-indicator.disabled {
+  stroke-width: 0rem;
+  stroke: var(--highlight);
 }
 
 .game .board .build-road-indicator:hover {
@@ -155,12 +158,12 @@
 
 .game .card-list button:disabled {
   cursor: unset;
-  font-style: italic;
-  text-decoration: unset;
+  transform: skewX(-20deg); /* Simulate italics and keep animations */
+  text-decoration: underline solid transparent 0px;
 }
 
 .game .card-list button:disabled:hover {
-  text-decoration: unset;
+  text-decoration: underline solid transparent 0px;
 }
 
 .game .card-list button:hover {

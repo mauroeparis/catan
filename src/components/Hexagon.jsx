@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
-import GameContext from "../GameContext";
+import GameContext, { PLAY_KNIGHT } from "../GameContext";
 
 function Hexagon({
   position,
@@ -15,8 +15,9 @@ function Hexagon({
   availableRobberMove,
   adjacentPlayersToRob
 }) {
-  const { gameId, showModal } = useContext(GameContext);
-
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const validPhase = [PLAY_KNIGHT].includes(phase);
+  const enabled = availableRobberMove && validPhase;
   // Point positioning
   const width = Math.sqrt(3) * unit;
   const radius = unit;
@@ -50,7 +51,7 @@ function Hexagon({
   const points = ps.join(" ");
 
   const moveRobber = () => {
-    if (availableRobberMove) {
+    if (enabled) {
       const disabled = false;
       const title = "Move Robber";
       const body = "Who would you like to take a resource from?";
@@ -91,7 +92,7 @@ function Hexagon({
 
   return (
     <g
-      className={`hexagon ${availableRobberMove ? "can-move-robber" : ""}`}
+      className={`hexagon ${enabled ? "can-move-robber" : ""}`}
       onClick={moveRobber}
     >
       <polygon

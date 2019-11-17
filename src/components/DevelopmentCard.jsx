@@ -4,14 +4,14 @@ import PropTypes from "prop-types";
 
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
-import GameContext from "../GameContext";
+import GameContext, { DEFAULT } from "../GameContext";
 
-// TODO: gameId should come from a GameContext,
-// there are other components with same problem as well
 export default function DevelopmentCard({ cardType, amount }) {
-  const { gameId, showModal } = useContext(GameContext);
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const validPhase = [DEFAULT].includes(phase);
   const [canPlayCard, setCanPlayCard] = useState(false);
-  const readableType = _.startCase(cardType);
+  const enabled = canPlayCard && validPhase;
+
   useEffect(() => {
     const fetchActions = async () => {
       const { data: actions } = await api.games.actions(gameId);
@@ -22,6 +22,8 @@ export default function DevelopmentCard({ cardType, amount }) {
     const interval = setInterval(() => fetchActions(), api.POLL_EVERY);
     return () => clearInterval(interval);
   }, [cardType, gameId]);
+
+  const readableType = _.startCase(cardType);
 
   const tryPlay = () => {
     showModal({
@@ -34,7 +36,7 @@ export default function DevelopmentCard({ cardType, amount }) {
 
   return (
     <li>
-      <button type="button" disabled={!canPlayCard} onClick={tryPlay}>
+      <button type="button" disabled={!enabled} onClick={tryPlay}>
         {readableType}: {amount}
       </button>
     </li>
