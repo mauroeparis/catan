@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
+
 import api from "../Api";
+import GameContext from "../GameContext";
 import CatanTypes from "../CatanTypes";
 import Hexagon from "./Hexagon";
 import Settlement, { BuildIndicator } from "./Settlement";
 import Road, { BuildRoadIndicator } from "./Road";
 
-export default function Board({ gameId }) {
+export default function Board() {
+  const { gameId } = useContext(GameContext);
   const [
     {
       hexagons,
@@ -138,12 +141,6 @@ export default function Board({ gameId }) {
     />
   );
 }
-
-Board.propTypes = {
-  gameId: PropTypes.string.isRequired
-  // TODO: This should be a number, but react-router treats match
-  // as strings. We could use regex /game/:id(//d+) as a safe mechanism
-};
 
 function BoardContainer({
   hexagons,

@@ -1,9 +1,10 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
+
 import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
+import GameContext from "../GameContext";
 
 function Hexagon({
   position,
@@ -14,7 +15,7 @@ function Hexagon({
   availableRobberMove,
   adjacentPlayersToRob
 }) {
-  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
+  const { gameId } = useContext(GameContext);
 
   // Point positioning
   const width = Math.sqrt(3) * unit;

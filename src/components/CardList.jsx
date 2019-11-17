@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import _ from "lodash";
-import PropTypes from "prop-types";
+
+import GameContext from "../GameContext";
 import { DEV_CARDS } from "../CatanTypes";
 import DevelopmentCard from "./DevelopmentCard";
 import api from "../Api";
 
-function CardList({ gameId }) {
+function CardList() {
+  const { gameId } = useContext(GameContext);
   const [{ cards }, setState] = useState({ cards: null });
   const amounts = _.countBy(cards);
 
@@ -29,14 +31,11 @@ function CardList({ gameId }) {
             key={cardType}
             cardType={cardType}
             amount={amounts[cardType] || 0}
-            gameId={gameId}
           />
         ))}
       </ul>
     </div>
   );
 }
-
-CardList.propTypes = { gameId: PropTypes.string.isRequired };
 
 export default CardList;

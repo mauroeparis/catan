@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import _ from "lodash";
 import PropTypes from "prop-types";
+
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
+import GameContext from "../GameContext";
 
 // TODO: gameId should come from a GameContext,
 // there are other components with same problem as well
-export default function DevelopmentCard({ cardType, amount, gameId }) {
+export default function DevelopmentCard({ cardType, amount }) {
+  const { gameId } = useContext(GameContext);
   const [canPlayCard, setCanPlayCard] = useState(false);
   const readableType = _.startCase(cardType);
   useEffect(() => {
@@ -40,6 +43,5 @@ export default function DevelopmentCard({ cardType, amount, gameId }) {
 
 DevelopmentCard.propTypes = {
   cardType: CatanTypes.Card.isRequired,
-  amount: PropTypes.number.isRequired,
-  gameId: PropTypes.string.isRequired
+  amount: PropTypes.number.isRequired
 };

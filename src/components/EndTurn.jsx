@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import api from "../Api";
+import React, { useState, useEffect, useContext } from "react";
 
-function EndTurn() {
-  const { id: gameId } = useParams(); // TODO: Should come from a GameContext
+import api from "../Api";
+import GameContext from "../GameContext";
+
+export default function EndTurn() {
+  const { gameId } = useContext(GameContext);
   const [canEndTurn, setCanEndTurn] = useState(false);
 
   useEffect(() => {
@@ -43,5 +44,3 @@ function EndTurn() {
     />
   );
 }
-
-export default EndTurn;
