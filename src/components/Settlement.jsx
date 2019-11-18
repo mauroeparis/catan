@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import getVertex from "../Vertex";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
-import GameContext from "../GameContext";
+import GameContext, { DEFAULT } from "../GameContext";
 
 // TODO: Unit param should probably come from an upper global config state
 export default function Settlement({
@@ -15,9 +15,11 @@ export default function Settlement({
   username,
   canUpgrade
 }) {
-  const { gameId, showModal } = useContext(GameContext);
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const isValidPhase = [DEFAULT].includes(phase);
+  const enabled = canUpgrade && isValidPhase;
   const tryUpgrade = () => {
-    if (canUpgrade) {
+    if (enabled) {
       const disabled = false;
       const title = "Upgrade City";
       const body =
@@ -42,7 +44,7 @@ export default function Settlement({
         cy={center.y}
         r={isCity ? "48px" : "32px"}
         fill={colour}
-        stroke={canUpgrade ? "#E91E63" : "white"}
+        stroke={enabled ? "#E91E63" : "white"}
         strokeWidth="10"
       />
       <text
@@ -71,7 +73,9 @@ Settlement.defaultProps = {
 };
 
 export function BuildIndicator({ position, unit = 256 }) {
-  const { gameId, showModal } = useContext(GameContext);
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const validPhase = [DEFAULT].includes(phase);
+  const enabled = validPhase;
   const doBuild = () => {
     const disabled = false;
     const title = "Build Settlement";
@@ -91,13 +95,14 @@ export function BuildIndicator({ position, unit = 256 }) {
   };
 
   const center = getVertex(position.level, position.index, unit);
+  const radius = enabled ? "48px" : "0px";
   return (
     <circle
       className="build-indicator"
       onClick={doBuild}
       cx={center.x}
       cy={center.y}
-      r="48px"
+      r={radius}
       fill="transparent"
       stroke="#E91E63"
       strokeWidth="10"

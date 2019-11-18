@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import CatanTypes from "../CatanTypes";
 import getVertex from "../Vertex";
 import api from "../Api";
-import GameContext from "../GameContext";
+import GameContext, { DEFAULT } from "../GameContext";
 
 export default function Road({
   vertices: [v, w],
@@ -34,7 +34,9 @@ Road.propTypes = {
 };
 
 export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
-  const { gameId, showModal } = useContext(GameContext);
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const validPhase = [DEFAULT].includes(phase);
+  const enabled = validPhase;
   const doBuild = () => {
     const disabled = false;
     const title = "Build Road";
@@ -55,7 +57,7 @@ export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
   const wmap = getVertex(w.level, w.index, unit);
   return (
     <line
-      className="build-road-indicator"
+      className={`build-road-indicator ${enabled ? "" : "disabled"}`}
       onClick={doBuild}
       x1={vmap.x}
       y1={vmap.y}

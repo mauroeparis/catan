@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import api from "../Api";
-import GameContext from "../GameContext";
+import GameContext, { DEFAULT } from "../GameContext";
 
 export default function EndTurn() {
-  const { gameId, showModal } = useContext(GameContext);
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const validPhase = [DEFAULT].includes(phase);
   const [canEndTurn, setCanEndTurn] = useState(false);
+  const enabled = canEndTurn && validPhase;
 
   useEffect(() => {
     const fetchActions = async () => {
@@ -39,7 +41,7 @@ export default function EndTurn() {
       type="button"
       value="End Turn"
       onClick={FinishTurn}
-      disabled={!canEndTurn}
+      disabled={!enabled}
       className="end-turn disabled:cursor-not-allowed disabled:opacity-50"
     />
   );
