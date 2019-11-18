@@ -6,6 +6,11 @@ import PropTypes from "prop-types";
 import GameContext from "../GameContext";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
+import { ReactComponent as BrickIcon } from "../public/icons/brick.svg";
+import { ReactComponent as WoolIcon } from "../public/icons/sheep.svg";
+import { ReactComponent as OreIcon } from "../public/icons/stone.svg";
+import { ReactComponent as LumberIcon } from "../public/icons/trees.svg";
+import { ReactComponent as GrainIcon } from "../public/icons/wheat.svg";
 
 // TODO: It would be nice to implement a custom hook like this
 // usePolling(async () => {
@@ -74,14 +79,42 @@ export default function ResourceList() {
 export function ResourceListContainer({ resources }) {
   const amounts = _.countBy(resources);
   return (
-    <div className="resource-list">
-      <h1>Resource List</h1>
-      <ul>
-        <li>Brick: {amounts.brick || 0}</li>
-        <li>Lumber: {amounts.lumber || 0}</li>
-        <li>Wool: {amounts.wool || 0}</li>
-        <li>Grain: {amounts.grain || 0}</li>
-        <li>Ore: {amounts.ore || 0}</li>
+    <div>
+      <ul className="flex flex-row">
+        <li className="flex flex-col p-3 text-center bg-red-800 text-orange-500 rounded-l-lg">
+          <div className="flex w-10 h-10 justify-center py-3">
+            <BrickIcon className="w-8 self-center" />
+          </div>
+          <span>{amounts.brick || 0}</span>
+        </li>
+
+        <li className="flex flex-col p-3 text-center bg-green-900 text-green-500">
+          <div className="flex w-10 h-10 justify-center py-3">
+            <LumberIcon className="w-8 self-center" />
+          </div>
+          <span>{amounts.lumber || 0}</span>
+        </li>
+
+        <li className="flex flex-col p-3 text-center bg-yellow-500 text-yellow-900">
+          <div className="flex w-10 h-10 justify-center py-3">
+            <GrainIcon className="w-8 self-center" />
+          </div>
+          <span>{amounts.grain || 0}</span>
+        </li>
+
+        <li className="flex flex-col p-3 text-center bg-gray-700 text-gray-500">
+          <div className="flex w-10 h-10 justify-center py-3">
+            <OreIcon className="w-8 self-center" />
+          </div>
+          <span>{amounts.ore || 0}</span>
+        </li>
+
+        <li className="flex flex-col p-3 text-center bg-green-500 text-green-900 rounded-r-lg">
+          <div className="flex w-10 h-10 justify-center py-3">
+            <WoolIcon className="w-8 self-center" />
+          </div>
+          <span>{amounts.wool || 0}</span>
+        </li>
       </ul>
     </div>
   );

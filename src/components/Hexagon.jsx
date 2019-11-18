@@ -76,12 +76,12 @@ function Hexagon({
 
   // Style
   const terrainColor = {
-    desert: "#F57C00",
-    brick: "#D32F2F",
-    lumber: "#5D4037",
-    wool: "#689F38",
-    grain: "#FBC02D",
-    ore: "#7B1FA2"
+    desert: "#B7791F",
+    brick: "#9B2C2C",
+    lumber: "#22543D",
+    wool: "#48BB78",
+    grain: "#ECC94B",
+    ore: "#4A5568"
   }[terrain];
   const terrainTextPos = center;
   const terrainTextStyle = { font: "bold 5rem Cinzel", fill: "white" };

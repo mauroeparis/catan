@@ -30,9 +30,11 @@ function Game() {
         <Board />
         <div className="information">
           <ToastProvider>
+            <div className="self-center">
+              <ResourceList />
+            </div>
             <CardList />
             <BuyCard />
-            <ResourceList />
           </ToastProvider>
           <BankTradeButton />
           <DiceRoll />
