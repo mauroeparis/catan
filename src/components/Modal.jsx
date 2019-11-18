@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Modal({ disabled, title, body, buttons }) {
+function Modal({ disabled, title, body, buttons, showCloseButton }) {
   return (
     <div className={`modal ${disabled ? "disabled" : ""}`}>
-      <button
-        className="close"
-        type="button"
-        onClick={() => window.showModal({ disabled: true })}
-      >
-        ☓
-      </button>
+      {showCloseButton && (
+        <button
+          className="close"
+          type="button"
+          onClick={() => window.showModal({ disabled: true })}
+        >
+          ☓
+        </button>
+      )}
       <div className="container">
         <h1>{title}</h1>
         <p>{body}</p>
@@ -42,13 +44,15 @@ Modal.propTypes = {
       text: PropTypes.string.isRequired,
       callback: PropTypes.func
     })
-  )
+  ),
+  showCloseButton: PropTypes.bool
 };
 
 Modal.defaultProps = {
   title: "",
   body: "",
-  buttons: []
+  buttons: [],
+  showCloseButton: true
 };
 
 export default Modal;
