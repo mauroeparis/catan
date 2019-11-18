@@ -78,43 +78,48 @@ export default function ResourceList() {
 
 export function ResourceListContainer({ resources }) {
   const amounts = _.countBy(resources);
+  const resourcesData = {
+    brick: {
+      icon: <BrickIcon className="w-8 self-center" />,
+      amount: amounts.brick || 0,
+      styleClasses: "bg-red-800 text-orange-500 rounded-l-lg"
+    },
+    lumber: {
+      icon: <LumberIcon className="w-8 self-center" />,
+      amount: amounts.lumber || 0,
+      styleClasses: "bg-green-900 text-green-500"
+    },
+    grain: {
+      icon: <GrainIcon className="w-8 self-center" />,
+      amount: amounts.grain || 0,
+      styleClasses: "bg-yellow-500 text-yellow-900"
+    },
+    ore: {
+      icon: <OreIcon className="w-8 self-center" />,
+      amount: amounts.ore || 0,
+      styleClasses: "bg-gray-700 text-gray-500"
+    },
+    wool: {
+      icon: <WoolIcon className="w-8 self-center" />,
+      amount: amounts.wool || 0,
+      styleClasses: "bg-green-500 text-green-900 rounded-r-lg"
+    }
+  };
+
   return (
     <div>
       <ul className="flex flex-row">
-        <li className="flex flex-col p-3 text-center bg-red-800 text-orange-500 rounded-l-lg">
-          <div className="flex w-10 h-10 justify-center py-3">
-            <BrickIcon className="w-8 self-center" />
-          </div>
-          <span>{amounts.brick || 0}</span>
-        </li>
-
-        <li className="flex flex-col p-3 text-center bg-green-900 text-green-500">
-          <div className="flex w-10 h-10 justify-center py-3">
-            <LumberIcon className="w-8 self-center" />
-          </div>
-          <span>{amounts.lumber || 0}</span>
-        </li>
-
-        <li className="flex flex-col p-3 text-center bg-yellow-500 text-yellow-900">
-          <div className="flex w-10 h-10 justify-center py-3">
-            <GrainIcon className="w-8 self-center" />
-          </div>
-          <span>{amounts.grain || 0}</span>
-        </li>
-
-        <li className="flex flex-col p-3 text-center bg-gray-700 text-gray-500">
-          <div className="flex w-10 h-10 justify-center py-3">
-            <OreIcon className="w-8 self-center" />
-          </div>
-          <span>{amounts.ore || 0}</span>
-        </li>
-
-        <li className="flex flex-col p-3 text-center bg-green-500 text-green-900 rounded-r-lg">
-          <div className="flex w-10 h-10 justify-center py-3">
-            <WoolIcon className="w-8 self-center" />
-          </div>
-          <span>{amounts.wool || 0}</span>
-        </li>
+        {Object.keys(resourcesData).map(resource => (
+          <li
+            className={`flex flex-col p-3 text-center ${resourcesData[resource].styleClasses}`}
+            key={resource}
+          >
+            <div className="flex w-10 h-10 justify-center py-3">
+              {resourcesData[resource].icon}
+            </div>
+            <span>{resourcesData[resource].amount}</span>
+          </li>
+        ))}
       </ul>
     </div>
   );
