@@ -33,11 +33,15 @@ function Game() {
             <div className="self-center">
               <ResourceList />
             </div>
-            <CardList />
-            <BuyCard />
+            <DiceRoll />
+            <BankTradeButton />
+            <div className="self-center">
+              <div className="pb-3">
+                <BuyCard />
+              </div>
+              <CardList />
+            </div>
           </ToastProvider>
-          <BankTradeButton />
-          <DiceRoll />
           <EndTurn />
         </div>
         <Modal

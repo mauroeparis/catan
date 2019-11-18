@@ -7,7 +7,8 @@ module.exports = {
     }
   },
   variants: {
-    opacity: ["disabled"]
+    opacity: ["disabled"],
+    cursor: ["disabled"]
   },
   plugins: []
 };
