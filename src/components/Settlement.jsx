@@ -25,6 +25,7 @@ export default function Settlement({
       const buttons = [
         {
           text: "Accept",
+          primary: true,
           callback: () => api.games.playAction(gameId, "upgrade_city", position)
         },
         {
@@ -80,6 +81,7 @@ export function BuildIndicator({ position, unit = 256 }) {
     const buttons = [
       {
         text: "Accept",
+        primary: true,
         callback: () =>
           api.games.playAction(gameId, "build_settlement", position)
       },

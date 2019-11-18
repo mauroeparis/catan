@@ -62,7 +62,7 @@ export default function DevelopmentCard({ cardType, amount }) {
         <div className="flex w-10 h-10 justify-center py-3">
           {cardIcon[cardType]}
         </div>
-        <span>{amount}</span>
+        <span className="font-semibold text-xl">{amount}</span>
       </button>
     </li>
   );

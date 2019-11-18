@@ -26,6 +26,7 @@ export default function BuyCard() {
     const buttons = [
       {
         text: "Accept",
+        primary: true,
         callback: () => api.games.playAction(gameId, "buy_card", null)
       },
       {
@@ -36,7 +37,7 @@ export default function BuyCard() {
   };
 
   const TextClasses =
-    "text-center text-xl self-center tracking-wider text-bold text-white";
+    "text-center text-xl self-center tracking-wider text-bold text-white font-cinzel";
   const CommonClasses = "w-5/6 shadow-md rounded h-12";
 
   return (

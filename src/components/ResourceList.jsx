@@ -117,7 +117,7 @@ export function ResourceListContainer({ resources }) {
             <div className="flex w-10 h-10 justify-center py-3">
               {resourcesData[resource].icon}
             </div>
-            <span>{resourcesData[resource].amount}</span>
+            <span className="font-semibold text-xl">{resourcesData[resource].amount}</span>
           </li>
         ))}
       </ul>

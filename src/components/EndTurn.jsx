@@ -25,6 +25,7 @@ export default function EndTurn() {
     const buttons = [
       {
         text: "Accept",
+        primary: true,
         callback: () => api.games.playAction(gameId, "end_turn", null)
       },
       {
@@ -35,7 +36,7 @@ export default function EndTurn() {
   };
 
   const TextClasses =
-    "text-center text-xl self-center tracking-wider text-bold text-white";
+    "text-center text-xl self-center tracking-wider text-bold font-cinzel";
   const CommonClasses = "w-5/6 shadow-md rounded h-12";
 
   return (
@@ -58,9 +59,3 @@ export default function EndTurn() {
     </button>
   );
 }
-
-//     <input
-    //   type="button"
-    //   value="End Turn"
-    //   className="end-turn disabled:cursor-not-allowed disabled:opacity-50"
-    // />
