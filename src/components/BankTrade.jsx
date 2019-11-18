@@ -154,14 +154,28 @@ export function BankTradeButton() {
     return () => clearInterval(interval);
   }, [gameId]);
 
+  const TextClasses =
+    "text-center text-xl self-center tracking-wider text-bold text-white";
+  const CommonClasses = "w-5/6 shadow-md rounded h-12";
+
   return (
     <Link to={`/game/${gameId}/bankTrade`} className="w-full text-center">
-      <input
+      <button
         type="button"
-        value="Trade with bank"
         disabled={!canTrade}
-        className="disabled:cursor-not-allowed disabled:opacity-50"
-      />
+        className={`
+          h-16
+          bg-blue-800
+          w-full
+          hover:bg-blue-900
+          disabled:cursor-not-allowed
+          disabled:opacity-50
+          ${CommonClasses}
+          ${TextClasses}
+        `}
+      >
+        Trade with bank
+      </button>
     </Link>
   );
 }

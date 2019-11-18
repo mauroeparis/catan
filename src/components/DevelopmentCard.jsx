@@ -43,18 +43,22 @@ export default function DevelopmentCard({ cardType, amount }) {
   };
 
   return (
-    <li className="bg-gray-800 rounded-lg mx-2">
+    <li className="bg-gray-800 rounded-lg">
       <button
         type="button"
-        className={`flex flex-col p-3 text-center text-gray-500 disabled:cursor-not-allowed disabled:opacity-50 rounded-lg ${
-          canPlayCard
-            ? "border-b-4 border-l-4 border-gray-800 hover:border-gray-500"
-            : ""
-        }`}
+        className="
+          flex
+          flex-col
+          p-3
+          text-center
+          text-gray-500
+          disabled:cursor-not-allowed
+          disabled:opacity-50
+          rounded-lg"
         onClick={tryPlay}
         disabled={!canPlayCard}
       >
-        <div className="flex w-12 h-12 justify-center py-3">
+        <div className="flex w-10 h-10 justify-center py-3">
           {cardIcon[cardType]}
         </div>
         <span>{amount}</span>

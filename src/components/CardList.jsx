@@ -26,11 +26,13 @@ function CardList() {
     <div className="self-center">
       <ul className="flex flex-row">
         {DEV_CARDS.map(cardType => (
-          <DevelopmentCard
-            key={cardType}
-            cardType={cardType}
-            amount={amounts[cardType] || 0}
-          />
+          <div className="mx-1">
+            <DevelopmentCard
+              key={cardType}
+              cardType={cardType}
+              amount={amounts[cardType] || 0}
+              />
+          </div>
         ))}
       </ul>
     </div>
