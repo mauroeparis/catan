@@ -2,14 +2,9 @@ import "../css/game.css";
 import React, { useState, useReducer } from "react";
 import { useParams } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
-import _ from "lodash";
 
-import GameContext, {
-  gameReducer,
-  initGameState,
-  SET_DEFAULT,
-  PLAY_KNIGHT
-} from "../GameContext";
+import GameContext, { gameReducer, initGameState } from "../GameContext";
+import GameStatus from "./GameStatus";
 import Board from "./Board";
 import CardList from "./CardList";
 import ResourceList from "./ResourceList";
@@ -48,20 +43,7 @@ function Game() {
           <DiceRoll />
           <EndTurn />
         </div>
-        {/* TODO: Find a better way to inform the player the current phase */}
-        <i style={{ position: "fixed", top: "1rem", right: "1rem" }}>
-          {/* TODO: Find a better way to let the player cancel play_knight */}
-          {[PLAY_KNIGHT].includes(game.phase) && (
-            <button
-              className="close"
-              type="button"
-              onClick={() => gameDispatch({ type: SET_DEFAULT })}
-            >
-              ☓
-            </button>
-          )}
-          {_.startCase(game.phase)}
-        </i>
+        <GameStatus />
         <Modal
           disabled={disabled}
           title={title}

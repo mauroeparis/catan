@@ -103,6 +103,13 @@
   stroke-dasharray: 1px;
 }
 
+.game .board .build-road-indicator.road-building-selected {
+  cursor: unset;
+  stroke: var(--highlight);
+  stroke-dasharray: 1px;
+  transition: 0.2s;
+}
+
 .game .information {
 	top: 0;
 	position: absolute;

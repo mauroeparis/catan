@@ -4,7 +4,11 @@ import PropTypes from "prop-types";
 
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
-import GameContext, { DEFAULT, SET_PLAY_KNIGHT } from "../GameContext";
+import GameContext, {
+  DEFAULT,
+  SET_PLAY_KNIGHT,
+  SET_PLAY_ROAD_BUILDING
+} from "../GameContext";
 
 export default function DevelopmentCard({ cardType, amount }) {
   const { phase, gameId, gameDispatch, showModal } = useContext(GameContext);
@@ -32,6 +36,10 @@ export default function DevelopmentCard({ cardType, amount }) {
       case "knight":
         body = "Select where you want to move the robber.";
         callback = () => gameDispatch({ type: SET_PLAY_KNIGHT });
+        break;
+      case "road_building":
+        body = "Select up to two roads to build roads on.";
+        callback = () => gameDispatch({ type: SET_PLAY_ROAD_BUILDING });
         break;
       default:
         body = "Sorry, this feature is not yet implemented";
