@@ -5,6 +5,13 @@ import V from "../Vector";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
 import GameContext from "../GameContext";
+import { ReactComponent as BrickIcon } from "../public/icons/brick.svg";
+import { ReactComponent as WoolIcon } from "../public/icons/sheep.svg";
+import { ReactComponent as OreIcon } from "../public/icons/stone.svg";
+import { ReactComponent as LumberIcon } from "../public/icons/trees.svg";
+import { ReactComponent as GrainIcon } from "../public/icons/wheat.svg";
+import { ReactComponent as DesertIcon } from "../public/icons/desert.svg";
+import { ReactComponent as ThiefIcon } from "../public/icons/thiefToken.svg";
 
 function Hexagon({
   position,
@@ -83,11 +90,78 @@ function Hexagon({
     grain: "#ECC94B",
     ore: "#4A5568"
   }[terrain];
-  const terrainTextPos = center;
-  const terrainTextStyle = { font: "bold 5rem Cinzel", fill: "white" };
+
+  const terrainIconPos = V.add(center, P(-56.5, -64));
   const tokenPos = V.add(center, P(0, 128));
-  const tokenTextStyle = { font: "bold 5rem Cinzel", fill: terrainColor };
-  const robberPos = V.add(center, P(0, -128));
+  const tokenTextStyle = { font: "bold 5rem Cinzel", fill: "#2d3748" };
+  const robberPos = V.add(center, P(-75, -198));
+
+  const terrainIconColor = {
+    desert: "#ECC94B",
+    brick: "#ED8936",
+    lumber: "#48BB78",
+    wool: "#22543D",
+    grain: "#744210",
+    ore: "#A0AEC0"
+  }[terrain];
+  const terrainIconSize = "115";
+
+  const terrainIcon = {
+    desert: (
+      <DesertIcon
+        x={terrainIconPos.x}
+        y={terrainIconPos.y}
+        width={terrainIconSize}
+        height={terrainIconSize}
+        color={terrainIconColor}
+      />
+    ),
+    brick: (
+      <BrickIcon
+        x={terrainIconPos.x}
+        y={terrainIconPos.y}
+        width={terrainIconSize}
+        height={terrainIconSize}
+        color={terrainIconColor}
+      />
+    ),
+    lumber: (
+      <LumberIcon
+        x={terrainIconPos.x}
+        y={terrainIconPos.y}
+        width={terrainIconSize}
+        height={terrainIconSize}
+        color={terrainIconColor}
+      />
+    ),
+    wool: (
+      <WoolIcon
+        x={terrainIconPos.x}
+        y={terrainIconPos.y}
+        width={terrainIconSize}
+        height={terrainIconSize}
+        color={terrainIconColor}
+      />
+    ),
+    grain: (
+      <GrainIcon
+        x={terrainIconPos.x}
+        y={terrainIconPos.y}
+        width={terrainIconSize}
+        height={terrainIconSize}
+        color={terrainIconColor}
+      />
+    ),
+    ore: (
+      <OreIcon
+        x={terrainIconPos.x}
+        y={terrainIconPos.y}
+        width={terrainIconSize}
+        height={terrainIconSize}
+        color={terrainIconColor}
+      />
+    )
+  }[terrain];
 
   return (
     <g
@@ -100,24 +174,16 @@ function Hexagon({
         stroke="white"
         strokeWidth="1rem"
       />
-      <text
-        dominantBaseline="middle"
-        textAnchor="middle"
-        x={terrainTextPos.x}
-        y={terrainTextPos.y}
-        style={terrainTextStyle}
-      >
-        {terrain}
-      </text>
-      <circle cx={tokenPos.x} cy={tokenPos.y} r="50" fill="white" />
+      {terrainIcon}
+      <circle cx={tokenPos.x} cy={tokenPos.y} r="55" fill="#e2e8f0" />
       {hasRobber && (
-        <circle
-          cx={robberPos.x}
-          cy={robberPos.y}
-          r="25"
-          fill={terrainColor}
-          stroke="white"
-          strokeWidth="1rem"
+        <ThiefIcon
+          x={robberPos.x}
+          y={robberPos.y}
+          fill="black"
+          color="black"
+          width="150"
+          height="150"
         />
       )}
       <text
