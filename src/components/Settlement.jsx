@@ -15,7 +15,7 @@ export default function Settlement({
   username,
   canUpgrade
 }) {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
   const tryUpgrade = () => {
     if (canUpgrade) {
       const disabled = false;
@@ -31,7 +31,7 @@ export default function Settlement({
           text: "Cancel"
         }
       ];
-      window.showModal({ disabled, title, body, buttons });
+      showModal({ disabled, title, body, buttons });
     }
   };
   const center = getVertex(position.level, position.index, unit);
@@ -71,7 +71,7 @@ Settlement.defaultProps = {
 };
 
 export function BuildIndicator({ position, unit = 256 }) {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
   const doBuild = () => {
     const disabled = false;
     const title = "Build Settlement";
@@ -87,7 +87,7 @@ export function BuildIndicator({ position, unit = 256 }) {
         text: "Cancel"
       }
     ];
-    window.showModal({ disabled, title, body, buttons });
+    showModal({ disabled, title, body, buttons });
   };
 
   const center = getVertex(position.level, position.index, unit);

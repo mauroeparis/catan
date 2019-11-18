@@ -1,6 +1,14 @@
 import React from "react";
 import Road, { BuildRoadIndicator } from "../../../src/components/Road";
 
+jest.mock("react", () => {
+  const ActualReact = require.requireActual("react");
+  return {
+    ...ActualReact,
+    useContext: () => ({ gameId: 1, showModal: () => {} }) // what you want to return when useContext get fired goes here
+  };
+});
+
 describe("Road", () => {
   it("should render", () => {
     const vertices = [{ level: 0, index: 0 }, { level: 0, index: 1 }];

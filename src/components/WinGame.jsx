@@ -6,7 +6,7 @@ import GameContext from "../GameContext";
 import AuthContext from "../AuthContext";
 
 function WinGame() {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
   const [winner, setWinner] = useState(null);
   const { auth } = useContext(AuthContext);
 
@@ -26,7 +26,7 @@ function WinGame() {
   useEffect(() => {
     const won = winner === auth.user;
     if (winner) {
-      window.showModal({
+      showModal({
         disabled: false,
         title: won ? "Victory" : "Defeat",
         body: won ? "You have won!" : `You've been defeated by ${winner}`,
@@ -39,7 +39,7 @@ function WinGame() {
         showCloseButton: false
       });
     }
-  }, [winner, history, auth.user]);
+  }, [winner, history, auth.user, showModal]);
 
   return <div />;
 }

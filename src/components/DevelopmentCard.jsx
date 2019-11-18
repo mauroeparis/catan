@@ -9,7 +9,7 @@ import GameContext from "../GameContext";
 // TODO: gameId should come from a GameContext,
 // there are other components with same problem as well
 export default function DevelopmentCard({ cardType, amount }) {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
   const [canPlayCard, setCanPlayCard] = useState(false);
   const readableType = _.startCase(cardType);
   useEffect(() => {
@@ -24,7 +24,7 @@ export default function DevelopmentCard({ cardType, amount }) {
   }, [cardType, gameId]);
 
   const tryPlay = () => {
-    window.showModal({
+    showModal({
       disabled: false,
       title: `Play ${readableType}`,
       body: "Sorry, but this feature is not yet implemented",

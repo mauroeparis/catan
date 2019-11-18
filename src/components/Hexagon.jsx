@@ -15,7 +15,7 @@ function Hexagon({
   availableRobberMove,
   adjacentPlayersToRob
 }) {
-  const { gameId } = useContext(GameContext);
+  const { gameId, showModal } = useContext(GameContext);
 
   // Point positioning
   const width = Math.sqrt(3) * unit;
@@ -70,7 +70,7 @@ function Hexagon({
             player: null
           })
       });
-      window.showModal({ disabled, title, body, buttons });
+      showModal({ disabled, title, body, buttons });
     }
   };
 

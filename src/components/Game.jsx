@@ -20,7 +20,7 @@ function Game() {
   const [game, gameDispatch] = useReducer(gameReducer, initGameState(gameId));
   const [
     { disabled, title, body, buttons, showCloseButton },
-    setModal
+    showModal
   ] = useState({
     disabled: true,
     title: "",
@@ -28,9 +28,8 @@ function Game() {
     buttons: [],
     showCloseButton: true
   });
-  window.showModal = setModal;
   return (
-    <GameContext.Provider value={{ ...game, gameDispatch }}>
+    <GameContext.Provider value={{ ...game, gameDispatch, showModal }}>
       <div className="game">
         <Board />
         <div className="information">
