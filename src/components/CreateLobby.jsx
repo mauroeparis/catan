@@ -31,11 +31,9 @@ function CreateLobbyPage() {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const res = await api.lobbies.create(name, boardId);
-      const { room } = res.data;
-      // TODO: API should return a room
-      // And we should redirect to that room lobby
-      history.push(`/lobby`);
+      const { data: room } = await api.lobbies.create(name, boardId);
+      if (room && room.id) history.push(`/lobby/${room.id}`);
+      else history.push(`/lobby`);
     } catch (err) {
       alert(`Error: ${err}`);
     }
