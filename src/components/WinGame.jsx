@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 
 import api from "../Api";
 import GameContext from "../GameContext";
+import AuthContext from "../AuthContext";
 
 function WinGame() {
   const { gameId } = useContext(GameContext);
   const [winner, setWinner] = useState(null);
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchWinner = async () => {
@@ -22,21 +24,22 @@ function WinGame() {
   const history = useHistory();
 
   useEffect(() => {
+    const won = winner === auth.user;
     if (winner) {
       window.showModal({
-        closeModal: false,
         disabled: false,
-        title: winner === localStorage.user ? "You have won" : "You have lost",
-        body: "",
+        title: won ? "Victory" : "Defeat",
+        body: won ? "You have won!" : `You've been defeated by ${winner}`,
         buttons: [
           {
             text: "Accept",
             callback: () => history.push(`/lobby`)
           }
-        ]
+        ],
+        showCloseButton: false
       });
     }
-  }, [winner, history]);
+  }, [winner, history, auth.user]);
 
   return <div />;
 }

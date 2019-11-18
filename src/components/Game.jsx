@@ -18,11 +18,15 @@ function Game() {
   // TODO: gameId must be a number. We could use regex /game/:gameId(//d+)
   const { gameId } = useParams();
   const [game, gameDispatch] = useReducer(gameReducer, initGameState(gameId));
-  const [{ disabled, title, body, buttons }, setModal] = useState({
+  const [
+    { disabled, title, body, buttons, showCloseButton },
+    setModal
+  ] = useState({
     disabled: true,
     title: "",
     body: "",
-    buttons: []
+    buttons: [],
+    showCloseButton: true
   });
   window.showModal = setModal;
   return (
@@ -44,7 +48,9 @@ function Game() {
           title={title}
           body={body}
           buttons={buttons}
+          showCloseButton={showCloseButton}
         />
+        {/* TODO: WinGame should be managed with GameContext phases instead */}
         <WinGame />
       </div>
     </GameContext.Provider>

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Modal({ closeModal, disabled, title, body, buttons }) {
+function Modal({ disabled, title, body, buttons, showCloseButton }) {
   return (
     <div className={`modal ${disabled ? "disabled" : ""}`}>
-      {closeModal && (
+      {showCloseButton && (
         <button
           className="close"
           type="button"
@@ -39,20 +39,20 @@ Modal.propTypes = {
   disabled: PropTypes.bool.isRequired,
   title: PropTypes.string,
   body: PropTypes.string,
-  closeModal: PropTypes.bool,
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       callback: PropTypes.func
     })
-  )
+  ),
+  showCloseButton: PropTypes.bool
 };
 
 Modal.defaultProps = {
   title: "",
   body: "",
-  closeModal: false,
-  buttons: []
+  buttons: [],
+  showCloseButton: true
 };
 
 export default Modal;
