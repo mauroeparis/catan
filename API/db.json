@@ -347,7 +347,7 @@
       "ore",
       "ore",
       "ore",
-      "ore"
+      "lumber"
     ],
     "cards": [
       "road_building",
@@ -520,7 +520,7 @@
       "players": [
         {
           "username": "mateo",
-          "colour": "#2196F3",
+          "colour": "blue",
           "settlements": [
             {
               "level": 2,
@@ -606,15 +606,11 @@
         },
         {
           "username": "julian",
-          "colour": "#4CAF50",
+          "colour": "white",
           "settlements": [
             {
               "level": 1,
               "index": 12
-            },
-            {
-              "level": 1,
-              "index": 6
             }
           ],
           "cities": [
@@ -668,6 +664,64 @@
           "last_gained": [
             "ore",
             "ore"
+          ]
+        },
+        {
+          "username": "mayco",
+          "colour": "yellow",
+          "settlements": [],
+          "cities": [
+            {
+              "level": 1,
+              "index": 6
+            }
+          ],
+          "roads": [
+            [
+              {
+                "level": 1,
+                "index": 6
+              },
+              {
+                "level": 1,
+                "index": 5
+              }
+            ]
+          ],
+          "development_cards": 2,
+          "resources_cards": 8,
+          "last_gained": [
+            "brick",
+            "brick"
+          ]
+        },
+        {
+          "username": "julieta",
+          "colour": "red",
+          "settlements": [],
+          "cities": [
+            {
+              "level": 2,
+              "index": 14
+            }
+          ],
+          "roads": [
+            [
+              {
+                "level": 2,
+                "index": 13
+              },
+              {
+                "level": 2,
+                "index": 14
+              }
+            ]
+          ],
+          "development_cards": 2,
+          "resources_cards": 8,
+          "last_gained": [
+            "wool",
+            "brick"
           ]
         }
       ],

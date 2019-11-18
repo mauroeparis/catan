@@ -163,6 +163,12 @@ function BoardContainer({
   const width = 2560;
   const height = 2560;
   const viewBox = `${-width / 2} ${-height / 2} ${width} ${height}`;
+  const playerColours = {
+    red: "#F44336",
+    blue: "#2196F3",
+    yellow: "#FFC107",
+    white: "#4CAF50"
+  };
   return (
     <div className="board">
       <svg
@@ -190,7 +196,7 @@ function BoardContainer({
             // TODO: Use better keys on maps
             key={JSON.stringify(road.vertices)}
             vertices={road.vertices}
-            colour={road.colour}
+            colour={playerColours[road.colour]}
             username={road.username}
           />
         ))}
@@ -199,7 +205,7 @@ function BoardContainer({
             key={Object.values(sett.position)}
             position={sett.position}
             isCity={sett.isCity}
-            colour={sett.colour}
+            colour={playerColours[sett.colour]}
             username={sett.username}
             canUpgrade={_.some(availableUpgrades, sett.position)}
           />

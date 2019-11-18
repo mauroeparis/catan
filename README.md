@@ -13,6 +13,8 @@ You need [`npm`](https://www.npmjs.com/get-npm) installed, and then:
 git clone https://gitlab.com/m3j2/catan.git
 cd catan
 npm install
+echo 'REACT_APP_API="http://localhost:8000/"' > .env
+npm run mockapi &
 npm start
 ```
 
@@ -31,11 +33,13 @@ nvm use 12.11.1
 
 Then do `npm install` inside the project folder.
 
+Setup the API address environment variable (next is the mock API default's):
+
+```
+echo 'REACT_APP_API="http://localhost:8000/"' > .env
+```
+
 For running catan run `npm start` and for running the mockapi `npm run mockapi`.
-
-Before running, set API url creating a file called `.env` in the root, and adding the line `REACT_APP_API=address` where `address` will be `http://localhost:8000/` when using the mockapi.
-
-You can also use temporary env variables running the app with `REACT_APP_API=address npm start`.
 
 # Wiki
 
