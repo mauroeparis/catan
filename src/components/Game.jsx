@@ -12,6 +12,7 @@ import { BankTradeButton } from "./BankTrade";
 import DiceRoll from "./DiceRoll";
 import EndTurn from "./EndTurn";
 import Modal from "./Modal";
+import WinGame from "./WinGame";
 
 function Game() {
   // TODO: gameId must be a number. We could use regex /game/:gameId(//d+)
@@ -44,6 +45,7 @@ function Game() {
           body={body}
           buttons={buttons}
         />
+        <WinGame />
       </div>
     </GameContext.Provider>
   );

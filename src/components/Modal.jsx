@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Modal({ disabled, title, body, buttons }) {
+function Modal({ closeModal, disabled, title, body, buttons }) {
   return (
     <div className={`modal ${disabled ? "disabled" : ""}`}>
-      <button
-        className="close"
-        type="button"
-        onClick={() => window.showModal({ disabled: true })}
-      >
-        ☓
-      </button>
+      {closeModal && (
+        <button
+          className="close"
+          type="button"
+          onClick={() => window.showModal({ disabled: true })}
+        >
+          ☓
+        </button>
+      )}
       <div className="container">
         <h1>{title}</h1>
         <p>{body}</p>
@@ -37,6 +39,7 @@ Modal.propTypes = {
   disabled: PropTypes.bool.isRequired,
   title: PropTypes.string,
   body: PropTypes.string,
+  closeModal: PropTypes.bool,
   buttons: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -48,6 +51,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   title: "",
   body: "",
+  closeModal: false,
   buttons: []
 };
 

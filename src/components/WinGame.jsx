@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import api from "../Api";
 import GameContext from "../GameContext";
@@ -19,41 +19,26 @@ function WinGame() {
     return () => clearInterval(interval);
   }, [gameId]);
 
-  function wins() {
-    const disabled = false;
-    const title = "You won the game!";
-    const body = "";
-    const buttons = [
-      {
-        text: "Accept",
-        callback: () => <Link to="/lobby" />
-      }
-    ];
-    window.showModal({ disabled, title, body, buttons });
-  }
+  const history = useHistory();
 
-  function loses() {
-    const disabled = false;
-    const title = "You lost the game!";
-    const body = "";
-    const buttons = [
-      {
-        text: "Accept",
-        callback: () => <Link to="/lobby" />
-      }
-    ];
-    window.showModal({ disabled, title, body, buttons });
-  }
-
-  if (winner) {
-    if (winner.data.current_turn.user === localStorage.user) {
-      wins();
-    } else {
-      loses();
+  useEffect(() => {
+    if (winner) {
+      window.showModal({
+        closeModal: false,
+        disabled: false,
+        title: winner === localStorage.user ? "You have won" : "You have lost",
+        body: "",
+        buttons: [
+          {
+            text: "Accept",
+            callback: () => history.push(`/lobby`)
+          }
+        ]
+      });
     }
-  } else {
-    return null;
-  }
+  }, [winner, history]);
+
+  return <div />;
 }
 
 export default WinGame;
