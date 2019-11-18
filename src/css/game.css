@@ -37,6 +37,10 @@
   fill: var(--light) !important;
 }
 
+.game .board .hexagon.can-move-robber:hover svg {
+  color: var(--dark) !important;
+}
+
 .game .board .hexagon.can-move-robber text:first-of-type {
   text-decoration: overline;
 }
@@ -128,12 +132,6 @@
 .game .information input[type=button]:hover {
   background-color: var(--light);
   color: var(--dark);
-}
-
-.game .information .end-turn {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
 }
 
 .game .card-list {

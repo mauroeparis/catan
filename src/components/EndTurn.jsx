@@ -34,13 +34,33 @@ export default function EndTurn() {
     window.showModal({ disabled, title, body, buttons });
   };
 
+  const TextClasses =
+    "text-center text-xl self-center tracking-wider text-bold text-white";
+  const CommonClasses = "w-5/6 shadow-md rounded h-12";
+
   return (
-    <input
+    <button
       type="button"
-      value="End Turn"
-      onClick={FinishTurn}
       disabled={!canEndTurn}
-      className="end-turn disabled:cursor-not-allowed disabled:opacity-50"
-    />
+      onClick={FinishTurn}
+      className={`
+        h-16
+        w-full
+        bg-red-800
+        hover:bg-red-900
+        disabled:cursor-not-allowed
+        disabled:opacity-50
+        ${CommonClasses}
+        ${TextClasses}
+      `}
+    >
+      End Turn
+    </button>
   );
 }
+
+//     <input
+    //   type="button"
+    //   value="End Turn"
+    //   className="end-turn disabled:cursor-not-allowed disabled:opacity-50"
+    // />

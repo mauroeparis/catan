@@ -54,6 +54,7 @@ export default function DevelopmentCard({ cardType, amount }) {
           text-gray-500
           disabled:cursor-not-allowed
           disabled:opacity-50
+          hover:text-gray-200
           rounded-lg"
         onClick={tryPlay}
         disabled={!canPlayCard}
