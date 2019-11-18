@@ -30,14 +30,16 @@ function Game() {
         <Board />
         <div className="information">
           <ToastProvider>
-            <div className="self-start">
+            <div>
               <ResourceList />
               <div className="pt-3">
                 <BankTradeButton />
               </div>
+              <div className="pt-3">
+                <DiceRoll />
+              </div>
             </div>
-            <DiceRoll />
-            <div className="self-center">
+            <div>
               <div className="pb-3">
                 <BuyCard />
               </div>
