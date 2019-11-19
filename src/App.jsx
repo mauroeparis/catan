@@ -37,7 +37,7 @@ function App() {
             <Route path="/game/:gameId" exact component={Game} />
             <Route path="/game/:gameId/bankTrade" component={BankTrade} />
             <Route path="/board" exact component={Board} />
-            <Route path="/" render={() => <Redirect to="/lobby" />} />
+            <Route path="/" render={() => <Redirect to="/login" />} />
           </Switch>
         </AuthContext.Provider>
       </div>
