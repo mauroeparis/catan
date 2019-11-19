@@ -16,8 +16,7 @@ function Hexagon({
   adjacentPlayersToRob
 }) {
   const { phase, gameId, gameDispatch, showModal } = useContext(GameContext);
-  const validPhase = [PLAY_KNIGHT].includes(phase);
-  const enabled = availableRobberMove && validPhase;
+  const enabled = availableRobberMove;
   // Point positioning
   const width = Math.sqrt(3) * unit;
   const radius = unit;
@@ -53,7 +52,9 @@ function Hexagon({
   const moveRobber = () => {
     if (enabled) {
       const robFrom = async player => {
-        await api.games.playAction(gameId, "move_robber", { position, player });
+        const action =
+          phase === PLAY_KNIGHT ? "play_knight_card" : "move_robber";
+        await api.games.playAction(gameId, action, { position, player });
         gameDispatch({ type: SET_DEFAULT });
       };
       const disabled = false;
