@@ -4,12 +4,14 @@ import { createContext } from "react";
 export const SET_DEFAULT = "SET_DEFAULT";
 export const SET_PLAY_KNIGHT = "SET_PLAY_KNIGHT";
 export const SET_PLAY_ROAD_BUILDING = "SET_PLAY_ROAD_BUILDING";
+export const SET_MOVE_ROBBER = "SET_MOVE_ROBBER";
 
 // game phases
 export const DEFAULT = "DEFAULT";
 export const PLAY_KNIGHT = "PLAY_KNIGHT";
 export const PLAY_ROAD_BUILDING = "PLAY_ROAD_BUILDING";
 export const ADD_ROAD_PLAY_ROAD_BUILDING = "ADD_ROAD_PLAY_ROAD_BUILDING";
+export const MOVE_ROBBER = "MOVE_ROBBER";
 // TODO: EXPECTATING
 // TODO: FINISHED
 // TODO: INVALID_GAME_ID
@@ -39,6 +41,8 @@ export function gameReducer(state, action) {
       }
       return { ...state, roads };
     }
+    case SET_MOVE_ROBBER:
+      return { ...state, phase: MOVE_ROBBER };
     default:
       throw Error(`Invalid action.type === ${action.type} for gameReducer`);
   }
