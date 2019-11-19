@@ -105,11 +105,81 @@
     },
     {
       "type": "play_knight_card",
-      "payload": []
+      "payload": [
+        {
+          "position": {
+            "level": 2,
+            "index": 4
+          },
+          "players": [
+            "mateo",
+            "julian"
+          ]
+        },
+        {
+          "position": {
+            "level": 2,
+            "index": 0
+          },
+          "players": [
+            "mateo"
+          ]
+        },
+        {
+          "position": {
+            "level": 1,
+            "index": 5
+          },
+          "players": [
+            "tupac"
+          ]
+        }
+      ]
     },
     {
       "type": "play_road_building_card",
-      "payload": []
+      "payload": [
+        [
+          {
+            "level": 2,
+            "index": 26
+          },
+          {
+            "level": 1,
+            "index": 16
+          }
+        ],
+        [
+          {
+            "level": 2,
+            "index": 27
+          },
+          {
+            "level": 2,
+            "index": 28
+          }
+        ],
+        [
+          {
+            "level": 2,
+            "index": 1
+          },
+          {
+            "level": 1,
+            "index": 1
+          }
+        ],
+        [
+          {
+            "level": 1,
+            "index": 1
+          },
+          {
+            "level": 1,
+            "index": 2
+          }
+        ]
+      ]
     },
     {
       "type": "play_monopoly_card",
@@ -277,7 +347,7 @@
       "ore",
       "ore",
       "ore",
-      "ore"
+      "lumber"
     ],
     "cards": [
       "road_building",
@@ -450,7 +520,7 @@
       "players": [
         {
           "username": "mateo",
-          "colour": "#2196F3",
+          "colour": "blue",
           "settlements": [
             {
               "level": 2,
@@ -536,15 +606,11 @@
         },
         {
           "username": "julian",
-          "colour": "#4CAF50",
+          "colour": "white",
           "settlements": [
             {
               "level": 1,
               "index": 12
-            },
-            {
-              "level": 1,
-              "index": 6
             }
           ],
           "cities": [
@@ -599,11 +665,69 @@
             "ore",
             "ore"
           ]
+        },
+        {
+          "username": "mayco",
+          "colour": "yellow",
+          "settlements": [],
+          "cities": [
+            {
+              "level": 1,
+              "index": 6
+            }
+          ],
+          "roads": [
+            [
+              {
+                "level": 1,
+                "index": 6
+              },
+              {
+                "level": 1,
+                "index": 5
+              }
+            ]
+          ],
+          "development_cards": 2,
+          "resources_cards": 8,
+          "last_gained": [
+            "brick",
+            "brick"
+          ]
+        },
+        {
+          "username": "julieta",
+          "colour": "red",
+          "settlements": [],
+          "cities": [
+            {
+              "level": 2,
+              "index": 14
+            }
+          ],
+          "roads": [
+            [
+              {
+                "level": 2,
+                "index": 13
+              },
+              {
+                "level": 2,
+                "index": 14
+              }
+            ]
+          ],
+          "development_cards": 2,
+          "resources_cards": 8,
+          "last_gained": [
+            "wool",
+            "brick"
+          ]
         }
       ],
       "robber": {
         "level": 1,
-        "index": 4
+        "index": 0
       },
       "current_turn": {
         "user": "mateo",

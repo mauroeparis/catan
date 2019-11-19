@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
-function Modal({ disabled, title, body, buttons }) {
+import GameContext from "../GameContext";
+
+function Modal({ disabled, title, body, buttons, showCloseButton }) {
+  const { showModal } = useContext(GameContext);
   return (
     <div
       className={`modal ${
@@ -13,18 +16,20 @@ function Modal({ disabled, title, body, buttons }) {
       <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50" />
 
       <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-        <div className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
-          <svg
-            className="fill-current text-white"
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 18 18"
-            onClick={() => window.showModal({ disabled: true })}
-          >
-            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
-          </svg>
-        </div>
+        {showCloseButton && (
+          <div className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+            <svg
+              className="fill-current text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              onClick={() => showModal({ disabled: true })}
+            >
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
+            </svg>
+          </div>
+        )}
 
         <div className="modal-content py-4 text-left px-6 font-sans">
           <div className="flex justify-between items-center pb-3">
@@ -36,7 +41,7 @@ function Modal({ disabled, title, body, buttons }) {
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
-                onClick={() => window.showModal({ disabled: true })}
+                onClick={() => showModal({ disabled: true })}
               >
                 <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z" />
               </svg>
@@ -57,7 +62,7 @@ function Modal({ disabled, title, body, buttons }) {
                 type="button"
                 onClick={() => {
                   callback && callback();
-                  window.showModal({ disabled: true });
+                  showModal({ disabled: true });
                 }}
               >
                 {text}
@@ -79,13 +84,15 @@ Modal.propTypes = {
       text: PropTypes.string.isRequired,
       callback: PropTypes.func
     })
-  )
+  ),
+  showCloseButton: PropTypes.bool
 };
 
 Modal.defaultProps = {
   title: "",
   body: "",
-  buttons: []
+  buttons: [],
+  showCloseButton: true
 };
 
 export default Modal;

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import GameContext from "../GameContext";
+import GameContext, { DEFAULT } from "../GameContext";
 import api from "../Api";
 
 export default function BuyCard() {
-  const { gameId } = useContext(GameContext);
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const validPhase = [DEFAULT].includes(phase);
   const [canBuy, setCanBuy] = useState(false);
+  const enabled = canBuy && validPhase;
 
   useEffect(() => {
     const fetchActions = async () => {
@@ -33,7 +35,7 @@ export default function BuyCard() {
         text: "Cancel"
       }
     ];
-    window.showModal({ disabled, title, body, buttons });
+    showModal({ disabled, title, body, buttons });
   };
 
   const TextClasses =
@@ -44,7 +46,7 @@ export default function BuyCard() {
     <div>
       <button
         type="button"
-        disabled={!canBuy}
+        disabled={!enabled}
         onClick={tryBuy}
         className={`
           h-16

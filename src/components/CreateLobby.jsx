@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import _ from "lodash";
+import AuthContext from "../AuthContext";
+
 import api from "../Api";
 import CustomInput from "./CustomInput";
 
@@ -7,14 +10,19 @@ const TextClasses = "text-center text-sm self-center tracking-wider text-bold";
 const CommonClasses = "w-5/6 shadow-md rounded h-12";
 
 function CreateLobbyPage() {
+  const { auth } = useContext(AuthContext);
   const [boards, setBoards] = useState([]);
   const history = useHistory();
-  const [name, setName] = useState("");
+  const [name, setName] = useState(
+    `${_.startCase(auth.user)}'s Lobby #${_.random(1000, 9999)}`
+  );
   const [boardId, setBoardId] = useState();
 
   useEffect(() => {
     const fetchRoom = async () => {
       const res = await api.boards.all();
+      // TODO: Assumes there is always at least one board
+      setBoardId(res.data[0].id);
       setBoards(res.data);
     };
     fetchRoom();
@@ -23,14 +31,11 @@ function CreateLobbyPage() {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const res = await api.lobbies.create(name, boardId);
-      const { room } = res.data;
-      console.log(room);
-      // TODO: API should return a room
-      // And we should redirect to that room lobby
-      history.push(`/lobby`);
+      const { data: room } = await api.lobbies.create(name, boardId);
+      if (room && room.id) history.push(`/lobby/${room.id}`);
+      else history.push(`/lobby`);
     } catch (err) {
-      console.log(`Error: ${err}`);
+      alert(`Error: ${err}`);
     }
   };
 

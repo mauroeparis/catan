@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import api from "../Api";
-import GameContext from "../GameContext";
+import GameContext, { DEFAULT } from "../GameContext";
 
 export default function EndTurn() {
-  const { gameId } = useContext(GameContext);
+  const { phase, gameId, showModal } = useContext(GameContext);
+  const validPhase = [DEFAULT].includes(phase);
   const [canEndTurn, setCanEndTurn] = useState(false);
+  const enabled = canEndTurn && validPhase;
 
   useEffect(() => {
     const fetchActions = async () => {
@@ -32,7 +34,7 @@ export default function EndTurn() {
         text: "Cancel"
       }
     ];
-    window.showModal({ disabled, title, body, buttons });
+    showModal({ disabled, title, body, buttons });
   };
 
   const TextClasses =
@@ -42,7 +44,7 @@ export default function EndTurn() {
   return (
     <button
       type="button"
-      disabled={!canEndTurn}
+      disabled={!enabled}
       onClick={FinishTurn}
       className={`
         h-16
