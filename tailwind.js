@@ -7,8 +7,10 @@ module.exports = {
     }
   },
   variants: {
-    opacity: ["disabled"],
-    cursor: ["disabled"]
+    opacity: ["disabled", "hover", "focus"],
+    cursor: ["disabled"],
+    borderColor: ["hover"],
+    borderWidth: ["hover"]
   },
   plugins: []
 };
