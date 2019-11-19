@@ -171,7 +171,7 @@ function Hexagon({
       />
       {terrainIcon}
       <circle cx={tokenPos.x} cy={tokenPos.y} r="55" fill="#e2e8f0" />
-      {hasRobber && (
+      {(hasRobber || enabled) && (
         <ThiefIcon
           x={robberPos.x}
           y={robberPos.y}
@@ -179,6 +179,7 @@ function Hexagon({
           color="black"
           width="150"
           height="150"
+          fill-opacity={hasRobber ? "1" : "0.4"}
         />
       )}
       <text
