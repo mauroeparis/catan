@@ -6,6 +6,11 @@ import PropTypes from "prop-types";
 import GameContext from "../GameContext";
 import CatanTypes from "../CatanTypes";
 import api from "../Api";
+import { ReactComponent as BrickIcon } from "../public/icons/brick.svg";
+import { ReactComponent as WoolIcon } from "../public/icons/sheep.svg";
+import { ReactComponent as OreIcon } from "../public/icons/stone.svg";
+import { ReactComponent as LumberIcon } from "../public/icons/trees.svg";
+import { ReactComponent as GrainIcon } from "../public/icons/wheat.svg";
 
 // TODO: It would be nice to implement a custom hook like this
 // usePolling(async () => {
@@ -73,15 +78,48 @@ export default function ResourceList() {
 
 export function ResourceListContainer({ resources }) {
   const amounts = _.countBy(resources);
+  const resourcesData = {
+    brick: {
+      icon: <BrickIcon className="w-8 self-center" />,
+      amount: amounts.brick || 0,
+      styleClasses: "bg-red-800 text-orange-500 rounded-l-lg"
+    },
+    lumber: {
+      icon: <LumberIcon className="w-8 self-center" />,
+      amount: amounts.lumber || 0,
+      styleClasses: "bg-green-900 text-green-500"
+    },
+    grain: {
+      icon: <GrainIcon className="w-8 self-center" />,
+      amount: amounts.grain || 0,
+      styleClasses: "bg-yellow-500 text-yellow-900"
+    },
+    ore: {
+      icon: <OreIcon className="w-8 self-center" />,
+      amount: amounts.ore || 0,
+      styleClasses: "bg-gray-700 text-gray-500"
+    },
+    wool: {
+      icon: <WoolIcon className="w-8 self-center" />,
+      amount: amounts.wool || 0,
+      styleClasses: "bg-green-500 text-green-900 rounded-r-lg"
+    }
+  };
+
   return (
-    <div className="resource-list">
-      <h1>Resource List</h1>
-      <ul>
-        <li>Brick: {amounts.brick || 0}</li>
-        <li>Lumber: {amounts.lumber || 0}</li>
-        <li>Wool: {amounts.wool || 0}</li>
-        <li>Grain: {amounts.grain || 0}</li>
-        <li>Ore: {amounts.ore || 0}</li>
+    <div>
+      <ul className="flex flex-row">
+        {Object.keys(resourcesData).map(resource => (
+          <li
+            className={`flex flex-col p-3 text-center ${resourcesData[resource].styleClasses}`}
+            key={resource}
+          >
+            <div className="flex w-10 h-10 justify-center py-3">
+              {resourcesData[resource].icon}
+            </div>
+            <span className="font-semibold text-xl">{resourcesData[resource].amount}</span>
+          </li>
+        ))}
       </ul>
     </div>
   );

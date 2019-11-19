@@ -35,12 +35,22 @@ function Game() {
         <Board />
         <div className="information">
           <ToastProvider>
-            <CardList />
-            <BuyCard />
-            <ResourceList />
+            <div className="table">
+              <ResourceList />
+              <div className="flex flex-col pt-3">
+                <BankTradeButton />
+                <div className="self-center pt-3">
+                  <DiceRoll />
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="pb-3">
+                <BuyCard />
+              </div>
+              <CardList />
+            </div>
           </ToastProvider>
-          <BankTradeButton />
-          <DiceRoll />
           <EndTurn />
         </div>
         <GameStatus />

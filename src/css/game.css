@@ -10,7 +10,6 @@
 .game {
   background-color: var(--dark);
   color: var(--light);
-  font: 2rem Cinzel;
 }
 
 .game .board {
@@ -37,8 +36,8 @@
   fill: var(--light) !important;
 }
 
-.game .board .hexagon.can-move-robber text:first-of-type {
-  text-decoration: overline;
+.game .board .hexagon.can-move-robber:hover svg {
+  color: var(--dark) !important;
 }
 
 .game .board .hexagon.can-move-robber:hover text {
@@ -117,7 +116,7 @@
 	width: 25rem;
 	display: flex;
 	flex-direction: column;
-	align-items: stretch;
+  align-items: stretch;
 	justify-content: space-evenly;
 	left: 5rem;
 }
@@ -138,18 +137,6 @@
 .game .information input[type=button]:hover {
   background-color: var(--light);
   color: var(--dark);
-}
-
-.game .information .end-turn {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-}
-
-.game .resource-list {
-  border: 2px solid var(--light);
-  border-radius: 1rem;
-  padding: 1rem;
 }
 
 .game .card-list {
@@ -176,72 +163,4 @@
 .game .card-list button:hover {
   transition: 0.1s;
   text-decoration: underline solid var(--highlight) 2px;
-}
-
-.game .modal.disabled {
-  display: none;
-}
-
-.game .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.game .modal .container {
-  border: 2px solid white;
-  border-radius: 1rem;
-  padding: 3rem;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: unset;
-}
-
-.game .modal .close {
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
-}
-
-.game .modal h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-}
-
-.game .modal p {
-  margin-top: 1rem;
-  font-size: 1.5rem;
-  max-width: 42rem;
-  text-align: center;
-}
-
-.game .modal .buttons-footer {
-  display: flex;
-  flex-flow: row;
-  align-items: center;
-  width: 100%;
-  margin-top: 2rem;
-  justify-content: space-around;
-}
-
-.game .modal .buttons-footer button {
-  background-color: var(--highlight);
-  padding: 0.5rem 1.5rem;
-  border-radius: 1rem 0;
-  float: right;
-  cursor: pointer;
-  transition: 0.2s;
-  margin: 0 1rem;
-}
-
-.game .modal .buttons-footer button:hover {
-  background-color: var(--light);
-  color: var(--dark);
 }

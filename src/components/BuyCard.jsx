@@ -28,6 +28,7 @@ export default function BuyCard() {
     const buttons = [
       {
         text: "Accept",
+        primary: true,
         callback: () => api.games.playAction(gameId, "buy_card", null)
       },
       {
@@ -37,15 +38,29 @@ export default function BuyCard() {
     showModal({ disabled, title, body, buttons });
   };
 
+  const TextClasses =
+    "text-center text-xl self-center tracking-wider text-bold text-white font-cinzel";
+  const CommonClasses = "w-5/6 shadow-md rounded h-12";
+
   return (
     <div>
-      <input
+      <button
         type="button"
-        value="Buy Card"
         disabled={!enabled}
         onClick={tryBuy}
-        className="disabled:cursor-not-allowed disabled:opacity-50"
-      />
+        className={`
+          h-16
+          bg-blue-800
+          w-full
+          hover:bg-blue-900
+          disabled:cursor-not-allowed
+          disabled:opacity-50
+          ${CommonClasses}
+          ${TextClasses}
+        `}
+      >
+        Buy Card
+      </button>
     </div>
   );
 }

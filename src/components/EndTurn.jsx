@@ -27,6 +27,7 @@ export default function EndTurn() {
     const buttons = [
       {
         text: "Accept",
+        primary: true,
         callback: () => api.games.playAction(gameId, "end_turn", null)
       },
       {
@@ -36,13 +37,27 @@ export default function EndTurn() {
     showModal({ disabled, title, body, buttons });
   };
 
+  const TextClasses =
+    "text-center text-xl self-center tracking-wider text-bold font-cinzel";
+  const CommonClasses = "w-5/6 shadow-md rounded h-12";
+
   return (
-    <input
+    <button
       type="button"
-      value="End Turn"
-      onClick={FinishTurn}
       disabled={!enabled}
-      className="end-turn disabled:cursor-not-allowed disabled:opacity-50"
-    />
+      onClick={FinishTurn}
+      className={`
+        h-16
+        w-full
+        bg-red-800
+        hover:bg-red-900
+        disabled:cursor-not-allowed
+        disabled:opacity-50
+        ${CommonClasses}
+        ${TextClasses}
+      `}
+    >
+      End Turn
+    </button>
   );
 }

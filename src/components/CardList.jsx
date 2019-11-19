@@ -23,9 +23,8 @@ function CardList() {
 
   if (!cards) return <i>Loading Card List...</i>;
   return (
-    <div className="card-list">
-      <h1>Card List</h1>
-      <ul>
+    <div className="self-center">
+      <ul className="flex flex-row justify-between">
         {DEV_CARDS.map(cardType => (
           <DevelopmentCard
             key={cardType}

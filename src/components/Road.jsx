@@ -59,6 +59,7 @@ export function BuildRoadIndicator({ vertices: [v, w], unit = 256 }) {
       const buttons = [
         {
           text: "Accept",
+          primary: true,
           callback: () => api.games.playAction(gameId, "build_road", [v, w])
         },
         {
