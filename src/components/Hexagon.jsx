@@ -179,7 +179,7 @@ function Hexagon({
           color="black"
           width="150"
           height="150"
-          fill-opacity={hasRobber ? "1" : "0.4"}
+          fillOpacity={hasRobber ? "1" : "0.4"}
         />
       )}
       <text
