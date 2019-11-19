@@ -84,19 +84,7 @@ export default function GameStatus() {
               className={successBtnClasses}
               type="button"
               onClick={() => {
-                if (roads.length === 2) {
-                  api.games.playAction(
-                    gameId,
-                    "play_road_building_card",
-                    roads
-                  );
-                  gameDispatch({ type: SET_DEFAULT });
-                } else
-                  showModal({
-                    disabled: false,
-                    title: "Select two roads first",
-                    buttons: [{ text: "Ok" }]
-                  });
+                api.games.playAction(gameId, "play_road_building_card", roads);
               }}
             >
               done
