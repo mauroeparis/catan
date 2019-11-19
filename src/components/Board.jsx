@@ -92,7 +92,7 @@ export default function Board() {
       // Available places to move the robber changes if playing knight card
       const availableRobberMoves = [PLAY_KNIGHT].includes(phase)
         ? getPayload("play_knight_card")
-        : getPayload("move_robber");
+        : getPayload("move_robber"); // If none then []
 
       // Combine board.hexes with information related to the robber
       const robberInfoForHex = hex => {
