@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 
 import { ReactComponent as Crown } from "../public/icons/crown-solid.svg";
 import { ReactComponent as Dot } from "../public/icons/circle-solid.svg";
@@ -162,20 +162,7 @@ function Lobby() {
               />
             </div>
           )}
-          {room.game_has_started && (
-            <Link to={`/game/${room.game_id}`} className="w-full text-center">
-              <input
-                type="button"
-                value="VIEW GAME"
-                className={`
-                  w-full
-                  bg-blue-800
-                  ${CommonClasses}
-                  ${TextClasses}
-                `}
-              />
-            </Link>
-          )}
+          {room.game_has_started && <Redirect to={`/game/${room.game_id}`} />}
         </div>
       </div>
     </div>
