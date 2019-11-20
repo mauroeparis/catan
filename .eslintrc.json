@@ -1,0 +1,44 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true
+    },
+    "extends": [
+        "airbnb",
+        "prettier",
+        "react-app",
+        "plugin:prettier/recommended",
+        "prettier/react"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly",
+        "shallow" : "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": ["error"],
+      "camelcase": ["error", {
+        // Allow api properties that have underscores in their names
+        "allow": [
+          "development_cards",
+          "resources_cards",
+          "max_players",
+          "board_id",
+          "game_has_started",
+          "game_id"
+        ]
+      }]
+    }
+}

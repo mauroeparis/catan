@@ -1,0 +1,166 @@
+/* TODO: Delete this file, we should be using tailwind */
+
+:root {
+  --dark: #202020;
+  --light: white;
+  --highlight: #E91E63;
+  user-select: none;
+}
+
+.game {
+  background-color: var(--dark);
+  color: var(--light);
+}
+
+.game .board {
+	height: 100vh;
+	width: 100vh;
+	margin-left: auto;
+	background-color: var(--dark);
+	margin-right: 10rem;
+}
+
+.game .board .hexagon {
+  transition: 0.2s;
+}
+
+.game .board .hexagon * {
+  transition: 0.2s;
+}
+
+.game .board .hexagon.can-move-robber {
+  cursor: pointer;
+}
+
+.game .board .hexagon.can-move-robber:hover polygon {
+  fill: var(--light) !important;
+}
+
+.game .board .hexagon.can-move-robber:hover svg {
+  color: var(--dark) !important;
+}
+
+.game .board .hexagon.can-move-robber:hover text {
+  fill: var(--dark) !important;
+}
+
+.game .board .settlement {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .board .settlement > circle {
+  transition: 0.2s;
+}
+
+.game .board .settlement:hover > circle {
+  r: 72px;
+}
+
+.game .board .settlement > text {
+  font: bold 2rem Cinzel;
+  fill: var(--light);
+  transition: 0.2s ease;
+}
+
+.game .board .settlement:hover > text {
+  fill: var(--light);
+  font: bold 5rem Cinzel;
+}
+
+.game .board .build-indicator {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .board .build-indicator:hover {
+  r: 72px;
+}
+
+.game .board .road {
+  stroke-width: 1.5rem;
+  stroke-linecap: round;
+}
+
+.game .board .build-road-indicator {
+  cursor: pointer;
+  stroke: var(--light);
+  stroke-width: 2rem;
+  stroke-linecap: round;
+  stroke-dasharray: 32px;
+  transition: 0.2s;
+}
+
+.game .board .build-road-indicator.disabled {
+  stroke-width: 0rem;
+  stroke: var(--highlight);
+}
+
+.game .board .build-road-indicator:hover {
+  stroke-width: 2rem;
+  stroke: var(--highlight);
+  stroke-dasharray: 1px;
+}
+
+.game .board .build-road-indicator.road-building-selected {
+  cursor: unset;
+  stroke: var(--highlight);
+  stroke-dasharray: 1px;
+  transition: 0.2s;
+}
+
+.game .information {
+	top: 0;
+	position: absolute;
+	height: 100vh;
+	width: 25rem;
+	display: flex;
+	flex-direction: column;
+  align-items: stretch;
+	justify-content: space-evenly;
+	left: 5rem;
+}
+
+.game .information h1 {
+  font: bold 3rem Cinzel;
+}
+
+.game .information input[type=button] {
+  background-color: var(--highlight);
+  padding: 0.5rem 1.5rem;
+  border-radius: 1rem 0;
+  float: right;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.game .information input[type=button]:hover {
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+.game .card-list {
+  border: 2px solid var(--light);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.game .card-list button {
+  transition: 0.1s;
+  text-decoration: underline solid transparent 64px;
+}
+
+.game .card-list button:disabled {
+  cursor: unset;
+  transform: skewX(-20deg); /* Simulate italics and keep animations */
+  text-decoration: underline solid transparent 0px;
+}
+
+.game .card-list button:disabled:hover {
+  text-decoration: underline solid transparent 0px;
+}
+
+.game .card-list button:hover {
+  transition: 0.1s;
+  text-decoration: underline solid var(--highlight) 2px;
+}
